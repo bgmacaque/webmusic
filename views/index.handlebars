@@ -1,0 +1,24 @@
+<body>
+	{{> bootstrap/jumbotron-bt }}
+	
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+		<ul class="list-group">
+			{{#each users}}
+				<li class="list-group-item">{{nom}}
+					<span class="badge">{{value}}</span>
+				</li>
+			{{/each}}
+			</ul>
+		</div>
+	</div>
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-2"></div>
+			<img src="images/macaque.png" alt="" class="col-xs-3 col-md-2 img-rounded">
+			<img src="images/macaque.png" alt="" class="col-xs-3 col-md-2 img-rounded">
+		</div>
+
+</body>

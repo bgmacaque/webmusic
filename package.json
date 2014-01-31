@@ -1,0 +1,25 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "mysql": "*",
+    "express3-handlebars": "*"
+  },
+  "devDependencies": {
+    "load-grunt-tasks": "~0.3.0",
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-concurrent": "~0.4.3",
+    "grunt-contrib-compass": "~0.7.1",
+    "grunt-nodemon": "~0.2.0",
+    "grunt-contrib-stylus": "~0.12.0",
+    "grunt-open": "~0.2.3",
+    "open": "0.0.4"
+  }
+}
