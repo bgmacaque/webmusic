@@ -5,5 +5,6 @@ var base = (function() {
 
 	function init() {
 		
-	}
+	},
+	
 });
