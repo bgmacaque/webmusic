@@ -10,5 +10,5 @@ describe('Base', function(){
     		assert(base);
     })
   })
-  
+
 })
