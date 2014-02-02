@@ -7,7 +7,7 @@ var config = {
 	database: 'webmusic',
 	user: 'adonis',
 	host: 'localhost',
-	password: 'BgMacaquePokemon36'
+	password: ''
 }
 
 //Base singleton
