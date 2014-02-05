@@ -3,12 +3,7 @@
 var mysql = require('mysql');
 
 //mysql config
-var config = {
-	database: 'webmusic',
-	user: 'adonis',
-	host: 'localhost',
-	password: ''
-}
+var config = require('../config');
 
 //Base singleton
 var Base = (function() {
@@ -23,12 +18,18 @@ var Base = (function() {
 		options = options || {};
 
 		//mysql object which is used to connect at the mysql server
-		return mysql.createConnection({
+		var db = mysql.createConnection({
 			database: options.database || "database",
 			host: options.host || "localhost",
 			user: options.user || "root",
 			password: options.password || "root"
 		});
+
+		//get connecting to the database
+		db.connect(function(err) {
+			if(err) throw err;
+		});
+		return db;
 	};
 
 	//instance of the singleton
