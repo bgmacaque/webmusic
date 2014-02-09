@@ -60,8 +60,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-var sync = false;
-if(sync) {
+var syncFlag = true;
+if(syncFlag) {
 	db.sequelize.sync({force:true});
 }
 
