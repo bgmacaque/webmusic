@@ -15,23 +15,23 @@ describe('User', function(){
   describe('#insert()', function(){
     it('should create a new user and insert it on the database', function(done){
     	var user = User.build({
-    		user_firstname: 'Kebab',
-    		user_lastname: 'Potatoes',
-    		user_birthday : '01/01/1999',
-    		user_nickname : 'ElKebabo',
-    		user_description : 'I love KEBAB! <3',
-    		user_email : 'kebab@frite.com',
+    		firstname: 'Kebab',
+    		lastname: 'Potatoes',
+    		birthday : '01/01/1999',
+    		nickname : 'ElKebabo',
+    		description : 'I love KEBAB! <3',
+    		email : 'kebab@frite.com',
     	});
     	user.save().success(function(userSaved){
-    		console.log(userSaved);
     		done();
     	});
     });
   describe('#delete()', function(){
     it('should delete the latest user inserted',function(done){
-        User.find({where:{'user_nickname':'ElKebabo'}})
+        User.find({where:{'nickname':'ElKebabo'}})
         .success(function(user){
-          console.log(user.user_nickname);
+          user.nickname.should.equal('ElKebabo');
+          user.id.should.equal(1);
             user.destroy()
             .success(function(){
             done();
