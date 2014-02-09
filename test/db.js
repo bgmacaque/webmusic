@@ -26,11 +26,28 @@ describe('User', function(){
     		done();
     	});
     });
+  describe('#update()',function(){
+    it('should update the latest user inserted',function(done){
+      User.find({where:{'nickname':'ElKebabo'}})
+        .success(function(user){
+          user.nickname = 'BgMacaque';
+          user.save().success(function(userSaved){
+            done();
+          })
+          .error(function(error){
+            done(error);
+          });
+        })
+        .error(function(error){
+          done(error);
+        });
+    });
+  });
   describe('#delete()', function(){
     it('should delete the latest user inserted',function(done){
-        User.find({where:{'nickname':'ElKebabo'}})
+        User.find({where:{'nickname':'BgMacaque'}})
         .success(function(user){
-          user.nickname.should.equal('ElKebabo');
+          user.nickname.should.equal('BgMacaque');
           user.id.should.equal(1);
             user.destroy()
             .success(function(){
