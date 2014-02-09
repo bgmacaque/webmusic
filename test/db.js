@@ -29,20 +29,20 @@ describe('User', function(){
     });
   describe('#delete()', function(){
     it('should delete the latest user inserted',function(done){
-            User.find({where:{'user_nickname':'ElKebabo'}})
-            .success(function(user){
-                user.destroy()
-                .success(function(){
-                done();
-                })
-                .error(function(error){
-                    done(error);
-                });
+        User.find({where:{'user_nickname':'ElKebabo'}})
+        .success(function(user){
+            user.destroy()
+            .success(function(){
+            done();
             })
             .error(function(error){
                 done(error);
             });
+        })
+        .error(function(error){
+            done(error);
         });
+      });
     });   
   });
 });
