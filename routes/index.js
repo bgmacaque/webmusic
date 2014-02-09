@@ -10,7 +10,7 @@ exports.index = function(req, res){
     res.render('index', {
       users : users,
   		layout: 'main',
-  		title: 'Expresss',
+  		title: 'Express',
   		macaque:true,
 	  });
   });
