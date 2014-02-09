@@ -2,12 +2,11 @@
  * Module dependencies.
  */
 var express = require('express');
-var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var app = express();
 var db = require('./models');
-
+var routes = require('./config/routes')(app);
 
 //handlebarjs
 var hbs = require('express3-handlebars').create({
@@ -61,15 +60,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-
-db.sequelize.sync({force:true})
-.complete(function(err) {
-  if (err) {
-  	throw err;
-  } else {
-    http.createServer(app).listen(app.get('port'), function(){
-      console.log('Express server listening on port ' + app.get('port'));
-    });
-  }
+sync = false;
+if(sync) {
+	db.sequelize.sync({force:true});
+}
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
 });
+  
+
