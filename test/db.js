@@ -27,7 +27,7 @@ describe('User', function(){
     		done();
     	});
     });
-    describe('#delete()', function(){
+  describe('#delete()', function(){
     it('should delete the latest user inserted',function(done){
             User.find({where:{'user_nickname':'ElKebabo'}})
             .success(function(user){
