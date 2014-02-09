@@ -2,16 +2,16 @@
 /*
  * GET home page.
  */
+var db = require('../models');
 
 exports.index = function(req, res){
-  res.render('index', 
-  	{
+  db.User.findAll().success(
+  function(users) {
+    res.render('index', {
+      users : users,
   		layout: 'main',
   		title: 'Expresss',
   		macaque:true,
-  		users: [
-  		{nom:'najimi', value:3},
-  		{nom:'kebab',value:4}
-  		]
-	});
+	  });
+  });
 };

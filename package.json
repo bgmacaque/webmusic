@@ -8,7 +8,10 @@
   "dependencies": {
     "express": "*",
     "mysql": "*",
-    "express3-handlebars": "*"
+    "express3-handlebars": "*",
+    "async": "*",
+    "sequelize": "~1.7.0-rc5",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "load-grunt-tasks": "~0.3.0",

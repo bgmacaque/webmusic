@@ -1,3 +1,5 @@
 node_modules
+.sass-cache
 config/mysql
-config/index.js
+config/database.js
+config/database-test.js
