@@ -3,3 +3,4 @@ node_modules
 config/mysql
 config/database.js
 config/database-test.js
+config/database-backup.js
