@@ -1,6 +1,7 @@
 <body>
 	{{> bootstrap/jumbotron-bt }}
-	
+	{{> bootstrap/carousel-bt }}
+
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-2"></div>
@@ -8,7 +9,7 @@
 		<ul class="list-group">
 			{{#each users}}
 				<li class="list-group-item">
-				{{user_lastname}} {{user_firstname}}
+				{{lastname}} {{firstname}}
 					<span class="badge">{{id}}</span>
 				</li>
 			{{/each}}
@@ -21,5 +22,4 @@
 			<img src="images/macaque.png" alt="" class="col-xs-3 col-md-2 img-rounded">
 			<img src="images/macaque.png" alt="" class="col-xs-3 col-md-2 img-rounded">
 		</div>
-
 </body>

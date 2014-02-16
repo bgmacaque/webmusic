@@ -1,0 +1,22 @@
+<body>
+	<div class="band">
+		<span class="name">
+			{{name}}
+		</span>
+		<span class="date">
+			{{creation}}
+		</span>
+		<span class="author">
+			{{author}}
+		</span>
+		<div class="users">
+			{{#each users}}
+				<div class="user-li">
+					<span class="user-li-name">
+						{{name}}
+					</span>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</body>
