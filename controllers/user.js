@@ -12,11 +12,6 @@ exports.list = function(req, res){
     }); 
   });
 };
-
-exports.create = function(req,res){
-	res.send("CREATION");
-};
-
 exports.profil = function(req,res){
   //search the user which has the id in the request
   db.User.find(req.params.id)
@@ -51,6 +46,8 @@ exports.save = function(req,res){
   var crypto = require('crypto');
   var salt = req.body.firstname+ 'babek' + res.lastname;
   var hash = crypto.createHmac('sha512',salt).update('PokemonBg').digest('hex');
+
+  //create a new user to save it
   var user = db.User.build({
     nickname: req.body.nickname,
     email: req.body.email,
@@ -61,6 +58,8 @@ exports.save = function(req,res){
     firstname : req.body.firstname,
     birthday : req.body.birthday
   });
+
+  //save the user in the database
   user.save()
   .success(function(){res.send("SUCCESS");})
   .error(function(error){res.send(error);});
