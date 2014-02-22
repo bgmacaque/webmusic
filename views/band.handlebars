@@ -1,4 +1,14 @@
 <body>
+	{{#if create}}
+	<form method="POST" action="/band/save">
+		<label for="name">name</label>
+		<input type="text" name="name">
+		<label for="description">description</label>
+		<textarea name="description" cols="30" rows="10"></textarea>
+		<input type="submit">
+	</form>
+		
+	{{else}}
 	<div class="band">
 		<span class="name">
 			{{name}}
@@ -9,14 +19,21 @@
 		<span class="author">
 			{{author}}
 		</span>
+		<form action="/band/user/add" method="POST">
+			<input type="hidden" name="adder" value="1">
+			<input type="text" name="idUser">
+			<input type="hidden" name="idBand" value="{{id}}">
+			<input type="submit">
+		</form>
 		<div class="users">
 			{{#each users}}
 				<div class="user-li">
 					<span class="user-li-name">
-						{{name}}
+						 {{nickname}}
 					</span>
 				</div>
 			{{/each}}
 		</div>
 	</div>
+	{{/if}}
 </body>

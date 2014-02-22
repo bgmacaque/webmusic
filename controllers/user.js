@@ -19,6 +19,7 @@ exports.profil = function(req,res){
     if(user!=null)
       res.render('user',{
         layout:'main',
+        id:user.id,
         title: user.nickname,
         nickname: user.nickname,
         firstname: user.firstname,
@@ -79,4 +80,11 @@ exports.save = function(req,res){
 
 exports.update = function(req,res){
 
+};
+
+
+//socket
+
+exports.follow = function(req,res){
+  
 };

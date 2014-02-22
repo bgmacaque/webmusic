@@ -5,8 +5,10 @@ var express = require('express');
 var http = require('http');
 var path = require('path');
 var app = express();
-app.use(express.bodyParser());
 var db = require('./models');
+var socket = require('socket.io').
+//routes
+app.use(express.bodyParser());
 var routes = require('./config/routes')(app);
 
 //handlebarjs
@@ -54,7 +56,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //for Sequelize config
 app.set('models',require('./models'));
-
+sync = false;
+if(sync)
+	db.sequelize.sync({force:true});
 
 // development only
 if ('development' == app.get('env')) {
@@ -62,12 +66,10 @@ if ('development' == app.get('env')) {
 }
 
 
+//start the server
+var server = http.createServer(app);
+socket.listen(app);
 
-//db.sequelize.sync({force:true});
-
-
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-  
-

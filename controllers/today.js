@@ -1,15 +1,18 @@
 //send the current time with mysql format
 var ToDay = function() {
   this.now = function(){
-    var now = Date();
+    var now = new Date();
     var result = '';
     //year
-    result += now.getFullYear();
+    result += now.getFullYear()+ " ";
+    
     //day
-    result+= now.getDate();
+    result+= now.getDate()+" ";
+
     //month
-    result+= now.getMonth + 1;
-  
+    result+= now.getMonth() + 1;
+    
+    console.log(result);
     return result;
   };
 }
