@@ -1,22 +1,45 @@
 <body>
-	<h1>{{title}}</h1>
-	<div class="user">
-		<div class="nickname">
-			{{nickname}}
+	{{!-- file which manages all user views --}}
+
+	{{#if create}}
+		<form method="POST" action="/user/save">
+		<label for="nickname">nickname</label>
+		<input type="text" name="nickname">
+		<label for="email">email</label>
+		<input type="mail" name="email"> 
+		<label for="lastname">lastname</label>
+		<input type="text" name="lastname">
+		<label for="firstname">firstname</label>
+		<input type="text" name="firstname"> 
+		<label for="password">password</label>
+		<input type="password" name="password">
+		<label for="description">description</label>
+		<input type="text" name="description">
+		<label for="birthday">birthday</label>
+		<input type="date" name="birthday">
+		<input type="submit">
+	</form>
+
+	{{else}}
+		<h1>{{title}}</h1>
+		<div class="user">
+			<div class="nickname">
+				{{nickname}}
+			</div>
+			<div class="infos">
+				<span class="firstname">
+					{{firstname}}
+				</span>
+				<span class="lastname">
+					{{lastname}}
+				</span>
+				<span class="birthday">
+					{{birthday}}
+				</span>
+			</div>
+			<div class="description">
+				{{description}}
+			</div>
 		</div>
-		<div class="infos">
-			<span class="firstname">
-				{{firstname}}
-			</span>
-			<span class="lastname">
-				{{lastname}}
-			</span>
-			<span class="birthday">
-				{{birthday}}
-			</span>
-		</div>
-		<div class="description">
-			{{description}}
-		</div>
-	</div>
+	{{/if}}
 </body>

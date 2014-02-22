@@ -24,7 +24,8 @@ exports.profil = function(req,res){
         firstname: user.firstname,
         lastname: user.lastname,
         birthday: user.birthday,
-        description: user.description
+        description: user.description,
+        userCreate: false
       });
     else
       res.send('404');
@@ -36,8 +37,9 @@ exports.profil = function(req,res){
 
 
 exports.create = function(req,res){
-  res.render('user-create',{
-    layout:'main'
+  res.render('user',{
+    layout:'main',
+    create:true
   });
 };
 
@@ -59,8 +61,22 @@ exports.save = function(req,res){
     birthday : req.body.birthday
   });
 
-  //save the user in the database
-  user.save()
-  .success(function(){res.send("SUCCESS");})
-  .error(function(error){res.send(error);});
+   db.User.find({where:{'nickname':user.nickname}})
+   .success(function(userFound){
+    console.log(user);
+    //if the user doesn't exist in the database
+    if(userFound==null) {
+      //save the user in the database
+      user.save()
+        .success(function(){res.send("SUCCESS");})
+        .error(function(error){res.send(error);});
+     }
+     else
+      res.send("USER ALREADY EXISTS !");
+   });
+};
+
+
+exports.update = function(req,res){
+
 };

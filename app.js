@@ -61,10 +61,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-var syncFlag = true;
-if(syncFlag) {
-	db.sequelize.sync({force:true});
-}
+
+
+//db.sequelize.sync({force:true});
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
