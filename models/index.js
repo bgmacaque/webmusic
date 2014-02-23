@@ -35,7 +35,7 @@ User
   .hasMany(Tab)
   .hasMany(Comment)
   .hasMany(Band)
-  .hasMany(User, {as : 'follower', through : 'FollowerUsers'});
+  .hasMany(User, {as : 'followers', through : 'FollowerUsers'});
 Tab
   .belongsTo(User, {as : 'user_author'})
   .hasMany(Comment)

@@ -8,9 +8,11 @@
 {{> bootstrap/navbar-bt }}
 
 <body>
-    {{{body}}}
-   {{{js 'jquery'}}}
-   {{{js 'bootstrap.min'}}}
+   	{{{body}}}
+   	<script src="/socket.io/socket.io.js"></script>
+   	{{{js 'sockets'}}}
+   	{{{js 'jquery'}}}
+   	{{{js 'bootstrap.min'}}}
 </body>
 {{> bootstrap/footer-bt }}
 </html>

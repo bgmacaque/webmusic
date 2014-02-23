@@ -6,10 +6,8 @@ var http = require('http');
 var path = require('path');
 var app = express();
 var db = require('./models');
-var socket = require('socket.io').
-//routes
-app.use(express.bodyParser());
-var routes = require('./config/routes')(app);
+var io = require('socket.io');
+
 
 //handlebarjs
 var hbs = require('express3-handlebars').create({
@@ -51,6 +49,9 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(express.json());
+app.use(express.urlencoded());
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -65,10 +66,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//configuring the routes
+var routes = require('./config/routes')(app,io);
 
-//start the server
-var server = http.createServer(app);
-socket.listen(app);
+//start the server and socket.io
+var server = http.createServer(app,io);
+io.listen(server);
 
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

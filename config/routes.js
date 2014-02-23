@@ -1,11 +1,13 @@
-var routes = require('../controllers');
-var user = require('../controllers/user');
-var about = require('../controllers/about');
-var band = require('../controllers/band');
-module.exports = function(app) {
+module.exports = function(app,io) {
+  //loading controllers
+  var routes = require('../controllers');
+  var user = require('../controllers/user') (io);
+  var about = require('../controllers/about');
+  var band = require('../controllers/band') (io);
+
 	app.get('/', routes.index);
 	//users
-  app.get('/users',user.list);
+  app.get('/user/list',user.list);
 	app.get('/user/create',user.create);
   app.post('/user/save',user.save);
   app.get('/user/:id',user.profil);

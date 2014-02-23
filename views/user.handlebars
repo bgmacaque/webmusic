@@ -40,6 +40,14 @@
 			<div class="description">
 				{{description}}
 			</div>
+			<a id="button-follow" href="#follow">
+				Follow
+			</a>
+			<div class="followers">
+				{{#each followers}}
+					{{nickname}}
+				{{/each}}
+			</div>
 		</div>
 	{{/if}}
 </body>
