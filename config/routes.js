@@ -1,10 +1,9 @@
-module.exports = function(app,io) {
+module.exports = function(app) {
   //loading controllers
   var routes = require('../controllers');
-  var user = require('../controllers/user') (io);
+  var user = require('../controllers/user');
   var about = require('../controllers/about');
-  var band = require('../controllers/band') (io);
-
+  var band = require('../controllers/band');
 	app.get('/', routes.index);
 	//users
   app.get('/user/list',user.list);

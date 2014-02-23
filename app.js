@@ -25,15 +25,15 @@ var hbs = require('express3-handlebars').create({
 				var file = files[i];
 				var tab = file.split('.');
 				if (tab[tab.length-1]=='css')
-					result+='<link rel="stylesheet" href="stylesheets/'+file+'">';
+					result+='<link rel="stylesheet" href="/stylesheets/'+file+'">';
 			}
 			return result;
 		},
 		css: function(name) {
-			return '<link rel="stylesheet" href="stylesheets/'+name+'.css">';
+			return '<link rel="stylesheet" href="/stylesheets/'+name+'.css">';
 		},
 		js: function(name) {
-			return '<script src="javascripts/'+name+'.js" type="text/javascript"></script>';
+			return '<script src="/javascripts/'+name+'.js" type="text/javascript"></script>';
 		}
 	}
 });
@@ -66,13 +66,17 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-//configuring the routes
-var routes = require('./config/routes')(app,io);
+//loading the routes
+var routes = require('./config/routes')(app);
 
-//start the server and socket.io
-var server = http.createServer(app,io);
-io.listen(server);
 
+//start the socket server
+var server = http.createServer(app);
+io = io.listen(server);
+//loading sockets config
+var sockets = require('./config/sockets')(io);
+
+//start the express server
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
