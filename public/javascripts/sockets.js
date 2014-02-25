@@ -1,6 +1,9 @@
 var socket = io.connect('http://localhost');
 var followButton = $('#button-follow');
 socket.emit('user',{});
+socket.on('followerAdded',function(data) {
+  $(".followers ul").append(data.nickname);
+});
 
 followButton.click(function() {
   //get the current profil id
@@ -9,13 +12,6 @@ followButton.click(function() {
   //send the id of the current user
   socket.emit('follow',{
     idUser:id,
-    idFollower:2
+    idFollower:1
   });
-});
-
-socket.on('followerAdded',function(data){
-  //insert the latest follower
-
-  //we have to compile the view with an updated context
-  
 });

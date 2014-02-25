@@ -74,7 +74,7 @@ var routes = require('./config/routes')(app);
 var server = http.createServer(app);
 io = io.listen(server);
 //loading sockets config
-var sockets = require('./config/sockets')(io);
+var sockets = require('./config/sockets')(io,hbs);
 
 //start the express server
 server.listen(app.get('port'), function(){

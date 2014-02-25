@@ -13,6 +13,10 @@ exports.list = function(req, res) {
   });
 };
 
+/*
+ * GET user profil
+ */
+
 exports.profil = function(req,res){
   //search the user which has the id in the request
   db.User.find(req.params.id)
@@ -41,6 +45,9 @@ exports.profil = function(req,res){
   });
 };
 
+/*
+ * GET create user
+ */
 
 exports.create = function(req,res){
   res.render('user',{
@@ -49,8 +56,11 @@ exports.create = function(req,res){
   });
 };
 
+/*
+ *  POST new user
+ */
+
 exports.save = function(req,res){
-  console.log(req.body);
   var crypto = require('crypto');
   var salt = req.body.firstname+ 'babek' + res.lastname;
   var hash = crypto.createHmac('sha512',salt).update('PokemonBg').digest('hex');

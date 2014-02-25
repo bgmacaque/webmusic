@@ -1,14 +1,25 @@
 <body>
-	<h1>{{title}}</h1>
-	<div class="name">
-		{{name}}
-	</div>
-	<div class="infos">
-		<span class="author">
-			{{author}}
-		</span>
-		<span class="note">
-			{{note}}
-		</span>
-	</div>
+	{{#if create}}
+		<h1>{{title}}</h1>
+		<p>Import your tab file here!</p>
+		<div class="creation">
+			<input type="text" value="name">
+			<input type="file">
+			<input type="submit">
+		</div>
+	{{else}}
+		<h1>{{title}}</h1>
+		<div class="name">
+			{{name}}
+		</div>
+		<div class="infos">
+			<span class="author">
+				{{author}}
+			</span>
+			<span class="note">
+				{{note}}
+			</span>
+		</div>
+	{{/if}}
+
 </body>
