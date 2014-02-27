@@ -9,10 +9,9 @@ followButton.click(function() {
   //get the current profil id
   var path = location.pathname;
   var id = path.split('/')[3].match('[0-9]*')[0];
-  alert(id);
   //send the id of the current user
   socket.emit('follow',{
     idUser:id,
-    idFollower:4
+    idFollower:2
   });
 });

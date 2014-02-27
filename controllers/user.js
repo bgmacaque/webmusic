@@ -97,3 +97,10 @@ exports.update = function(req,res){
 };
 
 
+//sockets 
+
+exports.follow = function(io) {
+  
+}
+
+
