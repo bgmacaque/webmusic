@@ -1,4 +1,5 @@
 module.exports = function(app) {
+
   //loading controllers
   var routes = require('../controllers');
   var user = require('../controllers/user');

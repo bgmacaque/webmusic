@@ -41,6 +41,8 @@ var hbs = require('express3-handlebars').create({
 
 app.engine('handlebars', hbs.engine);
 
+
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -56,6 +58,12 @@ var secretSession = require('./config/session').secret();
 app.use(express.cookieParser());
 app.use(express.session({secret:secretSession}));
 
+//res variables
+app.use(function(req, res, next){
+	//it's used to have session variable everywhere on the website
+  res.locals.session = req.session;
+  next();
+})
 //routes
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -84,7 +92,7 @@ var routes = require('./config/routes')(app);
 var server = http.createServer(app);
 io = io.listen(server);
 //loading sockets config
-var sockets = require('./config/sockets')(io,hbs);
+var sockets = require('./config/sockets')(io);
 
 //start the express server
 server.listen(app.get('port'), function(){

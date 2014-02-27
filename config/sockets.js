@@ -1,7 +1,7 @@
 //config all socket event
 var db = require('../models/');
 var user = require('../controllers/user');
-module.exports = function(io,hbs) {
+module.exports = function(io) {
   //user
   io.sockets.on('connection',function(socket){
     socket.on('follow',function(data) {
