@@ -11,7 +11,6 @@ exports.index = function(req, res){
     	layout: 'main',
     	title: 'Express',
    	 	macaque:true,
-      session:req.session
     });
   });
 }; 

@@ -58,12 +58,16 @@ var secretSession = require('./config/session').secret();
 app.use(express.cookieParser());
 app.use(express.session({secret:secretSession}));
 
-//res variables
+//res global variables
 app.use(function(req, res, next){
-	//it's used to have session variable everywhere on the website
+	/*
+	 * It's used to have session variable everywhere on the website
+	 * All handlebars page which contains {{session}} will be allow to use it
+	 */
   res.locals.session = req.session;
   next();
 })
+
 //routes
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -79,14 +83,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-
-
-
 //loading the routes
 var routes = require('./config/routes')(app);
-
-
-
 
 //start the socket server
 var server = http.createServer(app);
