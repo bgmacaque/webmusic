@@ -1,4 +1,9 @@
 <hr>
 <footer class="footer">
-  <p>El Macaque</p>
+	<ul class="list-group">
+	{{#each session}}
+		<li class="list-group-item">{{@key}} : {{this}}</li>
+	{{/each}}
+	</ul>
+	
 </footer>  

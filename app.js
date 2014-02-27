@@ -9,6 +9,7 @@ var db = require('./models');
 var io = require('socket.io');
 
 
+
 //handlebarjs
 var hbs = require('express3-handlebars').create({
 	helpers: {
@@ -50,8 +51,12 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.json());
-app.use(express.urlencoded());
+//managing session
+var secretSession = require('./config/session').secret();
+app.use(express.cookieParser());
+app.use(express.session({secret:secretSession}));
 
+//routes
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -66,8 +71,13 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
+
+
 //loading the routes
 var routes = require('./config/routes')(app);
+
+
 
 
 //start the socket server

@@ -12,6 +12,6 @@ followButton.click(function() {
   //send the id of the current user
   socket.emit('follow',{
     idUser:id,
-    idFollower:2
+    idFollower:1
   });
 });
