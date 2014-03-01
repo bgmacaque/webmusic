@@ -62,8 +62,8 @@ exports.create = function(req,res){
 
 exports.save = function(req,res){
   var crypto = require('crypto');
-  var salt = req.body.firstname+ 'babek' + res.lastname;
-  var hash = crypto.createHmac('sha512',salt).update('PokemonBg').digest('hex');
+  var salt = req.body.firstname+ 'babek' + req.body.lastname;
+  var hash = crypto.createHmac('sha512',salt).update(req.body.password).digest('hex');
 
   //create a new user to save it
   var user = db.User.build({
@@ -134,6 +134,33 @@ exports.follow = function(socket,data) {
       });
     };
   });
-}
+};
+
+exports.connect = function(socket,data) {
+  var crypto = require('crypto');
+  var query = 'nickname = \''+data.nickname+'\'';
+  db.User.find({where: query})
+  .success(function(user) {
+    //if the user is found
+    if(user) {
+      console.log(user);
+      //check the password
+      var salt = user.salt;
+      var hash = crypto.createHmac('sha512',salt).update(data.password).digest('hex'); 
+
+      var pass = user.password;
+      if(pass === hash) {
+        console.log("CONNECTED");
+        socket.emit('connected',user);
+      }
+      else {
+        socket.emit('connection-error');
+      }
+    }
+  })
+  .error(function(error){
+    console.log(error);
+  });
+};
 
 

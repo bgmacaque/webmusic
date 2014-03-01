@@ -17,7 +17,7 @@ module.exports = function(app) {
   app.get('/band/create',band.create);
   app.post('/band/save',band.save);
   app.get('/band/:id',band.profil);
-  app.post('/band/user/add',band.addUser);
+  app.post('/band/:id/user/add',band.addUser);
   //tabs
   app.get('/tab/profil/:id',tab.profil);
   app.get('/tab/list',tab.list);

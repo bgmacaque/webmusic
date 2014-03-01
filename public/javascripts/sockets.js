@@ -1,4 +1,6 @@
 var socket = io.connect('http://localhost');
+
+//follow
 var followButton = $('#button-follow');
 socket.emit('user',{});
 socket.on('followerAdded',function(data) {
@@ -13,5 +15,17 @@ followButton.click(function() {
   socket.emit('follow',{
     idUser:id,
     idFollower:1
+  });
+});
+
+
+
+//connect
+var connectForm = $('#form-connect');
+connectForm.submit(function(e){
+  e.preventDefault();
+  socket.emit('connect',{
+    nickname: $('#nickname').val(),
+    password: $('#password').val()
   });
 });

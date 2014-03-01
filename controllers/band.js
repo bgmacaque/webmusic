@@ -60,6 +60,7 @@ exports.save = function(req,res){
    });
 };
 
+
 exports.addUser = function(req,res){
   //get the band in the databse
   db.Band.find(req.body.idBand)
@@ -70,7 +71,7 @@ exports.addUser = function(req,res){
       .success(function(user){
         if (user) {
           band.addUser(user);
-          res.send("SUCCESS");
+          res.send('SUCCESS');
         }
         else {
           res.send("ERREUR USER NON TROUVE")
@@ -104,4 +105,4 @@ exports.removeUser = function(req,res) {
   });
 };
 
-
+//sockets

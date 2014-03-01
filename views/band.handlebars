@@ -19,7 +19,7 @@
 		<span class="author">
 			{{author}}
 		</span>
-		<form action="/band/user/add" method="POST">
+		<form action="/band/{{id}}/user/add" method="POST">
 			<input type="hidden" name="adder" value="1">
 			<input type="text" name="idUser">
 			<input type="hidden" name="idBand" value="{{id}}">

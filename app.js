@@ -8,7 +8,15 @@ var app = express();
 var db = require('./models');
 var io = require('socket.io');
 
+//define the key which will be used to get the Express SID
+var EXPRESS_SID_KEY = 'express.sid';
 
+//define the secret string to crypt cookies
+var SITE_SECRET = process.env.SECRET || 
+									require('./config/session').secret() ||
+									'test';
+//create the session store
+var sessionStore = new express.session.MemoryStore();
 
 //handlebarjs
 var hbs = require('express3-handlebars').create({
@@ -54,15 +62,14 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.json());
 //managing session
-var secretSession = require('./config/session').secret();
 app.use(express.cookieParser());
-app.use(express.session({secret:secretSession}));
+app.use(express.session({secret: SITE_SECRET}));
 
 //res global variables
 app.use(function(req, res, next){
 	/*
 	 * It's used to have session variable everywhere on the website
-	 * All handlebars page which contains {{session}} will be allow to use it
+	 * All handlebars pages which contains {{session}} will be allowed to use it
 	 */
   res.locals.session = req.session;
   next();
@@ -89,6 +96,10 @@ var routes = require('./config/routes')(app);
 //start the socket server
 var server = http.createServer(app);
 io = io.listen(server);
+//enable session with socket
+
+
+
 //loading sockets config
 var sockets = require('./config/sockets')(io);
 
