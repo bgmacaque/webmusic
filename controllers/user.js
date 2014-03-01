@@ -61,14 +61,14 @@ exports.create = function(req,res){
  */
 
 exports.save = function(req,res){
-  var hash = require('authenticate').toHash(req.body.nickname,req.body.password,req.body.firstname);
-  
+  var hash = require('./authenticate').toHash(req.body.nickname,req.body.password,req.body.firstname);
+
   //create a new user to save it
   var user = db.User.build({
     nickname: req.body.nickname,
     email: req.body.email,
-    salt : salt,
-    password: hash,
+    salt : hash.salt,
+    password: hash.password,
     description : req.body.description,
     lastname : req.body.lastname,
     firstname : req.body.firstname,
@@ -135,4 +135,15 @@ exports.follow = function(socket,data) {
 };
 
 
-
+exports.connect = function(socket,data) {
+    require('./authenticate').check(data.nickname,data.password,function(err,user) {
+      if(err) {
+        console.log("POJKEMON");
+        socket.emit('connection-error');
+      }
+      else {
+        console.log("HEHHEEHEHEH");
+        socket.emit('connected',user);
+      }
+    });
+};
