@@ -17,15 +17,3 @@ followButton.click(function() {
     idFollower:1
   });
 });
-
-
-
-//connect
-var connectForm = $('#form-connect');
-connectForm.submit(function(e){
-  e.preventDefault();
-  socket.emit('connect',{
-    nickname: $('#nickname').val(),
-    password: $('#password').val()
-  });
-});

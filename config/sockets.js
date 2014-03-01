@@ -5,7 +5,6 @@ module.exports = function(io) {
   //io configuration
 
 
-
   //user
   io.sockets.on('connection',function(socket){
     socket.on('follow',function(data) {

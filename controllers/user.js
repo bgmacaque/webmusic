@@ -95,9 +95,29 @@ exports.update = function(req,res){
 };
 
 
+exports.login = function(req,res) {
+  require('./authenticate').check(req.body.nickname,req.body.password,function(err,user) {
+    if(err) {
+      res.send('ERROR');
+    }
+    else {
+      req.session.user = user;
+      res.redirect('/');
+    }
+  });
+}
+
+exports.logout = function(req,res) {
+  //delete the current user
+  delete req.session.user;
+  res.redirect('/');
+}
+
 //sockets 
 
 exports.follow = function(socket,data) {
+  //get the follower id
+  console.log(data.headers.cookie);
   //find the user who will be followed
   db.User.find(data.idUser)
   .success(function(user){
@@ -136,14 +156,12 @@ exports.follow = function(socket,data) {
 
 
 exports.connect = function(socket,data) {
-    require('./authenticate').check(data.nickname,data.password,function(err,user) {
-      if(err) {
-        console.log("POJKEMON");
-        socket.emit('connection-error');
-      }
-      else {
-        console.log("HEHHEEHEHEH");
-        socket.emit('connected',user);
-      }
-    });
+  require('./authenticate').check(data.nickname,data.password,function(err,user) {
+    if(err) {
+      socket.emit('connection-error');
+    }
+    else {
+      socket.emit('connected',user);
+    }
+  });
 };

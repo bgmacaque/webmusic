@@ -1,8 +1,14 @@
-<form id="form-connect" method="POST" action="/user/connect">
-	<label for="nickname">Nickname</label> <input id="nickname" type="text">
-	<input id="password"type="password">
-	<input type="submit">
-</form>
-<div class="alert alert-danger">
-	ERROR
-</div>
+{{#if session.user}}
+	{{session.user.nickname}}
+	<form action="/logout" method="POST">
+		<input type="submit" class="btn btn-danger" value="logout">
+	</form>
+{{else}}
+	<form method="POST" action="/login">
+	<label for="nickname">nickname</label>
+	<input type="text" name="nickname">
+	<label for="password">password</label>
+	<input type="password" name="password">
+	<input type="submit" class="btn" value="login">
+	</form>
+{{/if}}

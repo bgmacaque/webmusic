@@ -28,4 +28,8 @@ module.exports = function(app) {
   app.get('/search',search.index);
   //about
   app.get('/about',about.about);
+
+  //login and logout
+  app.post('/login',user.login);
+  app.post('/logout',user.logout);
 };
