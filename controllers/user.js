@@ -62,7 +62,7 @@ exports.create = function(req,res){
 
 exports.save = function(req,res){
   var hash = require('authenticate').toHash(req.body.nickname,req.body.password,req.body.firstname);
-
+  
   //create a new user to save it
   var user = db.User.build({
     nickname: req.body.nickname,

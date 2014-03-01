@@ -4,9 +4,8 @@ var crypto = require('crypto');
 
 //make the hash to save a user
 var toHash = function(nickname,password,firstname) {
-  firstname = firstname || '';
-  lastname = lastname || '';
-  var salt = firstname+ 'babek' + nickname;
+  var name = firstname || '';
+  var salt = name+ 'babek' + nickname;
   return hash = crypto.createHmac('sha512',salt).update(password).digest('hex');
 }
 
