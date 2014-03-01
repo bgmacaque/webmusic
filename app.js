@@ -81,9 +81,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //for Sequelize config
 app.set('models',require('./models'));
-sync = false;
-if(sync)
-	db.sequelize.sync({force:true});
 
 // development only
 if ('development' == app.get('env')) {

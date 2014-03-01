@@ -7,6 +7,7 @@ module.exports = function(app) {
   var band = require('../controllers/band');
   var tab = require('../controllers/tab');
   var search = require('../controllers/search');
+  var authenticate = require('../controllers/authenticate');
 	app.get('/', routes.index);
 	//users
   app.get('/user/list',user.list);
