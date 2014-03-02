@@ -40,9 +40,12 @@
 				<div class="description">
 					{{description}}
 				</div>
-				<a id="button-follow" href="#follow">
-					Follow
-				</a>
+				{{#if session.user }}
+					<a id="button-follow" href="#follow">
+						Follow
+					</a>			
+				{{/if}}
+
 				<div class="followers">
 					<p>Followers:</p>
 					<ul>
