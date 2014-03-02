@@ -21,24 +21,24 @@
 		</form>
 	
 		{{else}}
-			<h1>{{title}}</h1>
+			<h1>{{user.nickname}}</h1>
 			<div class="profil" id="{{id}}">
 				<div class="nickname">
-					{{nickname}}
+					{{user.nickname}}
 				</div>
 				<div class="infos">
 					<span class="firstname">
-						{{firstname}}
+						{{user.firstname}}
 					</span>
 					<span class="lastname">
-						{{lastname}}
+						{{user.lastname}}
 					</span>
 					<span class="birthday">
-						{{birthday}}
+						{{user.birthday}}
 					</span>
 				</div>
 				<div class="description">
-					{{description}}
+					{{user.description}}
 				</div>
 				{{#if session.user }}
 					<a id="button-follow" href="#follow">
