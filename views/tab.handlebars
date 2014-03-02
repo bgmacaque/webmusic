@@ -9,19 +9,20 @@
 		</div>
 	{{else}}
 		<h1>{{tab.title}}</h1>
-		<div class="name">
+		<div class="tab-name">
 			{{tab.name}}
 		</div>
 		<div class="infos">
-			<span class="author">
+			<span class="tab-author">
 				{{tab.author}}
 			</span>
-			<span class="note">
+			<span id="tab-note">
 				{{tab.note}}
 			</span>
 		</div>
 		<form action="comment/add/" method="POST">
 			<label for="author">Author</label><input type="text" name="author" id="post-author">
+			<input type="number" name="note" id="post-note" min="0" max="5">
 			<textarea name="body" id="post-body" cols="30" rows="10" placeholder="comment"></textarea>
 			<input type="submit" id="submit-comment" class="btn btn-default" value="POST">
 		</form>

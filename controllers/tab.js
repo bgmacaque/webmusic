@@ -20,7 +20,7 @@ exports.profil = function(req,res) {
   db.Tab.find(req.params.id) 
   .success(function(tab){
     if(tab!=null)
-      tab.getComments({include : [db.User]})
+      tab.getComments({include : [db.User], order: '`created_at` DESC'})
       .success(function(comments){
         var sum = 0;
         //calc the average of comment notes
@@ -37,16 +37,6 @@ exports.profil = function(req,res) {
       });
   });
 };
-
-exports.profilQuery = function(req,res) {
-  db.sequelize.query('SELECT * FROM Comments Natural Join Users WHERE tab_id = :id;',null,{raw:true},{
-              id : req.params.id
-            })
-  .success(function(Tab) {
-    console.log(Tab);
-    res.send("OK");
-  }); 
-}
 
 exports.create = function(req,res) {
   res.render('tab',{
@@ -81,8 +71,9 @@ exports.addComment = function(sockets,data) {
           db.Comment.create(comment)
           .success(function(commentAdded){
             sockets.emit('commentAdded',{
-              comment : commentAdded,
-              author : data.author
+              author: data.author,
+              note: commentAdded.note,
+              body: commentAdded.body
             });
           });
         }

@@ -29,11 +29,17 @@ postComment.on('click',function(e){
   socket.emit('postComment',{
     body: $('#post-body').val(),
     author: $('#post-author').val(),
+    note: $('#post-note').val(),
     tabId: tabId
   });
 });
 
 
 socket.on('commentAdded',function(data){
-  $('.comments').prepend("<li>"+data.comment.body+" -->"+data.author+"</li>")
+  //update the current tab note
+  var note = parseFloat(data.note);
+  var current_note = parseFloat($('#tab-note').text())
+  var result = ( note + current_note ) /2;
+  $('#tab-note').html(result);
+  $('.comments').prepend("<li>"+data.body+" -->"+data.author+"=>"+data.note+"</li>")
 });
