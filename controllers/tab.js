@@ -20,9 +20,15 @@ exports.profil = function(req,res) {
   db.Tab.find(req.params.id) 
   .success(function(tab){
     if(tab!=null)
-      tab.getComments({include : [db.User]}) //issue here, comments have to contains users information, not only the id
+      tab.getComments({include : [db.User]})
       .success(function(comments){
-        console.log(comments);
+        var sum = 0;
+        //calc the average of comment notes
+        for (var i = 0; i < comments.length; i++) {
+          sum += comments[i].note;
+        };
+        var average = (comments.length!=0) ? sum/comments.length : 0;
+        tab.note = average;
         res.render('tab',{
           layout:'main',
           comments:comments,
