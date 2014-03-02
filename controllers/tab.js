@@ -25,12 +25,11 @@ exports.profil = function(req,res) {
         res.render('tab',{
           layout:'main',
           comments:comments,
-          title:tab.title
+          tab:tab
         });
       });
   });
 };
-
 
 exports.create = function(req,res) {
   res.render('tab',{
@@ -38,4 +37,14 @@ exports.create = function(req,res) {
     layout:'main',
     title:'IMPORT YOUR TAB'
   });
+};
+
+
+
+//sockets
+
+exports.addComment = function(socket,data) {
+  data.author
+  data.body 
+  
 };

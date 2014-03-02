@@ -8,19 +8,19 @@
 			<input type="submit">
 		</div>
 	{{else}}
-		<h1>{{title}}</h1>
+		<h1>{{tab.title}}</h1>
 		<div class="name">
-			{{name}}
+			{{tab.name}}
 		</div>
 		<div class="infos">
 			<span class="author">
-				{{author}}
+				{{tab.author}}
 			</span>
 			<span class="note">
-				{{note}}
+				{{tab.note}}
 			</span>
 		</div>
-		<form action="/comment/add" method="POST">
+		<form action="/tab/profil/{{tab.id}}/comment/add" method="POST">
 			<label for="author">Author</label><input type="text" name="author" id="author">
 			<textarea name="body" id="body" cols="30" rows="10"></textarea>
 			<input type="submit" class="btn btn-default">

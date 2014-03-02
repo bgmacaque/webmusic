@@ -27,13 +27,7 @@ exports.profil = function(req,res){
         res.render('user',{
           layout:'main',
           followers:followers,
-          id:user.id,
-          title: user.nickname,
-          nickname: user.nickname,
-          firstname: user.firstname,
-          lastname: user.lastname,
-          birthday: user.birthday,
-          description: user.description,
+          user: user,
           userCreate: false
         });
       });
