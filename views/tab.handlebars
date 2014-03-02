@@ -20,6 +20,21 @@
 				{{note}}
 			</span>
 		</div>
+		<form action="/comment/add" method="POST">
+			<label for="author">Author</label><input type="text" name="author" id="author">
+			<textarea name="body" id="body" cols="30" rows="10"></textarea>
+			<input type="submit" class="btn btn-default">
+		</form>
+		<div class="comments">
+			{{#each comments}}
+				<div class="author">
+					{{author}}
+				</div>
+				<div class="comment">
+					{{body}}
+				</div>
+			{{/each}}
+		</div>
 	{{/if}}
 
 </body>
