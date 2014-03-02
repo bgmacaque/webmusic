@@ -43,27 +43,30 @@ exports.create = function(req,res) {
 
 //sockets
 
-exports.addComment = function(socket,data) {
-  data.author
-  data.body 
-  data.bandId
+exports.addComment = function(sockets,data) {
   //check the user
   db.User.find({where : {'nickname' : data.author} })
   .success(function(user){
     if(user) {
       //check the tab
-      db.Band.find(tadId)
+      db.Tab.find(data.tabId)
       .success(function(tab){
         //check the body
+        console.log(tab);
         if(data.body && tab) {
-          //make the comment to add
-          var comment = db.Comment.build({
-            author: data.author,
-            body: data.body
-          });
-          tab.addComment(comment)
-          .success(function(){
-            socket.emit('commentAdded',comment);
+          //create the comment which will be added
+          var comment = {
+            user_id: user.id,
+            body: data.body,
+            note: (data.note) ? data.note : 0,
+            tab_id: tab.id
+          };
+          db.Comment.create(comment)
+          .success(function(commentAdded){
+            sockets.emit('commentAdded',{
+              comment : commentAdded,
+              author : data.author
+            });
           });
         }
       });

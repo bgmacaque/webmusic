@@ -19,10 +19,8 @@ module.exports = function(io) {
 
     //tab
     socket.on('postComment',function(data){
-      tab.addComment(socket,data);
+      tab.addComment(io.sockets,data);
     });
-
-
   });
 
 
