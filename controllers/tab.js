@@ -20,8 +20,9 @@ exports.profil = function(req,res) {
   db.Tab.find(req.params.id) 
   .success(function(tab){
     if(tab!=null)
-      tab.getComments()
+      tab.getComments({include : [db.User]}) //issue here, comments have to contains users information, not only the id
       .success(function(comments){
+        console.log(comments);
         res.render('tab',{
           layout:'main',
           comments:comments,
@@ -30,6 +31,16 @@ exports.profil = function(req,res) {
       });
   });
 };
+
+exports.profilQuery = function(req,res) {
+  db.sequelize.query('SELECT * FROM Comments Natural Join Users WHERE tab_id = :id;',null,{raw:true},{
+              id : req.params.id
+            })
+  .success(function(Tab) {
+    console.log(Tab);
+    res.send("OK");
+  }); 
+}
 
 exports.create = function(req,res) {
   res.render('tab',{

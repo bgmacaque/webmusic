@@ -33,7 +33,7 @@ var Band = db.Band;
 //define associations
 User
   .hasMany(Tab)
-  .hasMany(Comment)
+  .hasMany(Comment, {foreignKey : 'comment_id'})
   .hasMany(Band)
   .hasMany(User, {as : 'followers', through : 'FollowerUsers'});
 Tab
@@ -46,7 +46,7 @@ Band
   .hasMany(User)
   .hasMany(Tab);
 Comment
-  .belongsTo(User, {as : 'author'})
+  .belongsTo(User)
   .belongsTo(Tab);
 
 module.exports = lodash.extend({
