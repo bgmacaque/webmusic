@@ -3,7 +3,7 @@ var should = require("chai").should();
 var db = require('../models');
 var User = db.User;
 sync = process.env.SYNC || false;
-if(!sync)
+if(sync)
   db.sequelize.sync({force:true});
 
 describe('User', function(){
