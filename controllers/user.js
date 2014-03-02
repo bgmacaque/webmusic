@@ -116,13 +116,10 @@ exports.logout = function(req,res) {
 //sockets 
 
 exports.follow = function(socket,data) {
-  //get the follower id
-  console.log(data.headers.cookie);
   //find the user who will be followed
   db.User.find(data.idUser)
   .success(function(user){
     if(user!=null) {
-      console.log(user);
       //find the user which wants to follow
       db.User.find(data.idFollower)
       .success(function(follower){

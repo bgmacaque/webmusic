@@ -8,7 +8,7 @@ var app = express();
 var db = require('./models');
 var io = require('socket.io');
 var cookieParser = express.cookieParser();
-
+var sessionStore = new express.session.MemoryStore();
 //define the secret string to crypt cookies
 var SITE_SECRET = process.env.SECRET || 
 									require('./config/session').secret() ||
@@ -58,7 +58,8 @@ app.use(express.methodOverride());
 //managing session
 app.use(cookieParser);
 app.use(express.session({
-	secret: SITE_SECRET
+	secret: SITE_SECRET,
+	store: sessionStore
 }));
 
 //res global variables
