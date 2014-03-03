@@ -11,6 +11,19 @@ exports.index = function(req,res) {
 
 exports.searchEngine = function(req,res) {
   //search the results foreach words
+  var keywords = req.search.trim().split(' ');
+  for(var keyword in keywords) {
+    search(keyword,function(results){
+      if(results[0])
+        res.render('search',{
+          layout:'main',
+          title:'results',
+          results:results
+        })
+      else
+        res.send('null');
+    });
+  }
 };
 
 var search = function(keyword,callback) {
