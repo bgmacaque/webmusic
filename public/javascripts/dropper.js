@@ -7,8 +7,18 @@ dropper.addEventListener('dragover', function(e) {
 
 dropper.addEventListener('drop', function(e) {
     e.preventDefault();
-    alert("OK!");
+
     //create the tab object and send it with socket.io
+    var files = e.dataTransfer.files;
+    var filenames = "";
+    for(var i = 0; i < files.length; i++) {
+      read = new FileReader();
+      read.readAsBinaryString(files[i]);
+      read.onloadend = function() {
+        alert(read.result);
+      }
+    }
+
 
 }, false);
 
