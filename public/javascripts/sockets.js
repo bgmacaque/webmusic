@@ -39,7 +39,8 @@ socket.on('commentAdded',function(data){
   //update the current tab note
   var note = parseFloat(data.note);
   var current_note = parseFloat($('#tab-note').text())
-  var result = ( note + current_note ) /2;
+  var count = $('.comment').size();
+  var result = ( note + current_note*count ) / (count + 1) ;
   $('#tab-note').html(result);
   $('.comments').prepend("<li>"+data.body+" -->"+data.author+"=>"+data.note+"</li>")
 });
