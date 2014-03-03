@@ -5,7 +5,7 @@ exports.index = function(req,res) {
     title:'SEARCH',
     layout:'main'
   });
-}
+};
 
 
 
