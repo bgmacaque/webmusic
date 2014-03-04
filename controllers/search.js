@@ -1,27 +1,29 @@
 var db = require('../models');
 
 exports.index = function(req,res) {
-  res.render('search',{
-    title:'SEARCH',
-    layout:'main'
-  });
+  if(!req.query.q)
+    res.render('search',{
+      title:'SEARCH',
+     layout:'main'
+    });
+  else
+    searchEngine(req,res);
 };
 
 
 
-exports.searchEngine = function(req,res) {
+var searchEngine = function(req,res) {
   //search the results foreach words
-  var keywords = req.search.trim().split(' ');
-  for(var keyword in keywords) {
-    search(keyword,function(results){
-      if(results[0])
-        res.render('search',{
-          layout:'main',
-          title:'results',
-          results:results
-        })
+  var keywords = req.query.q.trim().split('+');
+  for(var i in keywords) {
+    console.log('TEST'+keywords[i]);
+    search(keywords[i],function(results){
+      if(results[0][0]) {
+        console.log(results);
+        res.send('OK')
+      }
       else
-        res.send('null');
+        res.send('RIEN TROUVE');
     });
   }
 };
@@ -47,10 +49,10 @@ var searchUser = function(keyword,callback) {
     firstname: keyword
   };
   db.User.findAll({
-    where : [' `nickname` = LIKE %?% OR `lastname` LIKE %?% OR `firstname` LIKE %?% ',
-                user.nickname,
-                user.lastname,
-                user.firstname] 
+    where : ['`nickname` LIKE ? OR `lastname` LIKE ? OR `firstname` LIKE ? ',
+                '%'+user.nickname+'%',
+                '%'+user.lastname+'%',
+                '%'+user.firstname+'%'] 
   })
   .success(function(usersFound) {
       callback(usersFound);
@@ -59,9 +61,9 @@ var searchUser = function(keyword,callback) {
 
 
 var searchTab = function(keyword,callback) {
-  db.User.findAll({
-    where : ['name = ?',
-              keyword]
+  db.Tab.findAll({
+    where : ['name LIKE ?',
+              '%'+keyword+'%']
   })
   .success(function(tabsFound){
       callback(tabsFound)

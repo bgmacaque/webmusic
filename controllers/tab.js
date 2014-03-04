@@ -15,6 +15,9 @@ exports.list = function(req,res) {
   });
 };
 
+var getBestTabs = function(callback) {
+  //find 10 best tabs in database
+};
 
 exports.profil = function(req,res) {
   db.Tab.find(req.params.id) 
