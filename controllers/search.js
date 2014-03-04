@@ -19,8 +19,7 @@ var searchEngine = function(req,res) {
     console.log('TEST'+keywords[i]);
     search(keywords[i],function(results){
       if(results[0][0]) {
-        console.log(results);
-        res.send('OK')
+        res.send(results);
       }
       else
         res.send('RIEN TROUVE');
