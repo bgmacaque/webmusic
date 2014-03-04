@@ -16,7 +16,6 @@ var searchEngine = function(req,res) {
   //search the results foreach words
   var keywords = req.query.q.trim().split('+');
   for(var i in keywords) {
-    console.log('TEST'+keywords[i]);
     search(keywords[i],function(results){
       if(results[0][0]) {
         res.send(results);
