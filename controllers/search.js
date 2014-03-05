@@ -17,11 +17,22 @@ var searchEngine = function(req,res) {
   var keywords = req.query.q.trim().split('+');
   for(var i in keywords) {
     search(keywords[i],function(results){
-      if(results[0][0]) {
-        res.send(results);
+      if(results[0][0] || results[1][0]) {
+        console.log(results[0]);
+        res.render('search',{
+          title:'RESULTS',
+          layout:'main',
+          users:results[0],
+          tabs:results[1],
+          result:true
+        });
       }
       else
-        res.send('RIEN TROUVE');
+        res.render('search',{
+          title:'RESULTS',
+          layout:'main',
+          result:false
+        });
     });
   }
 };
@@ -60,7 +71,7 @@ var searchUser = function(keyword,callback) {
 
 var searchTab = function(keyword,callback) {
   db.Tab.findAll({
-    where : ['name LIKE ?',
+    where : ['`name` LIKE ?',
               '%'+keyword+'%']
   })
   .success(function(tabsFound){

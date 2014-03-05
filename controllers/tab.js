@@ -15,8 +15,16 @@ exports.list = function(req,res) {
   });
 };
 
-var getBestTabs = function(callback) {
+exports.getBestTabs = function(callback) {
   //find 10 best tabs in database
+  db.Tab.findAll({
+    limit: 10,
+    order: ' `note` DESC'
+  }).success(function(tabs){
+    if(tabs) {
+      callback(tabs);
+    }
+  })
 };
 
 exports.profil = function(req,res) {

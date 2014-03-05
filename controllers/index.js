@@ -5,11 +5,11 @@ var db = require('../models');
 
 exports.index = function(req, res){
   req.session.pokemon = 'bg';
-  db.User.findAll().success(function(users) {
+  require('./tab').getBestTabs(function(tabs) {
       res.render('index', {
-      users : users,
+      tabs : tabs,
     	layout: 'main',
-    	title: 'Express',
+    	title: 'ShareTab',
    	 	macaque:true,
     });
   });

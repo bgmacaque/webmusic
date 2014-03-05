@@ -5,4 +5,23 @@
 		<input type="search" name="q">
 		<input type="submit">
 	</form>
+	<div class="results">
+		{{#unless result}}
+			No results
+		{{else}}
+			{{#if users}}
+				<h1>Users</h1>
+				{{#each users }}
+					{{nickname}} {{id}}
+				{{/each}}			
+			{{/if}}
+			{{#if tabs}}
+				<h1>Tabs</h1>
+				{{#each tabs}}
+					{{name}} {{id}}
+				{{/each}}
+			{{/if}}
+
+		{{/unless}}
+	</div>
 </body>
