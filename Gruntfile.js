@@ -11,6 +11,9 @@ module.exports = function(grunt) {
 				options: {
 					logConcurrentOutput: true
 				}
+			},
+			client: {
+				tasks: ['watch']
 			}
 		},
 			jshint : {
@@ -76,4 +79,6 @@ module.exports = function(grunt) {
 	});
 
 	grunt.registerTask('default',['concurrent:dev']);
+	grunt.registerTask('livereload',['concurrent:client']);
+
 };

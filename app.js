@@ -38,6 +38,19 @@ var hbs = require('express3-handlebars').create({
 		},
 		js: function(name) {
 			return '<script src="/javascripts/'+name+'.js" type="text/javascript"></script>';
+		},
+		//specific to this application
+		listing: function(hashmap) {
+			var out = '';
+			for(var key in hashmap) {
+				out += '<p>'+key+'</p>';
+				//tabs
+				for(var i in hashmap[key]) {
+					var tab = hashmap[key][i];
+					out += '<li class="tab-list"><a href="/tab/profil/'+tab.id+'">'+tab.name+'</a></li>';
+				}
+			}
+			return out;	
 		}
 	}
 });
