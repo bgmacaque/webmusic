@@ -39,6 +39,8 @@ exports.create = function(req,res){
 };
 
 exports.save = function(req,res){
+  if(!req.body.name)
+    throw new Error('name should exist');
   //create a new user to save it
   var band = db.Band.build({
     name: req.body.name,

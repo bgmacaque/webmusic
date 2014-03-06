@@ -34,4 +34,6 @@ module.exports = function(app) {
   //login and logout
   app.post('/login',user.login);
   app.post('/logout',user.logout);
+
+
 };
