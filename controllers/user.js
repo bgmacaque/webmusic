@@ -108,22 +108,18 @@ exports.logout = function(req,res) {
 }
 
 //get recent tabs which are in the following list
-var getFollowers = function(idFollower,callback) {
-  var tabs = [];
-  db.User.find(idFollower)
+var getFollowers = function(idUser,callback) {
+  //create the query
+  var query = 'SELECT name FROM `FollowerUsers`, `Users`, `Tabs` ';
+  query += 'WHERE FollowerUsers.user_id = Users.id ';
+  query += 'AND Tabs.user_id = Users.id ';
+  query += 'AND FollowerUsers.followers_id = ' + idUser;
+  //execute the query
+  db.User.find(idUser)
   .success(function(user){
     if(user) {                    
-      user.getFollowers() //getFollowing not followers
-      .success(function(followers){
-        for(i in followers) {
-          console.log('FOLLOWERS')
-          (function(i){ 
-            followers[i].getTabs()
-            .success(function(tabsFound){
-              tabs.push(tabsFound);
-            });
-         })(i,followers);
-        }
+     db.sequelize.query(query)
+      .success(function(tabs){
         callback(tabs);
       }).error(function(error){
         console.log('ERROR '+error);
