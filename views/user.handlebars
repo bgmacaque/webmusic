@@ -3,16 +3,16 @@
 	<div class="jumbotron">
 		{{#if create}}
 			<form method="POST" action="/user/save">
-			<label for="nickname">nickname</label>
-			<input type="text" name="nickname">
+			<label for="nickname">pseudo</label>
+			<input type="text" name="nickname" required>
 			<label for="email">email</label>
-			<input type="mail" name="email"> 
+			<input type="mail" name="email" required> 
 			<label for="lastname">lastname</label>
 			<input type="text" name="lastname">
 			<label for="firstname">firstname</label>
-			<input type="text" name="firstname"> 
-			<label for="password">password</label>
-			<input type="password" name="password">
+			<input type="text" name="firstname" required> 
+			<label for="password" >password</label>
+			<input type="password" name="password" required>
 			<label for="description">description</label>
 			<input type="text" name="description">
 			<label for="birthday">birthday</label>

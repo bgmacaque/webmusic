@@ -70,7 +70,6 @@ exports.addComment = function(sockets,data) {
       db.Tab.find(data.tabId)
       .success(function(tab){
         //check the body
-        console.log(tab);
         if(data.body && tab) {
           //create the comment which will be added
           var comment = {
@@ -81,6 +80,7 @@ exports.addComment = function(sockets,data) {
           };
           db.Comment.create(comment)
           .success(function(commentAdded){
+            //TODO update the tab note
             sockets.emit('commentAdded',{
               author: data.author,
               note: commentAdded.note,

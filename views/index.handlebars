@@ -2,10 +2,29 @@
 	{{> bootstrap/jumbotron-bt }}
 	
 	<div class="row">
-		<div class="col-md-9"></div>
-		<div class="col-md-3">
-		<ul class="list-group">
+		<div class="col-md-2">
+			<h3>My pannel</h3>
+			<ul>
+				<li>Favorites</li>
+				<li>Tabs</li>
+				<li>Following</li>
+				<li>Listing</li>
+				<li><a href="/search">Search</a></li>
+			</ul>
+		</div>
+		<div class="col-md-7">
+			<h1>tabs</h1>
 			{{#each tabs}}
+				<li class="list-group-item">
+				{{name}}
+					<span class="badge">{{note}}</span>
+				</li>			
+			{{/each}}
+		</div>
+		<div class="col-md-3">
+		<h3>Top 10 Tabs</h3>
+		<ul class="list-group">
+			{{#each topTabs}}
 				<li class="list-group-item">
 				{{name}}
 					<span class="badge">{{note}}</span>

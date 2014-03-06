@@ -32,19 +32,19 @@ var Band = db.Band;
 
 //define associations
 User
-  .hasMany(Tab)
+  .hasMany(Tab, {foreignKey : 'user_id'}) //author
   .hasMany(Comment, {foreignKey : 'comment_id'})
   .hasMany(Band)
   .hasMany(User, {as : 'followers', through : 'FollowerUsers'});
 Tab
-  .belongsTo(User, {as : 'user_author'})
-  .hasMany(Comment)
-  .hasMany(User) //like
+  .belongsTo(User, {as: 'author'})  //author
+  .hasMany(Comment, {foreignKey : 'comment_id'})
+  .hasMany(User, {as : 'likers'}) //like
   .belongsTo(Band, {as : 'band_author'});
 Band
   .belongsTo(User, {as : 'creator'})
   .hasMany(User)
-  .hasMany(Tab);
+  .hasMany(Tab, {foreignKey : 'tab_id'});
 Comment
   .belongsTo(User)
   .belongsTo(Tab);

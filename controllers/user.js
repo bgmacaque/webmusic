@@ -56,7 +56,6 @@ exports.create = function(req,res){
 
 exports.save = function(req,res){
   var hash = require('./authenticate').toHash(req.body.nickname,req.body.password,req.body.firstname);
-
   //create a new user to save it
   var user = db.User.build({
     nickname: req.body.nickname,
@@ -89,6 +88,7 @@ exports.update = function(req,res){
 };
 
 
+
 exports.login = function(req,res) {
   require('./authenticate').check(req.body.nickname,req.body.password,function(err,user) {
     if(err) {
@@ -107,6 +107,41 @@ exports.logout = function(req,res) {
   res.redirect('/');
 }
 
+//get recent tabs which are in the following list
+var getFollowers = function(idFollower,callback) {
+  var tabs = [];
+  db.User.find(idFollower)
+  .success(function(user){
+    if(user) {                    
+      user.getFollowers() //getFollowing not followers
+      .success(function(followers){
+        for(i in followers) {
+          console.log('FOLLOWERS')
+          (function(i){ 
+            followers[i].getTabs()
+            .success(function(tabsFound){
+              tabs.push(tabsFound);
+            });
+         })(i,followers);
+        }
+        callback(tabs);
+      }).error(function(error){
+        console.log('ERROR '+error);
+      });
+    } else {
+      callback(null);
+    }
+  });
+};
+
+
+exports.getFollowingTabs = function(user,callback) {
+  if(user)
+    getFollowers(user.id,callback);
+  else
+    callback(null);
+};
+
 //sockets 
 
 exports.follow = function(socket,data) {
@@ -116,8 +151,8 @@ exports.follow = function(socket,data) {
     if(user!=null) {
       //find the user which wants to follow
       db.User.find(data.idFollower)
-      .success(function(follower){
-        if(follower!=null){
+      .success(function(follower){ 
+        if(follower!=null){console.log('ok');
           //check the following
           user.getFollowers()
           .success(function(followers){
