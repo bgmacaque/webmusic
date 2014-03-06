@@ -8,6 +8,7 @@ module.exports = function(app) {
   var tab = require('../controllers/tab');
   var search = require('../controllers/search');
   var authenticate = require('../controllers/authenticate');
+  var listing = require('../controllers/listing');
 	app.get('/', routes.index);
 	//users
   app.get('/user/list',user.list);
@@ -28,7 +29,8 @@ module.exports = function(app) {
   app.get('/search',search.index);
   //about
   app.get('/about',about.about);
-
+  //listing
+  app.get('/listing',listing.index);
   //login and logout
   app.post('/login',user.login);
   app.post('/logout',user.logout);
