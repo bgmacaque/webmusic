@@ -2,10 +2,11 @@
 var db = require('../models/');
 var user = require('../controllers/user');
 var tab = require('../controllers/tab');
-module.exports = function(io) {
+module.exports = function(sessionSockets) {
   //io configuration
 
-  io.sockets.on('connection',function(socket){
+  sessionSockets.on('connection',function(err,socket,session){
+          console.log(session.pokemon);
 
     //user
     socket.on('follow',function(data) {
@@ -19,7 +20,7 @@ module.exports = function(io) {
 
     //tab
     socket.on('postComment',function(data){
-      tab.addComment(io.sockets,data);
+      tab.addComment(sessionSockets.getIo().sockets,data);
     });
   });
 
