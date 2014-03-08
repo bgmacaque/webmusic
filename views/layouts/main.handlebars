@@ -9,12 +9,14 @@
 <body>
 	{{> navigation-bar }}
    	{{{body}}}
-
    	{{{js 'jquery'}}}
    	{{{js 'bootstrap.min'}}}
    	<script src="/socket.io/socket.io.js"></script>
-	{{{js 'sockets'}}}
-	{{{js 'dropper' }}}
+    {{{js 'tabs/chart'}}}
+    {{{js 'tabs/chord'}}}
+    {{{js 'tabs/raphael-min'}}}
+	  {{{js 'sockets'}}}
+	   {{{js 'dropper' }}}
 </body>
 {{> bootstrap/footer-bt}}
 </html>
