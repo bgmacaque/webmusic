@@ -7,6 +7,7 @@ var path = require('path');
 var app = express();
 var db = require('./models');
 var io = require('socket.io');
+var connect = require('connect');
 var SessionSockets = require('session.socket.io')
 
 //define the secret string to crypt cookies
@@ -18,7 +19,7 @@ var sessionStore = new connect.middleware.session.MemoryStore();
 
 //handlebarjs
 
-app.engine('handlebars', require('./config/helpers').engine);
+app.engine('handlebars', require('./config/hbs').engine);
 
 
 

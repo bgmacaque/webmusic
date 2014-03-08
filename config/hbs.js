@@ -1,5 +1,4 @@
 //configuration file for handlebars 
-
 var hbs = require('express3-handlebars').create({
   helpers: {
     img: function(name,alt) { return '<img src="images/'+name+'" alt="'+alt+'">';},
@@ -8,7 +7,7 @@ var hbs = require('express3-handlebars').create({
       var fs = require('fs');
       var files;
       /* make the array which will be used for css files*/
-      files= fs.readdirSync(__dirname+'/public/stylesheets');
+      files= fs.readdirSync(process.cwd() + '/public/stylesheets');
       //make the string result
       var result='';      
       for (var i = files.length - 1; i >= 0; i--) {
@@ -40,3 +39,6 @@ var hbs = require('express3-handlebars').create({
     }
   }
 });
+
+
+module.exports = hbs;
