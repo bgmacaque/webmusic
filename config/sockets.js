@@ -6,7 +6,7 @@ module.exports = function(sessionSockets) {
   //io configuration
 
   sessionSockets.on('connection',function(err,socket,session){
-          console.log(session.pokemon);
+    console.log(session);
 
     //user
     socket.on('follow',function(data) {
@@ -20,7 +20,7 @@ module.exports = function(sessionSockets) {
 
     //tab
     socket.on('postComment',function(data){
-      tab.addComment(sessionSockets.getIo().sockets,data);
+      tab.addComment(sessionSockets.io().sockets,data);
     });
   });
 
