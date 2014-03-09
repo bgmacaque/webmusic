@@ -43,7 +43,14 @@
     var count = $('.comment').size();
     var result = ( note + current_note*count ) / (count + 1) ;
     $('#tab-note').html(result);
-    $('.comments').prepend("<li>"+data.body+" -->"+data.author+"=>"+data.note+"</li>")
+        var string = '';
+        string += '<li class="comment">';
+        string += '  <span class="author">'+data.author+'</span> \n';
+        string += '  <span class="note">'+data.note+'</span>  \n';
+        string += '  <div class="body">'+data.body+'</div> \n';
+        string += '</li>';
+    
+    $('.comments').prepend(string);
   });
   
 })();

@@ -20,7 +20,7 @@
 				{{tab.note}}
 			</span>
 		</div>
-		<form action="comment/add/" method="POST">
+		<form action="comment/add/" method="POST" id="add-comment">
 			<label for="author">Author</label>
 			<input type="text" name="author" id="post-author">
 			<input type="number" name="note" id="post-note" min="0" max="5">
@@ -30,7 +30,7 @@
 		<ul class="comments">
 			{{#each comments}}
 				<li class="comment">
-					<span class="author">{{user.nickname}}</span>
+					<span class="author">{{nickname}}</span>
 					<span class="note">{{note}}</span>	
 					<div class="body">{{body}}</div>
 				</li>

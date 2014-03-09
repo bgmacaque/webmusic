@@ -28,11 +28,16 @@ exports.getBestTabs = function(callback) {
 };
 
 exports.profil = function(req,res) {
-  db.Tab.find(req.params.id) 
-  .success(function(tab){
-    if(tab!=null)
-      tab.getComments({include : [db.User], order: '`created_at` DESC'})
+  var idTab = req.params.id;
+  var query = 'SELECT * from Users, Comments ';
+  query += 'WHERE Comments.tab_id = '+idTab;
+  query += ' AND Users.id = Comments.user_id';
+  db.Tab.find(idTab)
+  .success(function(tab){  
+    if(tab)
+      db.sequelize.query(query)
       .success(function(comments){
+        console.log(comments);
         var sum = 0;
         //calc the average of comment notes
         for (var i = 0; i < comments.length; i++) {
@@ -46,6 +51,8 @@ exports.profil = function(req,res) {
           tab:tab
         });
       });
+    else
+      res.send('404');
   });
 };
 

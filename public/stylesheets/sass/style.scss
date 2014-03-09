@@ -1,2 +1,40 @@
 /* main style */
 @import "compass/css3";
+//comments style
+/****** Tab page *****/
+
+#id-comment {
+	background-color: red;
+	input{
+	 	display:block;
+	}
+}
+
+.comments {
+	.comment {
+		border: solid #e1f1a2 1px;
+		width: 25%;
+
+		margin-bottom: 3px;
+		.author {
+			font-size: 1.5em;
+			border: solid 2px black;
+			display: inline-block;
+			width: 20%;
+			margin-left: 10%;
+			margin-bottom: 3px;
+			text-align: center;
+		}
+		.note {
+			display: inline-block;
+			font-size: 2em;
+			color:#d4d4d4;
+		}
+		.body {
+			border-left: solid 10px #e9e5d6;
+			border-top: solid 10px #e9e5d6;
+			padding: 3%;
+			min-height: 60px;
+		}
+	}
+}
