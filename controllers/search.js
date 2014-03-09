@@ -18,7 +18,6 @@ var searchEngine = function(req,res) {
   for(var i in keywords) {
     search(keywords[i],function(results){
       if(results[0][0] || results[1][0]) {
-        console.log(results[0]);
         res.render('search',{
           title:'RESULTS',
           layout:'main',

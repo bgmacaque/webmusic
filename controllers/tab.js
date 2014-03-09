@@ -94,7 +94,15 @@ exports.addComment = function(sockets,data) {
               body: commentAdded.body
             });
           });
+        } else {
+          res.send('500',{
+            error:'FORM ERROR';
+          })
         }
+      });
+    } else {
+      res.send('500',{
+        error:'UNKNOWN AUTHOR'
       });
     }
   });

@@ -68,7 +68,16 @@ exports.save = function(req,res){
     birthday : req.body.birthday
   });
 
-   db.User.find({where:{'nickname':user.nickname}})
+  var checkTab = ['firstname','nickname','salt','password','email'];
+  //check posted elements
+  for(property in checkTab ) {
+     if(!user[property])
+        res.render('500'{
+          error:'FORM ERROR'
+        });
+  }
+
+  db.User.find({where:{'nickname':user.nickname}})
    .success(function(userFound){
     //if the user doesn't exist in the database
     if(userFound==null) {

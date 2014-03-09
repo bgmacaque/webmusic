@@ -40,13 +40,25 @@ exports.create = function(req,res){
 
 exports.save = function(req,res){
   if(!req.body.name)
-    throw new Error('name should exist');
+    res.render('500',{
+      error:'name should exist'
+    });
   //create a new user to save it
   var band = db.Band.build({
     name: req.body.name,
     creation: today.now(),
     description : req.body.description
   });
+
+  var checkTab = ['name','creation','description'];
+  //check posted elements
+  for(property in checkTab ) {
+     if(!band[property])
+        res.render('500'{
+          error:'FORM ERROR'
+        });
+  }
+
 
   db.Band.find({where:{'name':band.name}})
    .success(function(bandFound){
