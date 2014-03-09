@@ -6,33 +6,37 @@ var http = require('http');
 var path = require('path');
 var db = require('./models');
 var app = express();
-
 //define the secret string to crypt cookies
 var SITE_SECRET = process.env.SECRET || 
 									require('./config/session').secret() ||
 									'test';
-var cookieParser = express.cookieParser('your secret sauce');
+
+var cookieParser = express.cookieParser(SITE_SECRET);
 var sessionStore = new express.session.MemoryStore();
 
 
 
 
 // all environments
+
+
 app.engine('handlebars', require('./config/hbs').engine);
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.resolve('views'));
 app.set('view engine', 'handlebars');
-app.use(express.favicon());
-app.use(express.logger('dev'));
+app.set('port', process.env.PORT || 3000);
+
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 
 //managing session 
 app.use(cookieParser);
-app.use(express.session({ 
-	store: sessionStore
 
+
+app.use(express.session({ 
+	store: sessionStore,
+  key : SITE_SECRET,
+  secret: SITE_SECRET
 }));
 
 //res global variables
@@ -59,7 +63,7 @@ var io = require('socket.io').listen(server);
 
 //define the session socket
 var SessionSockets = require('session.socket.io');
-var sessionSockets = new SessionSockets(io,sessionStore,cookieParser);
+var sessionSockets = new SessionSockets(io,sessionStore,cookieParser,SITE_SECRET);
 
 sessionSockets.io = function() {
 	return  io;

@@ -2,9 +2,9 @@
 	{{#if create}}
 	<form method="POST" action="/band/save">
 		<label for="name">name</label>
-		<input type="text" name="name">
+		<input type="text" name="name" required>
 		<label for="description">description</label>
-		<textarea name="description" cols="30" rows="10"></textarea>
+		<textarea name="description" cols="30" rows="10" required></textarea>
 		<input type="submit">
 	</form>
 		
@@ -21,8 +21,8 @@
 		</span>
 		<form action="/band/{{id}}/user/add" method="POST">
 			<input type="hidden" name="adder" value="1">
-			<input type="text" name="idUser">
-			<input type="hidden" name="idBand" value="{{id}}">
+			<input type="text" name="idUser" >
+			<input type="hidden" name="idBand" value="{{id}}" >
 			<input type="submit">
 		</form>
 		<div class="users">
