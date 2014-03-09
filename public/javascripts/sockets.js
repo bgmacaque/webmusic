@@ -10,7 +10,8 @@
       idUser:id,
     });
   };
-
+  
+  
   var unfollow = function(e) {
     //get the current profil id
     e.preventDefault();
@@ -28,17 +29,24 @@
   followButton.on('click',follow);
   unfollowButton.on('click',unfollow);
 
-  socket.emit('user',{});
   socket.on('followerAdded',function(data) {
-    $(".followers ul").append("<li>"+data.nickname+"</li>");
-    $('button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a>');
+    $(".followers ul").hide().append("<li>"+data.nickname+"</li>").fadeIn();
+    $('#button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a>');
     unfollowButton = $('#button-unfollow');
     unfollowButton.on('click',unfollow);
   });
   
   socket.on('unfollowOk',function(data){
     //remove the li which contains the session user nickname
-    alert('REMOVED');
+    $('.followers ul li').each(function(index){
+      if($(this).html() === data.nickname) {
+        $(this).fadeOut();
+        return;
+      }
+    });
+    $('#button-unfollow').replaceWith('<a id="button-follow" href="#follow">Follow</a>');    
+    followButton = $('#button-follow');
+    followButton.on('click',follow);
   });
 
   //comments, tab page

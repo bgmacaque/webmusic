@@ -115,6 +115,7 @@ exports.login = function(req,res) {
     }
     else {
       req.session.user = user;
+      console.log(req.session.lastPage);
       res.redirect('/');
     }
   });
@@ -168,7 +169,9 @@ exports.unfollow = function(socket,data) {
       db.User.find(idFollower)
       .success(function(follower){
         user.removeFollower(follower);
-        socket.emit('unfollowOk');
+        socket.emit('unfollowOk',{
+          nickname:follower.nickname
+        });
       });
   });
 };
