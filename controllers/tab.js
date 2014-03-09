@@ -31,13 +31,13 @@ exports.profil = function(req,res) {
   var idTab = req.params.id;
   var query = 'SELECT * from Users, Comments ';
   query += 'WHERE Comments.tab_id = '+idTab;
-  query += ' AND Users.id = Comments.user_id';
+  query += ' AND Users.id = Comments.user_id ';
+  query += 'ORDER BY Comments.created_at DESC ';
   db.Tab.find(idTab)
   .success(function(tab){  
     if(tab)
       db.sequelize.query(query)
       .success(function(comments){
-        console.log(comments);
         var sum = 0;
         //calc the average of comment notes
         for (var i = 0; i < comments.length; i++) {
@@ -53,6 +53,9 @@ exports.profil = function(req,res) {
       });
     else
       res.send('404');
+  })
+  .error(function(error){
+    console.log(error);
   });
 };
 
@@ -89,7 +92,7 @@ exports.addComment = function(sockets,data) {
           .success(function(commentAdded){
             //TODO update the tab note
             sockets.emit('commentAdded',{
-              author: data.author,
+              author: data.session.user.nickname,
               note: commentAdded.note,
               body: commentAdded.body
             });

@@ -41,11 +41,6 @@ app.use(express.session({
 
 //res global variables
 app.use(function(req, res, next){
-  //configure lastPage session
-  req.session.lastPage = req.session.currentPage || '/';
-  if(!req.originalUrl.contains('.js'))
-    req.session.currentPage = req.originalUrl;
-
 	/*
 	 * It's used to have session variable everywhere on the website
 	 * All handlebars pages which contains {{session}} will be allowed to use it

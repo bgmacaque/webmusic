@@ -20,13 +20,15 @@
 				{{tab.note}}
 			</span>
 		</div>
-		<form action="comment/add/" method="POST" id="add-comment">
-			<label for="author">Author</label>
-			<input type="text" name="author" id="post-author">
-			<input type="number" name="note" id="post-note" min="0" max="5">
-			<textarea name="body" id="post-body" cols="30" rows="10" placeholder="comment"></textarea>
-			<input type="submit" id="submit-comment" class="btn btn-default" value="POST">
-		</form>
+		{{#if session.user }}
+			<form action="comment/add/" method="POST" id="add-comment">
+				<p>{{session.user.nickname}} write a comment!</p>
+				<input type="number" name="note" id="post-note" min="0" max="5">
+				<textarea name="body" id="post-body" cols="30" rows="10" placeholder="comment"></textarea>
+				<input type="submit" id="submit-comment" class="btn btn-default" value="POST">
+			</form>		
+		{{/if}}
+
 		<ul class="comments">
 			{{#each comments}}
 				<li class="comment">
