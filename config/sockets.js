@@ -11,6 +11,7 @@ module.exports = function(sessionSockets) {
     //user
     socket.on('follow',function(data) {
       //call the function follow in user module
+      data.session = session;
       user.follow(socket,data);
     });
     //connection with a nickname and a password

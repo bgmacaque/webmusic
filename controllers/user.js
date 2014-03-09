@@ -141,12 +141,14 @@ exports.getFollowingTabs = function(user,callback) {
 //sockets 
 
 exports.follow = function(socket,data) {
+  //get the user in the session
+  var idFollower = data.session.user.id;
   //find the user who will be followed
   db.User.find(data.idUser)
   .success(function(user){
     if(user!=null) {
       //find the user which wants to follow
-      db.User.find(data.idFollower)
+      db.User.find(idFollower)
       .success(function(follower){ 
         if(follower!=null){console.log('ok');
           //check the following
