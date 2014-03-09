@@ -14,6 +14,12 @@ module.exports = function(sessionSockets) {
       data.session = session;
       user.follow(socket,data);
     });
+
+    socket.on('unfollow',function(data) {
+      //call the function follow in user module
+      data.session = session;
+      user.unfollow(socket,data);
+    });
     //connection with a nickname and a password
     socket.on('connect',function(data){
       user.connect(socket,data);
@@ -21,6 +27,7 @@ module.exports = function(sessionSockets) {
 
     //tab
     socket.on('postComment',function(data){
+      data.session = session;
       tab.addComment(sessionSockets.io().sockets,data);
     });
   });

@@ -1,14 +1,6 @@
 (function() {
   var socket = io.connect('http://127.0.0.1:3000');
-  
-  // //follow
-  var followButton = $('#button-follow');
-  socket.emit('user',{});
-  socket.on('followerAdded',function(data) {
-    $(".followers ul").append("<li>"+data.nickname+"</li>");
-  });
-  
-  followButton.on('click',function(e) {
+   var follow = function(e) {
     //get the current profil id
     e.preventDefault();
     var path = location.pathname;
@@ -16,24 +8,53 @@
     //send the id of the current user
     socket.emit('follow',{
       idUser:id,
-      idFollower:4
     });
-  });
-  
-  var postComment = $('#submit-comment');
-  
-  
-  postComment.on('click',function(e){
+  };
+
+  var unfollow = function(e) {
+    //get the current profil id
     e.preventDefault();
-    var url = location.pathname;
-    var tabId = url.split('/')[3].match('[0-9]*')[0];
-    socket.emit('postComment',{
-      body: $('#post-body').val(),
-      author: $('#post-author').val(),
-      note: $('#post-note').val(),
-      tabId: tabId
+    var path = location.pathname;
+    var id = path.split('/')[3].match('[0-9]*')[0];
+    //send the id of the current user
+    socket.emit('unfollow',{
+      idUser:id,
     });
+  };
+
+  // //follow
+  var followButton = $('#button-follow');
+  var unfollowButton = $('#button-unfollow');
+  followButton.on('click',follow);
+  unfollowButton.on('click',unfollow);
+
+  socket.emit('user',{});
+  socket.on('followerAdded',function(data) {
+    $(".followers ul").append("<li>"+data.nickname+"</li>");
+    $('button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a>');
+    unfollowButton = $('#button-unfollow');
+    unfollowButton.on('click',unfollow);
   });
+  
+  socket.on('unfollowOk',function(data){
+    //remove the li which contains the session user nickname
+    alert('REMOVED');
+  });
+
+  //comments, tab page
+  var postComment = $('#submit-comment');
+  if(postComment)
+    postComment.on('click',function(e){
+      e.preventDefault();
+      var url = location.pathname;
+      var tabId = url.split('/')[3].match('[0-9]*')[0];
+      socket.emit('postComment',{
+        body: $('#post-body').val(),
+        author: $('#post-author').val(),
+        note: $('#post-note').val(),
+        tabId: tabId
+      });
+    });
   
   
   socket.on('commentAdded',function(data){

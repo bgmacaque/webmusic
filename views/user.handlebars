@@ -41,9 +41,16 @@
 					{{user.description}}
 				</div>
 				{{#if session.user }}
-					<a id="button-follow" href="#follow">
-						Follow
-					</a>			
+					{{#unless isFollower}}
+						<a id="button-follow" href="#follow">
+							Follow
+						</a>		
+					{{else}}
+						<a id="button-unfollow" href="#unfollow">
+							Unfollow
+						</a>							
+					{{/unless}}
+	
 				{{/if}}
 
 				<div class="followers">

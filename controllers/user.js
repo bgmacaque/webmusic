@@ -24,8 +24,18 @@ exports.profil = function(req,res){
     if(user!=null)
       user.getFollowers()
       .success(function(followers){
+        var isFollower = false;
+        if(req.session.user) {
+          //test if the session user is a follower
+          followers.forEach(function(followerToTest) {
+            if(followerToTest.id == req.session.user.id) {
+              isFollower=true;
+            }
+          });
+        } 
         res.render('user',{
           layout:'main',
+          isFollower: isFollower,
           followers:followers,
           user: user,
           userCreate: false
@@ -72,7 +82,7 @@ exports.save = function(req,res){
   //check posted elements
   for(property in checkTab ) {
      if(!user[property])
-        res.render('500'{
+        res.render('500',{
           error:'FORM ERROR'
         });
   }
@@ -148,6 +158,20 @@ exports.getFollowingTabs = function(user,callback) {
 };
 
 //sockets 
+exports.unfollow = function(socket,data) {
+  //get the user in the session
+  var idFollower = data.session.user.id;
+   //find the user who will be unfollowed
+  db.User.find(data.idUser)
+  .success(function(user){ 
+    if(user)
+      db.User.find(idFollower)
+      .success(function(follower){
+        user.removeFollower(follower);
+        socket.emit('unfollowOk');
+      });
+  });
+};
 
 exports.follow = function(socket,data) {
   //get the user in the session
@@ -159,7 +183,7 @@ exports.follow = function(socket,data) {
       //find the user which wants to follow
       db.User.find(idFollower)
       .success(function(follower){ 
-        if(follower!=null){console.log('ok');
+        if(follower!=null){
           //check the following
           user.getFollowers()
           .success(function(followers){
@@ -169,7 +193,6 @@ exports.follow = function(socket,data) {
               followerExist = (followers[i].id === follower.id);
               i++;
             }
-
             //add the follower if is not already exist
             if(!followerExist) {
               user.addFollower(follower)

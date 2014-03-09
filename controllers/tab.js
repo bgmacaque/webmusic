@@ -70,7 +70,7 @@ exports.create = function(req,res) {
 
 exports.addComment = function(sockets,data) {
   //check the user
-  db.User.find({where : {'nickname' : data.author} })
+  db.User.find(data.session.user.id)
   .success(function(user){
     if(user) {
       //check the tab
@@ -96,7 +96,7 @@ exports.addComment = function(sockets,data) {
           });
         } else {
           res.send('500',{
-            error:'FORM ERROR';
+            error:'FORM ERROR'
           })
         }
       });

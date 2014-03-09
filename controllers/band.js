@@ -54,7 +54,7 @@ exports.save = function(req,res){
   //check posted elements
   for(property in checkTab ) {
      if(!band[property])
-        res.render('500'{
+        res.render('500',{
           error:'FORM ERROR'
         });
   }
