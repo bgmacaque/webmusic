@@ -1,9 +1,28 @@
 /* main style */
 @import "compass/css3";
+
+/****** User profil ******/
+.user-profil {
+	img {
+		max-width:200px;
+		max-height: 200px;
+		border:#b4b4b4 3px dashed ;
+		@include border-radius(50%);
+		display: inline-block;
+	}
+
+	.nickname {
+		vertical-align: top;
+		font-size:2em;
+		color:black;
+	}
+}
+
+
+
 /****** Tab page *****/
 
 //comments style
-
 #id-comment {
 	background-color: red;
 	input{

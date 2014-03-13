@@ -1,7 +1,7 @@
 //configuration file for handlebars 
 var hbs = require('express3-handlebars').create({
   helpers: {
-    img: function(name,alt) { return '<img src="images/'+name+'" alt="'+alt+'">';},
+    img: function(name,alt) { return '<img src="/images/'+name+'" alt="'+alt+'">';},
     styles: function() {
       //get directory name
       var fs = require('fs');

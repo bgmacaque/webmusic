@@ -1,67 +1,74 @@
 <body>
 	{{!-- file which manages all user views --}}
-	<div class="jumbotron">
-		{{#if create}}
-			<form method="POST" action="/user/save">
-			<label for="nickname">pseudo</label>
-			<input type="text" name="nickname" required>
-			<label for="email">email</label>
-			<input type="mail" name="email" required> 
-			<label for="lastname">lastname</label>
-			<input type="text" name="lastname">
-			<label for="firstname">firstname</label>
-			<input type="text" name="firstname" required> 
-			<label for="password" >password</label>
-			<input type="password" name="password" required>
-			<label for="description">description</label>
-			<input type="text" name="description">
-			<label for="birthday">birthday</label>
-			<input type="date" name="birthday">
-			<input type="submit">
-		</form>
-	
-		{{else}}
-			<h1>{{user.nickname}}</h1>
-			<div class="profil" id="{{id}}">
-				<div class="nickname">
-					{{user.nickname}}
-				</div>
-				<div class="infos">
-					<span class="firstname">
-						{{user.firstname}}
-					</span>
-					<span class="lastname">
-						{{user.lastname}}
-					</span>
-					<span class="birthday">
-						{{user.birthday}}
-					</span>
-				</div>
-				<div class="description">
-					{{user.description}}
-				</div>
-				{{#if session.user }}
-					{{#unless isFollower}}
-						<a id="button-follow" href="#follow">
-							Follow
-						</a>		
-					{{else}}
-						<a id="button-unfollow" href="#unfollow">
-							Unfollow
-						</a>							
-					{{/unless}}
-	
-				{{/if}}
+	{{#if create}}
+		<form method="POST" action="/user/save">
+		<label for="nickname">pseudo</label>
+		<input type="text" name="nickname" required>
+		<label for="email">email</label>
+		<input type="mail" name="email" required> 
+		<label for="lastname">lastname</label>
+		<input type="text" name="lastname">
+		<label for="firstname">firstname</label>
+		<input type="text" name="firstname" required> 
+		<label for="password" >password</label>
+		<input type="password" name="password" required>
+		<label for="description">description</label>
+		<input type="text" name="description">
+		<label for="birthday">birthday</label>
+		<input type="date" name="birthday">
+		<input type="submit">
+	</form>
 
-				<div class="followers">
-					<p>Followers:</p>
-					<ul>
-						{{#each followers}}
-							<li>{{nickname}}</li>
-						{{/each}}
-					</ul>
+	{{else}}
+		<div class="user-profil" id="{{id}}">
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1">{{{img "macaque.png"}}}</div>
+				<div class="col-md-1"></div>
+				<div class="col-md-1"></div>
+					<span class="nickname">
+						{{user.nickname}}
+					</span>
 				</div>
 			</div>
-		{{/if}}
-	</div>
+
+			<div class="infos">
+				<span class="firstname">
+					{{user.firstname}}
+				</span>
+				 <span class="lastname">
+					{{user.lastname}}
+				</span>
+				{{#if user.birthday}}
+					Birthday: <span class="birthday">
+						{{user.birthday}}
+					</span>					
+				{{/if}}
+			</div>
+			<div class="description">
+				{{user.description}}
+			</div>
+			{{#if session.user }}
+				{{#unless isFollower}}
+					<a id="button-follow" href="#follow">
+						Follow
+					</a>		
+				{{else}}
+					<a id="button-unfollow" href="#unfollow">
+						Unfollow
+					</a>							
+				{{/unless}}
+
+			{{/if}}
+			<div class="followers">
+				<p>Followers:</p>
+				<ul>
+					{{#each followers}}
+						<li>{{nickname}}</li>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+	{{/if}}
 </body>

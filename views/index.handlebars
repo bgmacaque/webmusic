@@ -5,6 +5,9 @@
 		<div class="col-md-2">
 			<h3>My pannel</h3>
 			<ul>
+			{{#if session.user.id}}
+				<li><a href="/user/profil/{{session.user.id}}">My Profil</a></li>			
+			{{/if}}
 				<li>Favorites</li>
 				<li>Tabs</li>
 				<li>Following</li>
