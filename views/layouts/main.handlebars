@@ -6,17 +6,19 @@
     <title>{{title}}</title>
 </head>
 
-<body>
-	{{> navigation-bar }}
+{{>left-menu}}
+<body id="layout">
+	  {{> navigation-bar }}
    	{{{body}}}
    	{{{js 'jquery'}}}
    	{{{js 'bootstrap.min'}}}
+    {{{js 'left-menu'}}}
    	<script src="/socket.io/socket.io.js"></script>
     {{{js 'tabs/chart'}}}
     {{{js 'tabs/chord'}}}
     {{{js 'tabs/raphael-min'}}}
 	  {{{js 'sockets'}}}
-	   {{{js 'dropper' }}}
+	  {{{js 'dropper' }}}
 </body>
 {{> bootstrap/footer-bt}}
 </html>

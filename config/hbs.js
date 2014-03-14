@@ -9,11 +9,12 @@ var hbs = require('express3-handlebars').create({
       /* make the array which will be used for css files*/
       files= fs.readdirSync(process.cwd() + '/public/stylesheets');
       //make the string result
-      var result='';      
+      var result='';
+      result+='<link rel="stylesheet" href="/stylesheets/bootstrap.css">';
       for (var i = files.length - 1; i >= 0; i--) {
         var file = files[i];
         var tab = file.split('.');
-        if (tab[tab.length-1]=='css')
+        if (tab[tab.length-1]=='css' && tab[tab.length-2] != 'bootstrap')
           result+='<link rel="stylesheet" href="/stylesheets/'+file+'">';
       }
       return result;
