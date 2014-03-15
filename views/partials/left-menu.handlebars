@@ -6,13 +6,29 @@
             <a class="pure-menu-heading" href="#">My pannel</a>
 
             <ul>
-                <li><a href="#">Favorites</a></li>
-                <li><a href="#">Tabs</a></li>
-                <li><a href="/listing">Listing</a></li>
+                <li>
+                    <a href="/user/{{{session.user.id}}}/favorites">
+                        <span class="glyphicon glyphicon-heart-empty"></span> Favorites
+                    </a>
+                </li>
+                <li>
+                    <a href="/user/{{{session.user.id}}}/tabs">
+                        <span class="glyphicon glyphicon-music"></span> Tabs
+                    </a>
+                </li>
+                <li>
+                    <a href="/listing">
+                        <span class="glyphicon glyphicon-star"></span> Listing
+                    </a>
+                </li>
 {{!--                 <li class="menu-item-divided pure-menu-selected">
                     <a href="#"></a>
                 </li> --}}
-                <li><a href="/search">Search</a></li>
+                <li>
+                    <a href="/search" >
+                       <span class="glyphicon glyphicon-search"></span>  Listing
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

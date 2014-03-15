@@ -1,14 +1,5 @@
 @import "compass/css3";
 
-
-
-
-
-
-
-// ------------------------------------------------------- \\
-
-
 body {
     color: #777;
 }
@@ -34,18 +25,18 @@ This is the parent `<div>` that contains the menu and the content area.
     position: relative;
     padding-left: 0;
 }
-    #layout.active {
-        position: relative;
-        left: 200px;
-    }
-        #layout.active #menu {
-            left: 200px;
-            width: 200px;
-        }
+#layout.active {
+    position: relative;
+    left: 200px;
+}
+#layout.active #menu {
+    left: 200px;
+    width: 200px;
+}
 
-        #layout.active .menu-link {
-            left: 200px;
-        }
+#layout.active .menu-link {
+    left: 200px;
+}
 
 
 
@@ -66,67 +57,91 @@ appears on the left side of the page.
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
-    /*
-    All anchors inside the menu should be styled like this.
-    */
-    #menu a {
-        color: #333;
-        border: none;
-        padding: 0.6em 0 0.6em 0.6em;
+/*
+All anchors inside the menu should be styled like this.
+*/
+#menu a {
+    text-decoration: none;
+    color: #333;
+    border: none;
+    padding: 0.6em 0 0.6em 0.6em;
+}
+
+/*
+Remove all background/borders, since we are applying them to #menu.
+*/
+ #menu .pure-menu,
+ #menu .pure-menu ul {
+    border: none;
+    background: transparent;
+}
+
+/*
+Add that light border to separate items into groups.
+*/
+#menu .pure-menu ul,
+#menu .pure-menu .menu-item-divided {
+    border-top: 1px solid #b4b4b4;
+}
+
+
+
+#menu .pure-menu {
+    ul {
+        padding: 0;
+        width: 100%;
     }
+}
 
-    /*
-    Remove all background/borders, since we are applying them to #menu.
-    */
-     #menu .pure-menu,
-     #menu .pure-menu ul {
-        border: none;
-        background: transparent;
+
+/*
+Change color of the anchor links on hover/focus.
+*/
+#menu .pure-menu li {
+    text-align: center;
+    list-style-type:none;
+    width: 100%;
+    display: block;
+    height: 60px;
+    padding: 0;
+    border-bottom: solid 1px #b4b4b4;
+    a {
+        color:white;
+        width: 100%;
+        display: block;
+        height: 100%;
     }
-
-    /*
-    Add that light border to separate items into groups.
-    */
-    #menu .pure-menu ul,
-    #menu .pure-menu .menu-item-divided {
-        border-top: 1px solid #333;
+    a:hover,a:focus {
+       background: white;
+       color: #3ba6ec;               
     }
-        /*
-        Change color of the anchor links on hover/focus.
-        */
-         #menu .pure-menu li a:hover,
-         #menu .pure-menu li a:focus {
-             background: #91cbf1;
-             color: #3ba6ec;
-         }
-     /*
-     This styles the selected menu item `<li>`.
-     */
-     #menu .pure-menu-selected,
-     #menu .pure-menu-heading {
-         background: white;
-         width: 100%;
-         display: block;
-         height: 100px;
-     }
-         /*
-         This styles a link within a selected menu item `<li>`.
-         */
-         #menu .pure-menu-selected a {
-             color: #2baae1;
-         }
-     /*
-     This styles the menu heading.
-     */
-     #menu .pure-menu-heading {
-         font-size: 110%;
-         color: #2baae1;
-         margin: 0;
-     }
+}
+/*
+This styles the selected menu item `<li>`.
+*/
+#menu .pure-menu-selected,
+#menu .pure-menu-heading {
+    background: white;
+    width: 100%;
+    display: block;
+    height: 100px;
+}
 
+/*
+This styles a link within a selected menu item `<li>`.
+*/
+#menu .pure-menu-selected a {
+    color: #2baae1;
+}
 
-
-
+/*
+This styles the menu heading.
+*/
+#menu .pure-menu-heading {
+    font-size: 110%;
+    color: #2baae1;
+    margin: 0;
+}
 
  /* -- Dynamic Button For Responsive Menu -------------------------------------*/
  
@@ -208,22 +223,6 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 
 
 
-//mod
-
- #menu .pure-menu {
-     ul {
-         padding: 0;
-         width: 100%;
-         li {
-             display: block;
-             width: 100%;
-             list-style-type:none;
-             margin-top:10px;
-             a {
-             }
-         }   
-     }
- }
 
 
 
