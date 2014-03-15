@@ -3,12 +3,13 @@
 </a>
 <div id="menu">
         <div class="pure-menu pure-menu-open">
-            <a class="pure-menu-heading" href="#">My pannel</a>
-
+            <div class="top-menu">
+                <a class="pure-menu-heading" href="/">{{APP_NAME}}</a>
+            </div>
             <ul>
                 <li>
                     <a href="/user/{{{session.user.id}}}/favorites">
-                        <span class="glyphicon glyphicon-heart-empty"></span> Favorites
+                        <span class="glyphicon glyphicon-heart"></span> Favorites
                     </a>
                 </li>
                 <li>

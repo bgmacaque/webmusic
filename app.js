@@ -46,6 +46,7 @@ app.use(function(req, res, next){
 	 * All handlebars pages which contains {{session}} will be allowed to use it
 	 */
   res.locals.session = req.session;
+  res.locals.APP_NAME = 'TabShare';
   next();
 })
 
