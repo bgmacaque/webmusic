@@ -1,4 +1,18 @@
 @import "compass/css3";
+
+
+
+
+
+
+
+// ------------------------------------------------------- \\
+
+
+body {
+    color: #777;
+}
+
 .pure-img-responsive {
     max-width: 100%;
     height: auto;
@@ -7,6 +21,7 @@
 /*
 Add transition to containers so they can push in and out.
 */
+
 #layout, #menu, .menu-link {
      @include transition-duration(0.2s);
      @include transition-timing-function(ease-out);
@@ -19,20 +34,20 @@ This is the parent `<div>` that contains the menu and the content area.
     position: relative;
     padding-left: 0;
 }
-    
-#layout.active {
-    position: relative;
-    left: 150px;
-
-    #menu {
-        left: 150px;
-        width: 150px;
+    #layout.active {
+        position: relative;
+        left: 200px;
     }
+        #layout.active #menu {
+            left: 200px;
+            width: 200px;
+        }
 
-    .menu-link {
-        left: 150px;
-    }
-}
+        #layout.active .menu-link {
+            left: 200px;
+        }
+
+
 
 /*
 The `#menu` `<div>` is the parent `<div>` that contains the `.pure-menu` that
@@ -40,8 +55,8 @@ appears on the left side of the page.
 */
 
 #menu {
-    margin-left: -150px; /* "#menu" width */
-    width: 150px;
+    margin-left: -200px; /* "#menu" width */
+    width: 200px;
     position: fixed;
     top: 0;
     left: 0;
@@ -55,7 +70,7 @@ appears on the left side of the page.
     All anchors inside the menu should be styled like this.
     */
     #menu a {
-        color: #999;
+        color: #333;
         border: none;
         padding: 0.6em 0 0.6em 0.6em;
     }
@@ -65,7 +80,6 @@ appears on the left side of the page.
     */
      #menu .pure-menu,
      #menu .pure-menu ul {
-        text-decoration: none;
         border: none;
         background: transparent;
     }
@@ -80,84 +94,83 @@ appears on the left side of the page.
         /*
         Change color of the anchor links on hover/focus.
         */
-        #menu .pure-menu li a:hover,
-        #menu .pure-menu li a:focus {
-            background: #91cbf1;
-            color: #2baae1;
+         #menu .pure-menu li a:hover,
+         #menu .pure-menu li a:focus {
+             background: #91cbf1;
+             color: #3ba6ec;
+         }
+     /*
+     This styles the selected menu item `<li>`.
+     */
+     #menu .pure-menu-selected,
+     #menu .pure-menu-heading {
+         background: white;
+         width: 100%;
+         display: block;
+         height: 100px;
+     }
+         /*
+         This styles a link within a selected menu item `<li>`.
+         */
+         #menu .pure-menu-selected a {
+             color: #2baae1;
+         }
+     /*
+     This styles the menu heading.
+     */
+     #menu .pure-menu-heading {
+         font-size: 110%;
+         color: #2baae1;
+         margin: 0;
+     }
 
-        }
 
-    /*
-    This styles the selected menu item `<li>`.
-    */
-    #menu .pure-menu-selected,
-    #menu .pure-menu-heading {
-        background: white;
-    }
-        /*
-        This styles a link within a selected menu item `<li>`.
-        */
-        #menu .pure-menu-selected a {
-            color: #2baae1;
-        }
 
-    /*
-    This styles the menu heading.
-    */
-    #menu .pure-menu-heading {
-        font-size: 110%;
-        color: #2baae1;
-        margin: 0;
 
-    }
 
-/* -- Dynamic Button For Responsive Menu -------------------------------------*/
-
-/*
-`.menu-link` represents the responsive menu toggle that shows/hides on
-small screens.
-*/
-.menu-link {
-    position: fixed;
-    display: block; /* show this only on small screens */
-    top: 0;
-    left: 0; /* "#menu width" */
-    background: #000;
-    background: rgba(0,0,0,0.7);
-    font-size: 10px; /* change this value to increase/decrease button size */
-    z-index: 10;
-    width: 2em;
-    height: auto;
-    padding: 2.1em 1.6em;
-
-    span {
-        position: relative;
-        display: block;       
-    }
-}
-
-.menu-link:hover,
-.menu-link:focus {
-    background: white;
-}
-.menu-link span,
-.menu-link span:before,
-.menu-link span:after {
-    background-color: #fff;
-    width: 100%;
-    height: 0.2em;
-}
-
-.menu-link span:before,
-.menu-link span:after {
-    position: absolute;
-    margin-top: -0.6em;
-    content: " ";
-}
-
-.menu-link span:after {
-    margin-top: 0.6em;
-}
+ /* -- Dynamic Button For Responsive Menu -------------------------------------*/
+ 
+ /*
+ `.menu-link` represents the responsive menu toggle that shows/hides on
+ small screens.
+ */
+ .menu-link {
+     position: fixed;
+     display: block; /* show this only on small screens */
+     top: 0;
+     left: 0; /* "#menu width" */
+     background: #000;
+     background: rgba(0,0,0,0.7);
+     font-size: 10px; /* change this value to increase/decrease button size */
+     z-index: 10;
+     width: 2em;
+     height: auto;
+     // padding: 2.1em 1.6em;
+     span {
+         position: relative;
+         display: block;       
+     }
+ }
+ .menu-link:hover,
+ .menu-link:focus {
+     background: white;
+ }
+ .menu-link span,
+ .menu-link span:before,
+ .menu-link span:after {
+     background-color: #fff;
+     width: 100%;
+     height: 0.2em;
+ }
+ .menu-link span:before,
+ .menu-link span:after {
+     position: absolute;
+     margin-top: -0.6em;
+     content: " ";
+ }
+ .menu-link span:after {
+     margin-top: 0.6em;
+ }
 
 
 
@@ -175,21 +188,21 @@ Hides the menu at `48em`, but modify this based on your app's needs.
     }
 
     #layout {
-        padding-left: 150px; /* left col width "#menu" */
+        padding-left: 200px; /* left col width "#menu" */
         left: 0;
     }
     #menu {
-        left: 150px;
+        left: 200px;
     }
 
     .menu-link {
         position: fixed;
-        left: 150px;
+        left: 200px;
         display: none;
     }
 
     #layout.active .menu-link {
-        left: 150px;
+        left: 200px;
     }
 }
 
@@ -197,9 +210,25 @@ Hides the menu at `48em`, but modify this based on your app's needs.
 
 //mod
 
-.pure-menu {
-    li {
-        width: 100%;
-        list-style-type:none;
-    }
-}
+ #menu .pure-menu {
+     ul {
+         padding: 0;
+         width: 100%;
+         li {
+             display: block;
+             width: 100%;
+             list-style-type:none;
+             margin-top:10px;
+             a {
+             }
+         }   
+     }
+ }
+
+
+
+
+
+
+
+
