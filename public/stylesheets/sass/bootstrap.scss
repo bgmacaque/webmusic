@@ -1,9 +1,11 @@
+@import "compass/css3";
 @import "bootstrap/bootstrap";
 
 
 .row {
 	width: 100%;
 }
+
 
 .navbar {
 	height: 50px;
@@ -14,9 +16,13 @@
 	.navbar-form {
 		//search input
 		.form-control {
+			@include transition-property(width);
+		    @include transition-duration(0.2s);
+     		@include transition-timing-function(ease-out);	
 			width: 50%;
-			&:focus {
-				width:60%;
+
+			&:focus, &.anim {
+				width: 75%;			
 			}
 		}
 	}
