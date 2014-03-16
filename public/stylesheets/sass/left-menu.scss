@@ -1,7 +1,12 @@
 @import "compass/css3";
 
 $main-color : #2baae1;
-$top-line-color : #f15a29;
+
+/* top line colors :
+    #f15a29
+    #f35656
+*/
+$top-line-color : #f35656;
 
 .pure-img-responsive {
     max-width: 100%;
