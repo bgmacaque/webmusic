@@ -4,12 +4,17 @@
 	height: 50px;
 	border-radius: 0;
 	background: #e8e8e8;
+	
 
-	//search input
-	.form-control {
-		width: 30%;
-		&:active, &:focus {
-			width:400px;
+	.navbar-form {
+
+		
+		//search input
+		.form-control {
+			width: 50%;
+			&:focus {
+				width:60%;
+			}
 		}
 	}
 }
