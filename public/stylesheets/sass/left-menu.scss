@@ -93,11 +93,18 @@ Add that light border to separate items into groups.
 #menu .pure-menu ul,
 #menu .pure-menu .menu-item-divided {
     border-top: 1px solid darken($main-color,10%);
+        border-top: solid 1px white;
+
 }
 
 
 
 #menu .pure-menu {
+    .separator {
+        display: block;
+        width:100%;
+        border-top: 1px solid rgba(255,255,255,0.3);
+    }
     ul {
         padding: 0;
         width: 100%;
@@ -114,6 +121,7 @@ Change color of the anchor links on hover/focus.
     display: block;
     height: 60px;
     padding: 0;
+    border-top: solid 1px rgba(255,255,255,0.3);
     border-bottom: solid 1px darken($main-color,10%);
     a {
         span {
@@ -149,7 +157,7 @@ This styles the selected menu item `<li>`.
     width:200px;
     height: 50px;
     
-
+    
     a {      
         font-size: 1.4em;
         text-align: center;
