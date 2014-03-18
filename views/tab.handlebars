@@ -21,7 +21,7 @@
 			</span>
 		</div>
 		{{#if session.user }}
-			<form action="comment/add/" method="POST" id="add-comment">
+			<form action="comment/add/" method="POST" class="form-comment" id="add-comment">
 				<p>{{session.user.nickname}} write a comment!</p>
 				<input type="number" name="note" id="post-note" min="0" max="5">
 				<textarea name="body" id="post-body" cols="30" rows="10" placeholder="comment"></textarea>
