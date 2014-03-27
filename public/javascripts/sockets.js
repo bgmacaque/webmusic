@@ -56,6 +56,7 @@
       e.preventDefault();
       var url = location.pathname;
       var tabId = url.split('/')[3].match('[0-9]*')[0];
+
       socket.emit('postComment',{
         body: $('#post-body').val(),
         author: $('#post-author').val(),

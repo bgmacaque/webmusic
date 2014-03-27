@@ -115,8 +115,9 @@ exports.login = function(req,res) {
     }
     else {
       req.session.user = user;
-      console.log(req.session.lastPage);
-      res.redirect('/');
+      //redirect to the last page
+      backURL=req.header('Referer') || '/';
+      res.redirect(backURL);
     }
   });
 }

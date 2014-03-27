@@ -100,7 +100,7 @@ exports.addComment = function(sockets,data) {
         } else {
           res.send('500',{
             error:'FORM ERROR'
-          })
+          });
         }
       });
     } else {

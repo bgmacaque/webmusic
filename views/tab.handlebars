@@ -20,24 +20,34 @@
 				{{tab.note}}
 			</span>
 		</div>
-		{{#if session.user }}
-			<form action="comment/add/" method="POST" class="form-comment" id="add-comment">
-				<p>{{session.user.nickname}} write a comment!</p>
-				<input type="number" name="note" id="post-note" min="0" max="5">
-				<textarea name="body" id="post-body" cols="30" rows="10" placeholder="comment"></textarea>
-				<input type="submit" id="submit-comment" class="btn btn-default" value="POST">
-			</form>		
-		{{/if}}
+		<div id = "comment-box">
+			{{#if session.user }}
 
-		<ul class="comments">
-			{{#each comments}}
-				<li class="comment">
-					<span class="author">{{nickname}}</span>
-					<span class="note">{{note}}</span>	
-					<div class="body">{{body}}</div>
-				</li>
-			{{/each}}
-		</ul>
+
+				<form action="comment/add/" method="POST" class="form-comment" id="add-comment">
+ 					<p>{{session.user.nickname}} write a comment!</p>
+					<div class="post-comment input-group">
+						<input id="post-body" name="body" cols="20" rows="1" placeholder="comment" type="text" class="form-control">
+					    <div class="input-group-btn">
+							<input type="number" name="note" id="post-note" min="0" max="5" class="btn btn-default" value="0">
+							<input type="submit" id="submit-comment" class="btn btn-warning" value="POST">
+						</div>
+					</div> 
+
+				</form>		
+			{{/if}}
+	
+			<ul class="comments">
+				{{#each comments}}
+					<li class="comment">
+						<span class="author">{{nickname}}</span>
+						<span class="note">{{note}}/5 </span>	
+						<div class="body">{{body}}</div>
+					</li>
+					<hr>
+				{{/each}}
+			</ul>
+		</div>
 	{{/if}}
 
 </body>

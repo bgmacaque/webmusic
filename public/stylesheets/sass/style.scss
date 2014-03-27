@@ -61,35 +61,67 @@ h1 {
 /****** Tab page *****/
 
 //comments style
-#id-comment {
-	background-color: red;
-}
+#comment-box {
+	padding-bottom:10px;
+	padding-top: 10px;
+	@include border-radius(7px);
+	// border:solid 1px white;
+	@include box-shadow(rgba(0,0,0,0.6) 0px 0px 10px );
+	.form-comment {
+		
+		padding:3%;
 
-.comments {
-	.comment {
-		border: solid #e1f1a2 1px;
-		width: 25%;
+		background-color: #fafafa;
+		p {
+			font-size: 1.4em;
+		}
 
-		margin-bottom: 3px;
-		.author {
-			font-size: 1.5em;
-			border: solid 2px black;
-			display: inline-block;
-			width: 20%;
-			margin-left: 10%;
-			margin-bottom: 3px;
-			text-align: center;
-		}
-		.note {
-			display: inline-block;
-			font-size: 2em;
-			color:#d4d4d4;
-		}
-		.body {
-			border-left: solid 10px #e9e5d6;
-			border-top: solid 10px #e9e5d6;
-			padding: 3%;
-			min-height: 60px;
+		.post-comment {
+			width: 70%;
+			margin-left: auto;
+			margin-right: auto;
+			@include box-shadow(rgba(176,172,180,0.8) 0px 0px 2px );
+			padding: 5px;
+
+			.form-control, #submit-comment, #post-note {
+				height: 40px;
+			}
 		}
 	}
+
+	margin-left: 15%;
+	margin-right: 15%;
+	
+	
+
+	.comments {
+		height: 100%;
+		background-color: white;
+		padding-left: 3%;
+		padding-right: 3%;
+		
+		
+		.comment {
+			display: block;
+			.author {
+				font-size: 1.5em;
+				display: inline-block;
+				width: 20%;
+				text-align: center;
+				font-style: "Verdana";
+			}
+			.note {
+				display: inline-block;
+				font-size: 1.5em;
+				color:#d4d4d4;
+			}
+			.body {
+				font-size: 0.9em;
+				color:grey;
+				padding: 3%;
+				min-height: 60px;
+			}
+		}
+	}
+
 }

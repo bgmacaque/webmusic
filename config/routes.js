@@ -22,7 +22,6 @@ module.exports = function(app) {
   app.post('/band/:id/user/add',band.addUser);
   //tabs
   app.get('/tab/profil/:id',tab.profil);
-  app.get('/tab/list',tab.list);
   app.get('/tab/create',tab.create);
 
   //search
