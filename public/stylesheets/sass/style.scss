@@ -41,12 +41,45 @@ h1 {
 
 /****** User profil ******/
 .user-profil {
-	img {
-		max-width:200px;
-		max-height: 200px;
-		border:#b4b4b4 3px dashed ;
+	//profile image
+	.rounded {
+		max-width: 250px;
+		max-height: 250px;
+		width: 220px;
+		height: 220px;
+		background: white;
 		@include border-radius(50%);
-		display: inline-block;
+		border: 1px solid white;
+		padding-left: 8px;
+		padding-top: 8px;
+		@include box-shadow(rgba(0,0,0,0.6) 0px 0px 5px );
+
+		img {
+			width:202px;
+			height: 202px;
+			border:#a4a4a4 1px solid ;
+			@include border-radius(50%);
+			display: inline-block;
+		}
+
+
+	}
+
+	//description
+	.infos {
+		font-family: "Verdana";
+		.nickname {
+			font-size: 2em;
+		}
+		.firstname, .lastname, .birthday {
+			color:#b4b4b4;
+			font-size: 1.1em;
+		}
+
+		.description {
+
+		}
+
 	}
 
 	.nickname {
@@ -54,7 +87,30 @@ h1 {
 		font-size:2em;
 		color:black;
 	}
+
+	#button-follow, #button-unfollow {
+		color:white;
+		display: inline-block;
+		height: 35px;
+		min-width: 50px;
+		background-color:#7db500;
+		@include border-radius(3px);
+	}
+
+
+	.followers {
+		padding-left: 10px;
+		h2 {
+			font-family: "Verdana";
+		}
+
+		li {
+			list-style: none;
+		}
+	}
 }
+
+
 
 
 
@@ -117,7 +173,7 @@ h1 {
 			}
 			.body {
 				font-size: 0.9em;
-				color:grey;
+				color:#b4b4b4;
 				padding: 3%;
 				min-height: 60px;
 			}
