@@ -22,33 +22,36 @@
 	{{else}}
 		<div class="user-profil" id="{{id}}">
 			<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-1"></div>
-				<div class="col-md-1">{{{img "macaque.png"}}}</div>
-				<div class="col-md-1"></div>
-				<div class="col-md-1"></div>
-					<span class="nickname">
-						{{user.nickname}}
-					</span>
+				<div class="col-md-3">
+					<div>{{{img "macaque.png"}}}</div>
+				</div>
+				<div class="col-md-3">
+					{{!-- informations about user --}}
+
+					<div class="infos">
+						<span class="nickname">
+								{{user.nickname}}
+						</span>
+						<span class="firstname">
+							{{user.firstname}}
+						</span>
+						 <span class="lastname">
+							{{user.lastname}}
+						</span>
+						{{#if user.birthday}}
+							Birthday: <span class="birthday">
+								{{user.birthday}}
+							</span>
+						{{/if}}
+						<div class="description">
+							{{user.description}}
+						</div>						
+					</div> 
 				</div>
 			</div>
 
-			<div class="infos">
-				<span class="firstname">
-					{{user.firstname}}
-				</span>
-				 <span class="lastname">
-					{{user.lastname}}
-				</span>
-				{{#if user.birthday}}
-					Birthday: <span class="birthday">
-						{{user.birthday}}
-					</span>					
-				{{/if}}
-			</div>
-			<div class="description">
-				{{user.description}}
-			</div>
+
+
 			{{#if session.user }}
 				{{#unless isFollower}}
 					<a id="button-follow" href="#follow">
