@@ -8,7 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     nickname : DataTypes.STRING,
     description : DataTypes.TEXT,
     email : DataTypes.STRING,
-    salt : DataTypes.TEXT
+    salt : DataTypes.TEXT,
+    image : DataTypes.TEXT
   });
  
   return User;

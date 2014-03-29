@@ -5,25 +5,26 @@
   					<span class="glyphicon glyphicon-search"></span>
   			</input>
 		</form>
-		<ul class="nav navbar-nav">
-			<li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="glyphicon glyphicon-settings"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Configuration</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">The team</li>
-                <li><a href="/about">About us</a></li>
-                <li><a href="#">Report bugs</a></li>
-              </ul>
-            </li>
+		<ul class="nav navbar-nav navbar-right">
+			<li class="divider-vertical"></li>
             {{#if session.user}}
-				<li>{{session.user.nickname}}</li>
-				<li>
-					<form action="/logout" method="POST">
-						<input type="submit" class="btn btn-danger" value="logout">
-					</form>
-				</li>
-				
+				<li class="dropdown">
+	            <a href="#" class="dropdown-toggle" data-toggle="dropdown">	{{session.user.nickname}}</a>
+	            <ul class="dropdown-menu">
+	                <li><a href="#">Configuration</a></li>
+	                <li class="divider"></li>
+	                <li class="dropdown-header">The team</li>
+	                <li><a href="/about">About us</a></li>
+	                <li><a href="#">Report bugs</a></li>
+	                <li>
+	                	{{!-- logout --}}
+						<form action="/logout" method="POST">
+							<input type="submit" class="navbar-	logout" value="logout">
+						</form>
+	                </li>
+	            </ul>
+			</li>
+			
             {{else}}
 				<li class="dropdown">
 	              	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Login</a>

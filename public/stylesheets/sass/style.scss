@@ -10,10 +10,25 @@
 	src:url('../fonts/UbuntuMono-Regular.ttf');
 }
 
+@-webkit-keyframes rotateImg{
+     from { @include transform(rotate(0deg)); }
+     35%  { @include transform(rotate(130deg)); }
+     to   { @include transform(rotate(360deg)); }
+}
+@keyframes rotateImg{
+     from { @include transform(rotate(0deg) scale(1) skew(-50deg)); }
+     35%  { @include transform(rotate(130deg) scale(1) skew(-50deg)); }
+     to   { @include transform(rotate(360deg) scale(1) skew(-50deg)); }
+}
+
 /****** Main *******/
 body {
 	background: #f7f7f7;
 	text-decoration: none;
+}
+
+.navbar[role="navigation"] {
+	margin-bottom: 1px;
 }
 
 h1 {
@@ -35,18 +50,12 @@ h1 {
 	color: #46b525;
 }
 
-
-
-
-
-/****** User profil ******/
-.user-profil {
-	//profile image
+@mixin circle-rounded($circle-size, $centered-circle-size) {
 	.rounded {
 		max-width: 250px;
 		max-height: 250px;
-		width: 220px;
-		height: 220px;
+		width: $circle-size;
+		height: $circle-size;
 		background: white;
 		@include border-radius(50%);
 		border: 1px solid white;
@@ -55,19 +64,36 @@ h1 {
 		@include box-shadow(rgba(0,0,0,0.6) 0px 0px 5px );
 
 		img {
-			width:202px;
-			height: 202px;
+			width:$centered-circle-size;
+			height: $centered-circle-size;
 			border:#a4a4a4 1px solid ;
 			@include border-radius(50%);
 			display: inline-block;
+
+
+			&:active  {
+				-webkit-animation: rotateImg 2s linear 0s;
+	             animation: rotateImg 2s linear 2s;
+
+			}
 		}
+	}	
+}
 
-
+/****** User profil ******/
+.user-profil {
+	background: white;
+	.row {
+		margin: 0;
 	}
+	//profile image
+	@include circle-rounded(220px,202px);
 
 	//description
 	.infos {
 		font-family: "Verdana";
+		margin-top: 5px;
+
 		.nickname {
 			font-size: 2em;
 		}
@@ -79,24 +105,13 @@ h1 {
 		.description {
 
 		}
-
 	}
-
+	
 	.nickname {
 		vertical-align: top;
 		font-size:2em;
 		color:black;
 	}
-
-	#button-follow, #button-unfollow {
-		color:white;
-		display: inline-block;
-		height: 35px;
-		min-width: 50px;
-		background-color:#7db500;
-		@include border-radius(3px);
-	}
-
 
 	.followers {
 		padding-left: 10px;
@@ -108,10 +123,87 @@ h1 {
 			list-style: none;
 		}
 	}
+
+	.col-md-4, .col-md-3, .col-md-1 {
+		padding: 0;
+	}
+	//right side for other information
+	.right-side {
+		padding-top: 10px;
+		padding-left: 1%;
+		background: #f7f7f7;
+		.glyph-title {
+			font-size: 1em;
+			width: 31%;
+		}
+		.glyph-number {
+			font-size: 2em;
+			width: 31%;
+		}
+
+		border-left: 1px solid rgba(0,0,0,0.6);
+		hr {
+			width:100%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		.follow-container {
+			height: 60px;
+			#button-follow, #button-unfollow {
+				color:white;
+				display: inline-block;
+				height: 35px;
+				min-width: 50px;
+				background-color:#7db500;
+				@include border-radius(3px);
+			}
+		}
+		
+		.tricks {
+			height: 2*60px;
+			.glyphicon, .glyph-number,.glyph-title {
+				display: inline-block;
+				margin: auto;
+			}
+			.glyphicon {
+				width: 30%;
+				font-size: 4em;
+			}
+		}
+
+		.followers {
+			ul {
+			padding: 0;
+			//resize the circle for the followers img
+				.rounded {
+
+					border: 1px solid white;
+					padding-left: 1px;
+					padding-top: 1px;
+					display: inline-block;
+					height: 74px;
+					width: 74px;
+					img {
+						height: 70px;
+						width: 70px;
+					}
+				}				
+			}
+
+
+
+		}
+	}
+
+
 }
 
-
-
+/****** User inscription ******/
+#create-user {
+	input {
+		display: block;
+	}
+}
 
 
 /****** Tab page *****/

@@ -1,7 +1,7 @@
 <body>
 	{{!-- file which manages all user views --}}
 	{{#if create}}
-		<form method="POST" action="/user/save">
+		<form method="POST" action="/user/save" id="create-user">
 		<label for="nickname">pseudo</label>
 		<input type="text" name="nickname" required>
 		<label for="email">email</label>
@@ -28,7 +28,6 @@
 						<div>{{{img "macaque.png"}}}</div>
 					</div>
 				</div>
-				<div class="col-md-1"></div>
 				<div class="col-md-4">
 					{{!-- informations about user --}}
 
@@ -36,6 +35,7 @@
 						<span class="nickname">
 								{{user.nickname}}
 						</span>
+
 						<br>
 						<span class="firstname">
 							{{user.firstname}}
@@ -56,31 +56,67 @@
 						</div>						
 					</div> 
 				</div>
-			</div>
+			<div class="col-md-1"></div>
+			<div class="col-md-3 right-side">
+				{{!-- right column --}}
+				{{#if session.user }}
+					<div class="follow-container">
+							{{#unless isFollower}}
+								<a id="button-follow" class="btn" href="#follow">
+									Follow
+								</a>		
+							{{else}}
+								<a id="button-unfollow" class="btn" href="#unfollow">
+									Unfollow
+								</a>							
+							{{/unless}}
+							<hr>
+					</div>
+				{{/if}}
+					<div class="tricks">
+						<div class="glyph-title-container">
+							<h3 class="glyph-title">
+								Favorites
+							</h3>
+							<h3 class="glyph-title">
+								Tabs
+							</h3>
+							<h3 class="glyph-title">
+								Rates
+							</h3>									
+						</div>
+				
+						<span class="glyphicon glyphicon-heart"></span>
+						<span class="glyphicon glyphicon-music"></span>
+						<span class="glyphicon glyphicon-star"></span>
+						<br>
+						<span class="glyph-number">
+							10
+						</span>
+						<span class="glyph-number">
+							0
+						</span>
+						<span class="glyph-number">
+							100
+						</span>												
+					</div>
+					<hr>
+					<h2>Followers</h2>
+					<div class="followers">
+						<ul>
+							{{#each followers}}
+							<div class="rounded">
+								<li>{{{img "macaque.png"}}}</li>
+							</div>
+							{{/each}}
+						</ul>						
+					</div>
+					<a href="#list">
+						See all followers
+					</a>
+			</div>  {{!-- end right side --}}
+			</div> {{!-- end rows --}}
 
-
-
-			{{#if session.user }}
-				{{#unless isFollower}}
-					<a id="button-follow" class="btn" href="#follow">
-						Follow
-					</a>		
-				{{else}}
-					<a id="button-unfollow" class="btn" href="#unfollow">
-						Unfollow
-					</a>							
-				{{/unless}}
-
-			{{/if}}
-			<div class="followers">
-				<h2>Followers</h2>
-				<hr>
-				<ul>
-					{{#each followers}}
-						<li>{{nickname}}</li>
-					{{/each}}
-				</ul>
-			</div>
 		</div>
 	{{/if}}
 </body>
