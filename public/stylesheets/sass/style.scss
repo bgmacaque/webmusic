@@ -201,8 +201,19 @@ h1 {
 
 /****** User inscription ******/
 #create-user {
-	input {
+	input, textarea,label {
 		display: block;
+		width: 30%;
+		margin: auto;
+	}
+
+	input[type="submit"] {
+		margin-top: 2%;
+		margin-right: 30%;
+		max-width: 100px;
+		width: 100px;
+		background-color: #7db500;
+		color: white;
 	}
 }
 

@@ -1,22 +1,26 @@
 <body>
 	{{!-- file which manages all user views --}}
 	{{#if create}}
-		<form method="POST" action="/user/save" id="create-user">
-		<label for="nickname">pseudo</label>
-		<input type="text" name="nickname" required>
-		<label for="email">email</label>
-		<input type="mail" name="email" required> 
-		<label for="lastname">lastname</label>
-		<input type="text" name="lastname">
-		<label for="firstname">firstname</label>
-		<input type="text" name="firstname" required> 
-		<label for="password" >password</label>
-		<input type="password" name="password" required>
-		<label for="description">description</label>
-		<input type="text" name="description">
-		<label for="birthday">birthday</label>
-		<input type="date" name="birthday">
-		<input type="submit">
+		<h1>Welcome to the {{APP_NAME}} website!</h1>
+		<form method="POST" action="/user/save" id="create-user" role="form" >
+		<div class="form-group">
+			<label for="nickname">pseudo</label>
+			<input class="form-control" type="text" name="nickname" required>
+			<label for="email">email</label>
+			<input class="form-control" type="email" name="email" required> 
+			<label for="lastname">lastname</label>
+			<input class="form-control" type="text" name="lastname">
+			<label for="firstname">firstname</label>
+			<input class="form-control" type="text" name="firstname" required> 
+			<label for="password" >password</label>
+			<input class="form-control" type="password" name="password" required>
+			<label for="description">description</label>
+			<textarea class="form-control" type="text" name="description" rows="3"></textarea>
+			<label for="birthday">birthday</label>
+			<input class="form-control" type="date" name="birthday">
+			<input class="form-control btn" type="submit" value="SIGN IN" >			
+		</div>
+
 	</form>
 
 	{{else}}
@@ -91,13 +95,13 @@
 						<span class="glyphicon glyphicon-star"></span>
 						<br>
 						<span class="glyph-number">
-							10
+							{{user.nbFavorites}}
 						</span>
 						<span class="glyph-number">
-							0
+							{{user.nbTabs}}
 						</span>
 						<span class="glyph-number">
-							100
+							{{user.nbStars}}
 						</span>												
 					</div>
 					<hr>

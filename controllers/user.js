@@ -32,13 +32,32 @@ exports.profil = function(req,res){
               isFollower=true;
             }
           });
-        } 
-        res.render('user',{
-          layout:'main',
-          isFollower: isFollower,
-          followers:followers,
-          user: user,
-          userCreate: false
+        }
+        //count the favorites about the current user page
+        var queryFavorites = "SELECT COUNT(*) AS COUNT FROM `TabsUsers` WHERE user_id = '"+ user.id +"'";
+
+        db.sequelize.query(queryFavorites)
+        .success(function(favoritesRow) {
+          user.nbFavorites = favoritesRow[0]['COUNT'];
+          //count the tabs of the current user
+          var queryTabs = "SELECT COUNT(*) AS COUNT FROM `Tabs` WHERE user_id = '"+ user.id +"'";
+          db.sequelize.query(queryTabs)
+          .success(function(tabsRow){
+            user.nbTabs = tabsRow[0]['COUNT'];
+            var queryStars = "SELECT AVG(note) AS AVG FROM `Tabs` GROUP BY user_id HAVING user_id  = '"+ user.id+"'";
+            db.sequelize.query(queryStars)
+            .success(function(starsRow){
+              console.log(starsRow);
+              user.nbStars = starsRow[0]['AVG'];
+                res.render('user',{
+                  layout:'main',
+                  isFollower: isFollower,
+                  followers:followers,
+                  user: user,
+                  userCreate: false
+                });              
+            });
+          });
         });
       });
       else
@@ -75,7 +94,8 @@ exports.save = function(req,res){
     description : req.body.description,
     lastname : req.body.lastname,
     firstname : req.body.firstname,
-    birthday : req.body.birthday
+    birthday : req.body.birthday//,
+    //image : "public/images/profiles/macaque.png"
   });
 
   var checkTab = ['firstname','nickname','salt','password','email'];
@@ -90,7 +110,7 @@ exports.save = function(req,res){
   db.User.find({where:{'nickname':user.nickname}})
    .success(function(userFound){
     //if the user doesn't exist in the database
-    if(userFound==null) {
+    if(!userFound) {
       //save the user in the database
       user.save()
         .success(function(){res.send("SUCCESS");})
