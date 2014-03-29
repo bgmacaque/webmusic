@@ -141,7 +141,7 @@ h1 {
 			width: 31%;
 		}
 
-		border-left: 1px solid rgba(0,0,0,0.6);
+		border-left: 1px solid rgba(170,172,178,0.3);
 		hr {
 			width:100%;
 			margin-left: auto;
@@ -176,7 +176,8 @@ h1 {
 			padding: 0;
 			//resize the circle for the followers img
 				.rounded {
-
+					margin-left: 1%;
+					margin-bottom: 3%;
 					border: 1px solid white;
 					padding-left: 1px;
 					padding-top: 1px;
