@@ -8,3 +8,4 @@ config/database-backup.js
 config/session.js
 
 public/tmp
+public/images/profiles

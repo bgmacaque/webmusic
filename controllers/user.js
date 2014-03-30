@@ -81,16 +81,37 @@ exports.create = function(req,res){
 
 exports.uploadImg = function(req,res) {
   var fs = require('fs');
+  console.log(req.files.image);
   //write the image
-  if (req.files.image.type === 'image/png' || req.files.image.type === 'images/jpg') {
+  if (req.files.image.type === 'image/png' || req.files.image.type === 'image/jpeg') {
     //get the type of the image
+  console.log('PKOKOKOKOKOKOKOKOKO');
+
     var extension = req.files.image.type.split('/')[1];
     var name = req.files.image.name;
+    var newFile = "./public/images/profiles/"+req.session.user.id+"."+extension;
     console.log(req.session.user.id);
-    fs.rename("../"+req.files.image.path,"../public/images/profiles/"+req.session.user.id,function(err){
-      console.log(err);
-      console.log('file writen');
-      res.redirect('/');
+    fs.rename("./"+req.files.image.path,newFile,function(err){
+      if(!err) {
+        //save the image
+        db.User.find(req.session.user.id)
+        .success(function(user){
+            console.log('OK');
+
+          user.image = '/images/profiles/'+req.session.user.id+"."+extension;
+          user.save()
+          .success(function(){
+            console.log('OK');
+            res.redirect('/');
+          });
+        });
+      } else {
+        console.log(err);
+        res.render('500',{
+          error:err
+        });
+      }
+
     });
   }
 }
