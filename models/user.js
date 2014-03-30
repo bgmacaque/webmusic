@@ -9,7 +9,10 @@ module.exports = function(sequelize, DataTypes) {
     description : DataTypes.TEXT,
     email : DataTypes.STRING,
     salt : DataTypes.TEXT,
-    image : DataTypes.TEXT
+    image : {
+      type : DataTypes.TEXT,
+      defaultValue: "public/images/macaque.png"
+    }
   });
  
   return User;

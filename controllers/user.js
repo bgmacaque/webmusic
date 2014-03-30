@@ -78,12 +78,21 @@ exports.create = function(req,res){
   });
 };
 
+
+function checkImg(img) {
+
+} 
+
+
 /*
  *  POST new user
  */
 
 exports.save = function(req,res){
   var hash = require('./authenticate').toHash(req.body.nickname,req.body.password,req.body.firstname);
+  //check the img
+  var imageToUpload = checkImg(req.files.image);
+
   //create a new user to save it
   var user = db.User.build({
     nickname: req.body.nickname,
@@ -93,8 +102,8 @@ exports.save = function(req,res){
     description : req.body.description,
     lastname : req.body.lastname,
     firstname : req.body.firstname,
-    birthday : req.body.birthday//,
-    //image : "public/images/profiles/macaque.png"
+    birthday : req.body.birthday,
+    image : null
   });
 
   var checkTab = ['firstname','nickname','salt','password','email'];

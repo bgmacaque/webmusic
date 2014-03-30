@@ -217,12 +217,18 @@ h1 {
 
 /****** User inscription ******/
 #create-user {
-	input, textarea,label {
+	input, textarea,label,p {
 		display: block;
 		width: 30%;
 		margin: auto;
 	}
-
+	input[type="file"] {
+		margin-top: 1%;
+		color:transparent;
+	}
+	.help-block {
+		margin-bottom: 1%;
+	}
 	input[type="submit"] {
 		margin-top: 2%;
 		margin-right: 35%;
