@@ -137,8 +137,8 @@ h1 {
 			width: 31%;
 		}
 		.glyph-number {
-			font-size: 2em;
-			width: 31%;
+			font-size: 3em;
+			width: 32%;
 		}
 
 		border-left: 1px solid rgba(170,172,178,0.3);
@@ -168,6 +168,22 @@ h1 {
 			.glyphicon {
 				width: 30%;
 				font-size: 4em;
+				color:rgba(0,0,0,0.6);
+			}
+			.glyphicon-heart-empty, .glyph-number-favorites {
+				color: #f95645;
+			}
+			.glyphicon-star-empty, .glyph-number-stars {
+				color:#f5e424;
+			}
+			.glyphicon-music {
+				color: #71cbb9;
+				font-size: 3.6em;
+			}
+
+			.glyph-number-tabs {
+				color: #71cbb9;
+				font-size: 3.6em;
 			}
 		}
 
@@ -209,7 +225,7 @@ h1 {
 
 	input[type="submit"] {
 		margin-top: 2%;
-		margin-right: 30%;
+		margin-right: 35%;
 		max-width: 100px;
 		width: 100px;
 		background-color: #7db500;

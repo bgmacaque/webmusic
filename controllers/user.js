@@ -47,8 +47,7 @@ exports.profil = function(req,res){
             var queryStars = "SELECT AVG(note) AS AVG FROM `Tabs` GROUP BY user_id HAVING user_id  = '"+ user.id+"'";
             db.sequelize.query(queryStars)
             .success(function(starsRow){
-              console.log(starsRow);
-              user.nbStars = starsRow[0]['AVG'];
+              user.nbStars = (starsRow[0]) ? starsRow[0]['AVG'] : 0; 
                 res.render('user',{
                   layout:'main',
                   isFollower: isFollower,
