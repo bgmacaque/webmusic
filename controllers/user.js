@@ -79,9 +79,21 @@ exports.create = function(req,res){
 };
 
 
-function checkImg(img) {
-
-} 
+exports.uploadImg = function(req,res) {
+  var fs = require('fs');
+  //write the image
+  if (req.files.image.type === 'image/png' || req.files.image.type === 'images/jpg') {
+    //get the type of the image
+    var extension = req.files.image.type.split('/')[1];
+    var name = req.files.image.name;
+    console.log(req.session.user.id);
+    fs.rename("../"+req.files.image.path,"../public/images/profiles/"+req.session.user.id,function(err){
+      console.log(err);
+      console.log('file writen');
+      res.redirect('/');
+    });
+  }
+}
 
 
 /*
@@ -90,9 +102,6 @@ function checkImg(img) {
 
 exports.save = function(req,res){
   var hash = require('./authenticate').toHash(req.body.nickname,req.body.password,req.body.firstname);
-  //check the img
-  var imageToUpload = checkImg(req.files.image);
-
   //create a new user to save it
   var user = db.User.build({
     nickname: req.body.nickname,
@@ -102,14 +111,13 @@ exports.save = function(req,res){
     description : req.body.description,
     lastname : req.body.lastname,
     firstname : req.body.firstname,
-    birthday : req.body.birthday,
-    image : null
+    birthday : req.body.birthday
   });
 
   var checkTab = ['firstname','nickname','salt','password','email'];
   //check posted elements
   for(property in checkTab ) {
-     if(!user[property])
+     if(!user[checkTab[property]])
         res.render('500',{
           error:'FORM ERROR'
         });
@@ -121,11 +129,21 @@ exports.save = function(req,res){
     if(!userFound) {
       //save the user in the database
       user.save()
-        .success(function(){res.send("SUCCESS");})
-        .error(function(error){res.send(error);});
-     }
+        .success(function(){
+          req.session.user = user;
+          res.render('signin',{
+            user: req.session.user
+          });
+        })
+        .error(function(error){res.render('500',{
+          error:'FORM ERROR'
+        });
+      });
+    }
      else
-      res.send("USER ALREADY EXISTS !");
+      res.render('500', {
+        error:"This user already exists!"
+      });
    });
 };
 

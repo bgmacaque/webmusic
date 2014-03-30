@@ -1,0 +1,12 @@
+<body>
+	
+	<h2>Congratulation {{user.username}}!</h2>
+	
+	<p>Now choose your profile image and click on the next button</p>
+	<form action="/upload/img" method="post" enctype="multipart/form-data"> 
+		<input type="hidden" name="MAX_FILE_SIZE" value="2097152">
+		<input type="file" name="image">
+		<input type="submit" value="NEXT">
+	</form>
+
+</body>

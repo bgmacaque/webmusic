@@ -6,3 +6,5 @@ config/database-test.js
 config/database-backup.js
 
 config/session.js
+
+public/tmp

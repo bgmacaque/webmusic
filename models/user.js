@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     salt : DataTypes.TEXT,
     image : {
       type : DataTypes.TEXT,
-      defaultValue: "public/images/macaque.png"
+      defaultValue: "/images/profiles/macaque.png"
     }
   });
  

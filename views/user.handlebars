@@ -8,9 +8,6 @@
 			<input class="form-control" type="text" name="nickname" required>
 			<label for="email">email</label>
 			<input class="form-control" type="email" name="email" required> 
-			<input type="file" name="image">
-		    <p class="help-block">Upload your image here!</p>
-
 			<label for="lastname">lastname</label>
 			<input class="form-control" type="text" name="lastname">
 			<label for="firstname">firstname</label>
@@ -27,12 +24,12 @@
 	</form>
 
 	{{else}}
-		<div class="user-profil" id="{{id}}">
+		<div class="user-profil" id="{{user.id}}">
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-3">
 					<div class="rounded">
-						<div>{{{img "macaque.png"}}}</div>
+						<div><img src="{{user.image}}" /></div>
 					</div>
 				</div>
 				<div class="col-md-4">
@@ -113,7 +110,7 @@
 						<ul>
 							{{#each followers}}
 							<div class="rounded">
-								<li>{{{img "macaque.png"}}}</li>
+								<li><img src="{{image}}" alt=""></li>
 							</div>
 							{{/each}}
 						</ul>						

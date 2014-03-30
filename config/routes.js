@@ -34,5 +34,6 @@ module.exports = function(app) {
   app.post('/login',user.login);
   app.post('/logout',user.logout);
 
-
+  //send the profile image
+  app.post('/upload/img',user.uploadImg);
 };
