@@ -69,17 +69,21 @@ exports.create = function(req,res) {
 
 exports.upload = function(socket,data) {
 
-  if( data.json && data.name ) {
+  if( data.json && data.session.user.id ) {
+    //parse the file in JSON file
+    var tabParsed = JSON.parse(data.json);
+    var nameParsed = tabParsed.name;
+    console.log(nameParsed);
     //save and check the tab uploaded
-    var tab = db.Tab.build({
-      name: data.name,
+    var tab = {
+      name: nameParsed,
       file: data.json,
-      note: 0
-    });
-    console.log('OKOKOKOOKOKKOOKKO');
+      note: 0,
+      user_id: data.session.user.id
+    };
     db.Tab.create(tab)
     .success(function(tabAdded){
-      socket.send('tabCreated',tabAdded);
+      socket.emit('tabCreated',tabAdded);
     });
   } 
 }
