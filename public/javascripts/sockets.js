@@ -90,10 +90,24 @@
     
     $('.comments').prepend(string);
   });
-  
+
+  //socket which manages tab uploaded  
   socket.on('tabAdded',function(data){
-    alert('OK');
-    alert(data);
+    $('#upload-tab').hide();
+    $('#upload-tab .glyphicon').remove();
+    $('#upload-tab').append('<span class="glyphicon glyphicon-ok-circle"></span>');
+    $('#upload-tab').fadeIn();
   });
+
+
+  //socket which manages tab errors
+  socket.on('tabUploadError',function(data){
+    $('#upload-tab').hide();
+    $('#upload-tab .glyphicon').remove();
+    $('#upload-tab').append('<span class="glyphicon glyphicon-remove-circle"></span>');
+    $('#upload-tab').fadeIn();
+  });
+
+  
 
 })(socket);

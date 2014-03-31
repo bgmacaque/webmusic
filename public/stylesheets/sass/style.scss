@@ -42,6 +42,13 @@ h1 {
 .dropper {
 	text-align: center;
 	font-size: 20em;
+	.glyphicon-remove-circle {
+		color:red;
+	}
+
+	.glyphicon-ok-circle {
+		color:green;
+	}
 }
 
 .dropper-active {

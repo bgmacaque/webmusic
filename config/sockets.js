@@ -37,6 +37,11 @@ module.exports = function(sessionSockets) {
       tab.upload(socket,data);
     });
 
+    //add favorite
+    socket.on('tabFavorite',function(data){
+      data.session = session;
+      tab.addFavorite(socket,data);
+    })
   });
 
 };

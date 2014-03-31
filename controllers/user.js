@@ -203,7 +203,7 @@ exports.logout = function(req,res) {
 //get recent tabs which are in the following list
 var getFollowers = function(idUser,callback) {
   //create the query
-  var query = 'SELECT name FROM `FollowerUsers`, `Users`, `Tabs` ';
+  var query = 'SELECT * FROM `FollowerUsers`, `Users`, `Tabs` ';
   query += 'WHERE FollowerUsers.user_id = Users.id ';
   query += 'AND Tabs.user_id = Users.id ';
   query += 'AND FollowerUsers.followers_id = ' + idUser;

@@ -4,7 +4,8 @@
 			<h1>Tabs</h1>
 			{{#each tabs}}
 				<li class="list-group-item">
-				{{name}}
+					<a href="/tab/{{id}}">{{name}}</a>
+					<a href="/tab/download/{{id}}">Download</a>
 					<span class="badge">{{note}}</span>
 				</li>			
 			{{/each}}
@@ -14,7 +15,8 @@
 		<ul class="list-group">
 			{{#each topTabs}}
 				<li class="list-group-item">
-				{{name}}
+					<a href="/tab/profil/{{id}}">{{name}}</a>
+					<a href="/tab/download/{{id}}">Download</a>
 					<span class="badge">{{note}}</span>
 				</li>
 			{{/each}}

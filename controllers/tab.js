@@ -67,6 +67,18 @@ exports.create = function(req,res) {
   });
 };
 
+
+exports.download = function(req,res) {
+  //get the tab which will be downloaded
+  db.Tab.find(req.params.id)
+  .success(function(tab) {
+    res.send(tab.file);
+  });
+}
+
+//sockets
+
+
 exports.upload = function(socket,data) {
 
   if( data.json && data.session.user.id ) {
@@ -83,13 +95,29 @@ exports.upload = function(socket,data) {
     };
     db.Tab.create(tab)
     .success(function(tabAdded){
-      socket.emit('tabCreated',tabAdded);
+      socket.emit('tabAdded',tabAdded);
+    })
+    .error(function(err){
+      socket.emit('tabUploadError',err);
     });
   } 
 }
 
+exports.addFavorite = function(socket,data) {
+  db.User.find(data.session.user.id)
+  .success(function(user){
+    if(user) {
+      var query = 'INSERT INTO TabsUsers(`tab_id`,`user_id`) VALUES ( \''+data.id+'\',\''+user.id+'\')';
+      console.log(query);
+      db.sequelize.query(query)
+      .success(function() {
+        socket.emit('favoriteAdded',{
 
-//sockets
+        });
+      });
+    }
+  });
+}
 
 exports.addComment = function(sockets,data) {
   //check the user
@@ -120,7 +148,7 @@ exports.addComment = function(sockets,data) {
                 var avg = averageRow['AVG'];
                 tab.note = avg;
                 tab.save()
-                .sucess(function(){
+                .success(function(){
                    sockets.emit('commentAdded',{
                     author: data.session.user.nickname,
                     note: commentAdded.note,
