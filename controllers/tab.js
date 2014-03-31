@@ -67,6 +67,11 @@ exports.create = function(req,res) {
   });
 };
 
+exports.upload = function(sockets,data) {
+  if( data.json && data.name ) {
+    
+  } 
+}
 
 
 //sockets

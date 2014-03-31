@@ -28,7 +28,8 @@
         read.onloadend = function() {
           //send the json tab
           window.socket.send('tabSent',{
-            json:read.result
+            json:read.result,
+            name:files[i].name
           });
         }
       }

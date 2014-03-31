@@ -32,7 +32,10 @@ module.exports = function(sessionSockets) {
     });
 
     //add new tab with upload
-    
+    socket.on('tabSent',function(data){
+      data.session = session;
+      tab.upload(socket,data);
+    });
   });
 
 
