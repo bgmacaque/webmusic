@@ -30,6 +30,9 @@ module.exports = function(sessionSockets) {
       data.session = session;
       tab.addComment(sessionSockets.io().sockets,data);
     });
+
+    //add new tab with upload
+    
   });
 
 

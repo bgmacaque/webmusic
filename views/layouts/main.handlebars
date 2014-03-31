@@ -16,9 +16,9 @@
    	{{{js 'bootstrap.min'}}}
     {{{js 'left-menu'}}}
    	<script src="/socket.io/socket.io.js"></script>
-    {{{js 'tabs/chart'}}}
-    {{{js 'tabs/chord'}}}
-    {{{js 'tabs/raphael-min'}}}
+    <script type="text/javascript">
+      var socket = io.connect('http://127.0.0.1:3000');
+    </script>
 	  {{{js 'sockets'}}}
 	  {{{js 'dropper' }}}
 </body>
