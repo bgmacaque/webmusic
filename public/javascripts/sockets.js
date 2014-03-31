@@ -30,7 +30,16 @@
   unfollowButton.on('click',unfollow);
 
   socket.on('followerAdded',function(data) {
-    $(".followers ul").hide().append("<li>"+data.nickname+"</li>").fadeIn();
+    //hide the list
+    var $list = $(".followers ul").hide();
+    //use the add method to push a new element in the ul
+    var string = '<div class="rounded">'
+    string += "<li><a href=\"/user/profil/"+data.nickname+"\"> "+'<img src="'+data.image+'"></a></li>';
+    string += '</div>';
+    $list.append(string);
+    //show the list with the new element
+    $list.fadeIn();
+
     $('#button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a>');
     unfollowButton = $('#button-unfollow');
     unfollowButton.on('click',unfollow);
@@ -38,9 +47,9 @@
   
   socket.on('unfollowOk',function(data){
     //remove the li which contains the session user nickname
-    $('.followers ul li').each(function(index){
-      if($(this).html() === data.nickname) {
-        $(this).fadeOut();
+    $('.followers ul li a').each(function(index){
+      if($(this).attr('href') === '/user/profil/'+data.id) {
+        $(this).parent().parent().fadeOut();
         return;
       }
     });

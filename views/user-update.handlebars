@@ -1,0 +1,25 @@
+<body>
+	<h1>{{user.nickname}} update your profile</h1>
+	<form method="POST" action="/user/save" id="update-user" role="form" class="user-info">
+		<input type="hidden" name="update">
+		<div class="form-group">
+			<label for="nickname">pseudo</label>
+			<input class="form-control" type="text" name="nickname" value="{{user.nickname}}" required>
+			<label for="email">email</label>
+			<input class="form-control" type="email" name="email" value="{{user.email}}" required> 
+			<label for="lastname">lastname</label>
+			<input value="{{user.lastname}}" class="form-control" type="text" name="lastname">
+			<label for="firstname">firstname</label>
+			<input class="form-control" type="text" name="firstname" value="{{user.firstname}}" required> 
+			<label for="description">description</label>
+			<textarea class="form-control" type="text" name="description" rows="3">{{user.description}}</textarea>
+			<label for="birthday">birthday</label>
+			<input value="{{user.birthday}}" class="form-control" type="date" name="birthday">
+			<label for="password" >enter your password to confirm the update</label>
+			<div class="upadte-password">
+				<input class="form-control" type="password" name="password" required>				
+			</div>
+			<input class="form-control btn" type="submit" value="UPDATE">
+		</div>
+	</form>	
+</body>

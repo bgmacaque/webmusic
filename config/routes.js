@@ -23,7 +23,8 @@ module.exports = function(app) {
   //tabs
   app.get('/tab/profil/:id',tab.profil);
   app.get('/tab/create',tab.create);
-
+  //update the current user
+  app.get('/user/update/:id',user.update);
   //search
   app.get('/search',search.index);
   //about
@@ -33,7 +34,6 @@ module.exports = function(app) {
   //login and logout
   app.post('/login',user.login);
   app.post('/logout',user.logout);
-
   //send the profile image
   app.post('/upload/img',user.uploadImg);
 };

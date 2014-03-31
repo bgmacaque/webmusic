@@ -64,7 +64,7 @@
 			<div class="col-md-3 right-side">
 				{{!-- right column --}}
 				{{#if session.user }}
-					<div class="follow-container">
+					<div class="top-container">
 							{{#unless isFollower}}
 								<a id="button-follow" class="btn" href="#follow">
 									Follow
@@ -74,8 +74,12 @@
 									Unfollow
 								</a>							
 							{{/unless}}
-							<hr>
+					{{#equals session.user.id user.id }}
+						<a class="btn btn-update" href="/user/update/{{session.user.id}}">Update</a>
+					{{/equals}}
+					<hr>
 					</div>
+
 				{{/if}}
 					<div class="tricks">
 						<div class="glyph-title-container">
@@ -105,17 +109,17 @@
 						</span>												
 					</div>
 					<hr>
-					<h2>Followers</h2>
+					<h3>Followers</h3>
 					<div class="followers">
 						<ul>
 							{{#each followers}}
 							<div class="rounded">
-								<li><img src="{{image}}" alt=""></li>
+								<li><a href="/user/profil/{{id}}"><img src="{{image}}" alt=""></a></li>
 							</div>
 							{{/each}}
 						</ul>						
 					</div>
-					<a href="#list">
+					<a href="./followers">
 						See all followers
 					</a>
 			</div>  {{!-- end right side --}}

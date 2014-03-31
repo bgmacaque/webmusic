@@ -81,12 +81,9 @@ exports.create = function(req,res){
 
 exports.uploadImg = function(req,res) {
   var fs = require('fs');
-  console.log(req.files.image);
   //write the image
-  if (req.files.image.type === 'image/png' || req.files.image.type === 'image/jpeg') {
+  if (req.files.image && (req.files.image.type === 'image/png' || req.files.image.type === 'image/jpeg')) {
     //get the type of the image
-  console.log('PKOKOKOKOKOKOKOKOKO');
-
     var extension = req.files.image.type.split('/')[1];
     var name = req.files.image.name;
     var newFile = "./public/images/profiles/"+req.session.user.id+"."+extension;
@@ -113,6 +110,8 @@ exports.uploadImg = function(req,res) {
       }
 
     });
+  } else {
+      res.redirect('/');
   }
 }
 
@@ -170,7 +169,13 @@ exports.save = function(req,res){
 
 
 exports.update = function(req,res){
-
+  if(req.session.user)
+    res.render('user-update',{
+      layout:'main',
+      user:req.session.user
+    });
+  else
+    res.send('404 NOT FOUND');
 };
 
 
@@ -237,9 +242,7 @@ exports.unfollow = function(socket,data) {
       db.User.find(idFollower)
       .success(function(follower){
         user.removeFollower(follower);
-        socket.emit('unfollowOk',{
-          nickname:follower.nickname
-        });
+        socket.emit('unfollowOk',follower);
       });
   });
 };

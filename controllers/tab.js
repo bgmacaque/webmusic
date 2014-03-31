@@ -90,12 +90,25 @@ exports.addComment = function(sockets,data) {
           };
           db.Comment.create(comment)
           .success(function(commentAdded){
-            //TODO update the tab note
-            sockets.emit('commentAdded',{
-              author: data.session.user.nickname,
-              note: commentAdded.note,
-              body: commentAdded.body
-            });
+            //update the tab note
+            db.Tab.find(tab.id)
+            .success(function(tab){
+              //get the average of the notes
+              var queryAvg = "SELECT AVG(note) AS AVG FROM Comments WHERE tab_id ='"+tab.id+"'";
+              db.sequelize.query(queryAvg)
+              .success(function(averageRow){
+                var avg = averageRow['AVG'];
+                tab.note = avg;
+                tab.save()
+                .sucess(function(){
+                   sockets.emit('commentAdded',{
+                    author: data.session.user.nickname,
+                    note: commentAdded.note,
+                    body: commentAdded.body
+                  });                 
+                });
+              });
+            }) 
           });
         } else {
           res.send('500',{
