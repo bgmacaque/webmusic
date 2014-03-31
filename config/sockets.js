@@ -36,8 +36,8 @@ module.exports = function(sessionSockets) {
       data.session = session;
       tab.upload(socket,data);
     });
-  });
 
+  });
 
 };
 

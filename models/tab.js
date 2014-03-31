@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes) {
   var Tab = sequelize.define('Tab', {
     name: DataTypes.STRING,
-    file : DataTypes.STRING,
+    file : DataTypes.TEXT,
     note : DataTypes.INTEGER
   });
  

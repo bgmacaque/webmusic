@@ -91,4 +91,9 @@
     $('.comments').prepend(string);
   });
   
+  socket.on('tabAdded',function(data){
+    alert('OK');
+    alert(data);
+  });
+
 })(socket);

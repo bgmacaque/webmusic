@@ -67,9 +67,20 @@ exports.create = function(req,res) {
   });
 };
 
-exports.upload = function(sockets,data) {
+exports.upload = function(socket,data) {
+
   if( data.json && data.name ) {
-    
+    //save and check the tab uploaded
+    var tab = db.Tab.build({
+      name: data.name,
+      file: data.json,
+      note: 0
+    });
+    console.log('OKOKOKOOKOKKOOKKO');
+    db.Tab.create(tab)
+    .success(function(tabAdded){
+      socket.send('tabCreated',tabAdded);
+    });
   } 
 }
 
