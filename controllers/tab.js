@@ -77,8 +77,8 @@ function translateToVexTab(json) {
     var notes = tabParsed.chords[i].notes;
     for(j in notes) {
       var note = notes[j];
-      var number = require('calc').calcNumber(note);
-      var line = require('calc').calcLine(note);
+      var number = require('./calc').calcNumber(note);
+      var line = require('./calc').calcLine(note);
 
       //write the notes
       textGenerated += number.toString()+'/'+line.toString()+'.';      
@@ -89,9 +89,6 @@ function translateToVexTab(json) {
   }
   return textGenerated;
 }
-
-
-
 
 exports.create = function(req,res) {
   res.render('tab',{
