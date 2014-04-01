@@ -107,7 +107,7 @@ exports.download = function(req,res) {
     fs.writeFile('./public/tmp/tab/'+tab.name+'user_'+tab.user_id+'.tab',tab.file,function(err){
       if(!err) {
         //send the tab file
-        res.sendfile('./public/tmp/tab/'+tab.name+'user_'+tab.user_id+'.tab');
+        res.download('./public/tmp/tab/'+tab.name+'user_'+tab.user_id+'.tab',tab.name);
       } else
         console.log(err);
     });
@@ -117,7 +117,7 @@ exports.download = function(req,res) {
 
 exports.getAllFavorites = function(req,res) {
   var idTab = req.params.id;
-  var query = 'SELECT * FROM TabsUsers, Tabs WHERE TabsUsers.tab_id = \''+idTab + '\' AND TabsUsers.tab_id = Tabs.id';
+  var query = 'SELECT * FROM TabsUsers, Tabs WHERE TabsUsers.user_id = \''+req.session.user.id + '\' AND TabsUsers.tab_id = Tabs.id';
   db.sequelize.query(query)
   .success(function(TabRows){
     res.render('favorites',{
@@ -159,16 +159,21 @@ exports.upload = function(socket,data) {
 
 
 exports.addFavorite = function(socket,data) {
+  var ToDay = require('./today');
+  var today = new ToDay; 
+  var date = today.now();
   db.User.find(data.session.user.id)
   .success(function(user){
     if(user) {
-      var query = 'INSERT INTO TabsUsers(`tab_id`,`user_id`) VALUES ( \''+data.id+'\',\''+user.id+'\')';
-      console.log(query);
+      var query = "INSERT INTO TabsUsers(`tab_id`,`user_id`) VALUES ( '"+data.id+"','"+user.id+"')";
       db.sequelize.query(query)
       .success(function() {
         socket.emit('favoriteAdded',{
 
         });
+      })
+      .error(function(error){
+        console.log(error);
       });
     }
   });

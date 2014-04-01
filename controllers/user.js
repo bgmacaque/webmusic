@@ -116,11 +116,52 @@ exports.uploadImg = function(req,res) {
 }
 
 
+function saveUpdate(req,res) {
+  //update information about the current user
+  if(req.session.user)
+    db.User.find(req.session.user)
+    .success(function(user){
+      if(user) {
+        //update the user
+        user.email = req.body.email;
+        user.lastname = req.body.lastname;
+        user.firstname = req.body.firstname;
+        user.description = req.body.description;
+        user.birthday = req.body.birthday;
+        //check the password before updating
+        require('./authenticate').check(user.nickname,req.body.password,function(err,user) {
+          if(err) {
+            res.render('500',{
+              error:'error update form',
+              layout:'main'
+            });
+          } 
+          else
+            user.save()
+            .success(function(user){
+              res.render('update-success',{
+                layout:'main'
+              });
+            }); 
+        });
+      } else {
+          res.render('500',{
+            error:'error update form',
+            layout:'main'
+          }); 
+      }
+    });
+}
+
+
 /*
  *  POST new user
  */
-
 exports.save = function(req,res){
+  if(req.body.update == true) {
+    return saveUpdate(req,res);
+  }
+
   var hash = require('./authenticate').toHash(req.body.nickname,req.body.password,req.body.firstname);
   //create a new user to save it
   var user = db.User.build({
