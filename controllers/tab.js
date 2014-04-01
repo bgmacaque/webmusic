@@ -45,10 +45,13 @@ exports.profil = function(req,res) {
         };
         var average = (comments.length!=0) ? sum/comments.length : 0;
         tab.note = average;
+        //generate the vextab language
+        var translatedText = translateToVexTab(tab.file);
         res.render('tab',{
           layout:'main',
           comments:comments,
-          tab:tab
+          tab:tab,
+          tabText : translatedText
         });
       });
     else
@@ -58,6 +61,46 @@ exports.profil = function(req,res) {
     console.log(error);
   });
 };
+
+
+function translateToVexTab(json) {
+  //here the json file is in well format
+  var textGenerated = 'options player=true ';
+  var tabParsed = JSON.parse(json);
+  textGenerated += ' tempo='+tabParsed.tempo.toString()+'\n';
+  textGenerated += 'tabstave notation=true tablature=false \n';
+  textGenerated += ' notes';
+  //generate the notes
+  for(i in tabParsed.chords) {
+    textGenerated += ' (';
+    //get the current note
+    var notes = tabParsed.chords[i].notes;
+    for(j in notes) {
+      var note = notes[j];
+      var number = calcNumber(note);
+      var line = calcLine(note);
+
+      //write the notes
+      textGenerated += number.toString()+'/'+line.toString()+'.';      
+    }
+    //remove the latest dot
+    textGenerated = textGenerated.substring(0, textGenerated.length - 1);
+    textGenerated += ' ) ';
+  }
+  return textGenerated;
+}
+
+//calcul the number of the note
+function calcNumber(note){
+  var numbers = {'A':1,'B':2,'C':3,'D':4,'E':5,'F':6, 'G':7};
+  return numbers[note[0]];
+}
+//calcul the line of the note
+function calcLine() {
+  var line =  (note.length == 3) ? note[2] : note[1];
+  return line;
+}
+
 
 exports.create = function(req,res) {
   res.render('tab',{
@@ -85,7 +128,6 @@ exports.upload = function(socket,data) {
     //parse the file in JSON file
     var tabParsed = JSON.parse(data.json);
     var nameParsed = tabParsed.name;
-    console.log(nameParsed);
     //save and check the tab uploaded
     var tab = {
       name: nameParsed,

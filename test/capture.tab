@@ -1,9 +1,9 @@
 {
-	"name" : "capture.tab",
+	"name" : "capture2.tab",
 	"tempo" : "120",
 	"chords" : [
 	{"volume":0.0262736,"duration":7,
-	"notes": ["F#2"]
+	"notes": ["F#3"]
 	},
 	{"volume":0.0455792,"duration":14, 
 	"notes" : [ "F#2" , "F2", "A#2", "B2", "G2", "G#2" ]
