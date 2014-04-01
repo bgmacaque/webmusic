@@ -22,7 +22,7 @@
     });
   };
 
-  // //follow
+  //follow
   var followButton = $('#button-follow');
   var unfollowButton = $('#button-unfollow');
   followButton.on('click',follow);
@@ -108,6 +108,20 @@
     $('#upload-tab').fadeIn();
   });
 
-  
+  //manage favorites
+  $('#favorite-button').on('click',addFavorite);
+
+  function addFavorite() {
+    //get the current tab id
+    var url = location.pathname;
+    var tabId = url.split('/')[3].match('[0-9]*')[0];
+    socket.emit('addFavorite',{
+      id:tabId
+    });
+  }
+
+  socket.on('favoriteAdded',function(data){
+    $('#favorite-button');
+  });
 
 })(socket);

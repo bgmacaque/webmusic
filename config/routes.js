@@ -15,6 +15,7 @@ module.exports = function(app) {
 	app.get('/user/create',user.create);
   app.post('/user/save',user.save);
   app.get('/user/profil/:id',user.profil);
+  app.get('/user/favorites/:id',tab.getAllFavorites);
   //bands
   app.get('/band/create',band.create);
   app.post('/band/save',band.save);
@@ -24,6 +25,7 @@ module.exports = function(app) {
   app.get('/tab/profil/:id',tab.profil);
   app.get('/tab/create',tab.create);
   app.get('/tab/download/:id',tab.download);
+
   //update the current user
   app.get('/user/update/:id',user.update);
   //search

@@ -103,12 +103,35 @@ exports.download = function(req,res) {
   //get the tab which will be downloaded
   db.Tab.find(req.params.id)
   .success(function(tab) {
-    res.send(tab.file);
+    var fs = require('fs');
+    fs.writeFile('./public/tmp/tab/'+tab.name+'user_'+tab.user_id+'.tab',tab.file,function(err){
+      if(!err) {
+        //send the tab file
+        res.sendfile('./public/tmp/tab/'+tab.name+'user_'+tab.user_id+'.tab');
+      } else
+        console.log(err);
+    });
   });
 }
 
-//sockets
 
+exports.getAllFavorites = function(req,res) {
+  var idTab = req.params.id;
+  var query = 'SELECT * FROM TabsUsers, Tabs WHERE TabsUsers.tab_id = \''+idTab + '\' AND TabsUsers.tab_id = Tabs.id';
+  db.sequelize.query(query)
+  .success(function(TabRows){
+    res.render('favorites',{
+      layout:'main',
+      tabs:TabRows
+    });
+  })
+  .error(function(error){
+    console.log(error);
+  })
+}
+
+
+//sockets
 
 exports.upload = function(socket,data) {
 
@@ -132,6 +155,8 @@ exports.upload = function(socket,data) {
     });
   } 
 }
+
+
 
 exports.addFavorite = function(socket,data) {
   db.User.find(data.session.user.id)

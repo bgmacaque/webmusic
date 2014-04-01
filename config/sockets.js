@@ -38,10 +38,11 @@ module.exports = function(sessionSockets) {
     });
 
     //add favorite
-    socket.on('tabFavorite',function(data){
-      data.session = session;
+    socket.on('addFavorite',function(data){
+      data.session =session;
       tab.addFavorite(socket,data);
-    })
+    });
+    
   });
 
 };
