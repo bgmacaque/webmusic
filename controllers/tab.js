@@ -96,7 +96,7 @@ function calcNumber(note){
   return numbers[note[0]];
 }
 //calcul the line of the note
-function calcLine() {
+function calcLine(note) {
   var line =  (note.length == 3) ? note[2] : note[1];
   return line;
 }
