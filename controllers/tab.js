@@ -145,7 +145,7 @@ exports.addComment = function(sockets,data) {
               var queryAvg = "SELECT AVG(note) AS AVG FROM Comments WHERE tab_id ='"+tab.id+"'";
               db.sequelize.query(queryAvg)
               .success(function(averageRow){
-                var avg = averageRow['AVG'];
+                var avg = averageRow[0]['AVG'];
                 tab.note = avg;
                 tab.save()
                 .success(function(){

@@ -8,22 +8,29 @@
 			<input type="submit">
 		</div>
 	{{else}}
-		<h1>{{tab.title}}</h1>
 		<div class="tab-name">
-			{{tab.name}}
+			<h1>{{tab.name}} <span class="badge">{{tab.note}}</span></h1>
 		</div>
+		{{!-- draw the tab --}}
+		<div class="vex-tabdiv" width="400" scale="1.0" editor="true" editor_height="80" style="position: relative;">
+			<canvas class="vex-canvas" width="400" height="170"></canvas>
+			<textarea class="editor">
+			{{#if tabText}}
+				{{tabText}}
+			{{else}}
+				options player=true tempo=140
+				tabstave notation=true tablature=true
+				notes 4-5-6/3 10/4
+			{{/if}}
+			</textarea>
+		</div> 	{{!-- end vex tab div --}}
 		<div class="infos">
 			<span class="tab-author">
 				{{tab.author}}
 			</span>
-			<span id="tab-note">
-				{{tab.note}}
-			</span>
 		</div>
 		<div id = "comment-box">
 			{{#if session.user }}
-
-
 				<form action="comment/add/" method="POST" class="form-comment" id="add-comment">
  					<p>{{session.user.nickname}} write a comment!</p>
 					<div class="post-comment input-group">
