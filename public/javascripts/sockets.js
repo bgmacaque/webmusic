@@ -39,7 +39,8 @@
     //show the list with the new element
     $list.fadeIn();
 
-    $('#button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a>');
+    $('#button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a> ');
+    $('#button-follow').
     unfollowButton = $('#button-unfollow');
     unfollowButton.on('click',unfollow);
   });
