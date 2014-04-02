@@ -261,11 +261,26 @@ h1 {
 
 
 /****** Tab page *****/
-#upload-button {
+
+#favorite-button {
 	.glyphicon {
-		color: #3498db;
+		color:#f35656;
+	}
+	
+	.glyphicon:hover {
+		color:red;
 	}
 	text-underline: none;
+}
+
+#upload-button {
+	.glyphicon {
+		color: #1abc9c;
+	}
+	text-underline: none;
+	.glyphicon:hover {
+		color:green;
+	}
 }
 
 
