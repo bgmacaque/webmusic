@@ -33,7 +33,7 @@
     var $list = $(".followers ul").hide();
     //use the add method to push a new element in the ul
     var string = '<div class="rounded">'
-    string += "<li><a href=\"/user/profil/"+data.nickname+"\"> "+'<img src="'+data.image+'"></a></li>';
+    string += "<li><a href=\"/user/profil/"+data.id+"\"> "+'<img src="'+data.image+'"></a></li>';
     string += '</div>';
     $list.append(string);
     //show the list with the new element
