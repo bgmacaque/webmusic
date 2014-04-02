@@ -142,7 +142,15 @@ exports.upload = function(socket,data) {
 
   if( data.json && data.session.user.id ) {
     //parse the file in JSON file
+    var tabParsed;
+    try {
     var tabParsed = JSON.parse(data.json);
+    } catch(e) {
+      console.log(e);
+      socket.emit('tabUploadError',e);  
+      return;    
+    } 
+
     var nameParsed = tabParsed.name;
     //save and check the tab uploaded
     var tab = {
@@ -158,7 +166,9 @@ exports.upload = function(socket,data) {
     .error(function(err){
       socket.emit('tabUploadError',err);
     });
-  } 
+  }  else {
+      socket.emit('tabUploadError',e);
+  }
 }
 
 

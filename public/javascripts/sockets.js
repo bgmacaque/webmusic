@@ -39,10 +39,17 @@
     //show the list with the new element
     $list.fadeIn();
 
-    $('#button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a> ');
-    $('#button-follow').
-    unfollowButton = $('#button-unfollow');
-    unfollowButton.on('click',unfollow);
+    var $button = $('#button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a> ');
+    $button.css({
+      "min-width":"50px",
+      "text-decoration":"none",
+      "text-align":"center",
+      "height": "35px",
+      "display":"inline-block",
+      "color":"red"
+    });
+    $unfollowButton = $('#button-unfollow');
+    $unfollowButton.on('click',unfollow);
   });
   
   socket.on('unfollowOk',function(data){
@@ -53,9 +60,18 @@
         return;
       }
     });
-    $('#button-unfollow').replaceWith('<a id="button-follow" href="#follow">Follow</a>');    
-    followButton = $('#button-follow');
-    followButton.on('click',follow);
+    var $button = $('#button-unfollow').replaceWith('<a id="button-follow" href="#follow">Follow</a>');    
+    $button.css({
+      "min-width":"50px",
+      "text-decoration":"none",
+      "text-align":"center",
+      "height": "35px",
+      "display":"inline-block",
+      "color":"red"
+    });
+
+    $followButton = $('#button-follow');
+    $followButton.on('click',follow);
   });
 
   //comments, tab page
