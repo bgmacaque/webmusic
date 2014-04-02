@@ -103,6 +103,7 @@ function translateToVexTab(json) {
   textGenerated += ' tempo='+tempo.toString()+'\n';
   textGenerated += 'tabstave notation=true tablature=true \n';
   textGenerated += ' notes';
+  var lines = [6,5,4,3,2,1];
   //generate the notes
   for(i in positions) {
     //i is the current display chord
@@ -114,7 +115,8 @@ function translateToVexTab(json) {
       var note = chords[j];
       var number = note[' number ']; 
       var line = note[' line '];
-      line = line + 1;
+      //convert line into the well format
+      line = lines[line];
 
       //write the notes
       textGenerated += number.toString()+'/'+line.toString()+'.';      
