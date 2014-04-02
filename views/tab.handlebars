@@ -10,7 +10,6 @@
 	{{else}}
 		<div class="tab-name">
 			<h1>{{tab.name}} 
-				<span id="tab-note" class="badge">{{tab.note}}</span>
 				{{#if session.user}}
 					{{#if isFavorite}}
 						<a href="#rmFavorite" id="favorite-button-selected"> <span class="glyphicon glyphicon-heart" ></span>
@@ -25,7 +24,10 @@
  				<a href="/tab/download/{{tab.id}}" id="download-button">
  					<span class="glyphicon glyphicon-download"></span>
  				</a>
+ 				<span id="tab-note" class="badge">{{tab.note}}</span>
+
  			</h1>
+ 			<a href="/user/profil/{{author.id}}" class="tab-author">{{author.nickname}}</a>
 		</div>
 		{{!-- draw the tab --}}
 		<div class="vex-tabdiv" width="400" scale="1.0" editor="true" editor_height="80" style="position: relative;">

@@ -11,8 +11,7 @@ var ToDay = function() {
 
     //month
     result+= now.getMonth() + 1;
-    
-    console.log(result);
+        
     return result;
   };
 }

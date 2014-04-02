@@ -51,15 +51,14 @@ exports.profil = function(req,res) {
         var queryAuthor = "SELECT * FROM Users WHERE id = '"+tab.user_id+"'";
 
         db.sequelize.query(queryAuthor)
-        .success(function(author){
-          if(!author)
+        .success(function(authorRow){
+          if(!authorRow)
             res.send('404');
           //check if the current user has this tab in his favorite list
           if(req.session.user) {
             var queryFavorite = "SELECT * FROM TabsUsers WHERE user_id = '"+req.session.user.id+"'";
             db.sequelize.query(queryFavorite)
             .success(function(favRow) {
-              console.log(favRow);
               var isFavorite = false;
               if(favRow[0])
                 isFavorite = true;
@@ -69,7 +68,7 @@ exports.profil = function(req,res) {
                 comments:comments,
                 tab:tab,
                 tabText : translatedText,
-                author:author,
+                author:authorRow[0],
                 isFavorite : isFavorite
               });          
             });
@@ -80,7 +79,7 @@ exports.profil = function(req,res) {
                 tab:tab,
                 tabText : translatedText,
                 isFavorite:false,
-                author:author
+                author:authorRow[0]
               });                 
           }
         }); //end queryAuthor
