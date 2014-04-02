@@ -2,9 +2,9 @@
 
 //calcul the number of the note
 exports.calcNumber = function(note,currentChord,currentPos,positions){
-  return positions[currentChord][currentPos].number;
+  return positions[currentChord][currentPos][' number '];
 }
 //calcul the line of the note
 exports.calcLine = function(note,currentChord,currentPos,positions) {
-  return positions[currentChord][currentPos].line;
+  return positions[currentChord][currentPos][' line '];
 }

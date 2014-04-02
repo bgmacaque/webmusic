@@ -4,11 +4,26 @@
 		<input type="submit" class="btn btn-danger" value="logout">
 	</form>
 {{else}}
-	<form method="POST" action="/login">
-	<label for="nickname">nickname</label>
-	<input type="text" name="nickname">
-	<label for="password">password</label>
-	<input type="password" name="password">
-	<input type="submit" class="btn" value="login">
+	<form method="POST" action="/login" class="login-form" >
+	<div class="input-group">
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-user">
+			</span>
+		</span>
+		<input type="text" name="nickname" class="form-control" placeholder="username">
+
+	</div>
+	<div class="input-group">
+		<span class="input-group-addon">
+			<span class="glyphicon glyphicon-lock">
+			</span>
+		</span>
+		<input type="password" name="password" class="form-control" placeholder="password">
+	</div>
+
+	<input type="submit" id="button-login" class="btn btn-success" value="login">
 	</form>
+
+	<p><a href="/user/create" id="button-user" class="">Sign Up Here</a>
+</p>
 {{/if}}

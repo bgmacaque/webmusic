@@ -67,19 +67,23 @@ function translateToVexTab(json) {
   //here the json file is in well format
   var textGenerated = 'options player=true ';
   var tabParsed = JSON.parse(json);
-  var positions = tabParsed.emplacements;
-  textGenerated += ' tempo='+tabParsed.tempo.toString()+'\n';
-  textGenerated += 'tabstave notation=true tablature=false \n';
+  var tempo = tabParsed[' tempo '];
+  var positions = tabParsed[ ' emplacements '];
+  textGenerated += ' tempo='+tempo.toString()+'\n';
+  textGenerated += 'tabstave notation=true tablature=true \n';
   textGenerated += ' notes';
   //generate the notes
-  for(i in tabParsed.chords) {
+  for(i in positions) {
+    //i is the current display chord
+    var chords = positions[i];
+
     textGenerated += ' (';
     //get the current note
-    var notes = tabParsed.chords[i].notes;
-    for(j in notes) {
-      var note = notes[j];
-      var number = require('./calc').calcNumber(note,i,j,positions);
-      var line = require('./calc').calcLine(note,i,j,positions);
+    for(j in chords) {
+      var note = chords[j];
+      var number = note[' number ']; 
+      var line = note[' line '];
+      line = line + 1;
 
       //write the notes
       textGenerated += number.toString()+'/'+line.toString()+'.';      
@@ -145,13 +149,15 @@ exports.upload = function(socket,data) {
     var tabParsed;
     try {
      tabParsed = JSON.parse(data.json);
+
     } catch(e) {
       console.log(e);
       socket.emit('tabUploadError',e);  
       return;    
     } 
 
-    var nameParsed = tabParsed.name;
+    var nameParsed = tabParsed[' name '];
+    console.log('NAME:'+nameParsed);
     //save and check the tab uploaded
     var tab = {
       name: nameParsed,
