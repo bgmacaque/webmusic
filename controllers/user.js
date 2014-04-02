@@ -122,27 +122,34 @@ function saveUpdate(req,res) {
     db.User.find(req.session.user)
     .success(function(user){
       if(user) {
+        var userToUpdate = user;
         //update the user
-        user.email = req.body.email;
-        user.lastname = req.body.lastname;
-        user.firstname = req.body.firstname;
-        user.description = req.body.description;
-        user.birthday = req.body.birthday;
+        userToUpdate.email = req.body.email;
+        userToUpdate.lastname = req.body.lastname;
+        userToUpdate.firstname = req.body.firstname;
+        userToUpdate.description = req.body.description;
+        userToUpdate.birthday = req.body.birthday;
         //check the password before updating
         require('./authenticate').check(user.nickname,req.body.password,function(err,user) {
           if(err) {
             res.render('500',{
-              error:'error update form',
+              error:'error password',
               layout:'main'
             });
           } 
           else
-            user.save()
-            .success(function(user){
-              res.render('update-success',{
+            console.log(userToUpdate);
+            userToUpdate.save()
+            .success(function(userUpdated){
+              req.session.user = userUpdated;
+              res.render('user-update',{
+                success:true,
                 layout:'main'
               });
-            }); 
+            })
+            .error(function(error){
+              console.log(error);
+            });
         });
       } else {
           res.render('500',{
@@ -158,7 +165,7 @@ function saveUpdate(req,res) {
  *  POST new user
  */
 exports.save = function(req,res){
-  if(req.body.update == true) {
+  if(req.body.update == "true") {
     return saveUpdate(req,res);
   }
 

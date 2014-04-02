@@ -1,10 +1,11 @@
 <body>
+{{#if success}}
+	<h1>Your profile has updated!</h1>
+{{else}}
 	<h1>{{user.nickname}} update your profile</h1>
 	<form method="POST" action="/user/save" id="update-user" role="form" class="user-info">
-		<input type="hidden" name="update">
+		<input type="hidden" name="update" value="true">
 		<div class="form-group">
-			<label for="nickname">pseudo</label>
-			<input class="form-control" type="text" name="nickname" value="{{user.nickname}}" required>
 			<label for="email">email</label>
 			<input class="form-control" type="email" name="email" value="{{user.email}}" required> 
 			<label for="lastname">lastname</label>
@@ -22,4 +23,6 @@
 			<input class="form-control btn" type="submit" value="UPDATE">
 		</div>
 	</form>	
+{{/if}}
+
 </body>
