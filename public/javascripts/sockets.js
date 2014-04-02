@@ -127,6 +127,7 @@
 
   //manage favorites
   $('#favorite-button').on('click',addFavorite);
+  $('#favorite-button-selected').on('click',addFavorite);
 
   function addFavorite() {
     //get the current tab id
@@ -137,8 +138,23 @@
     });
   }
 
+
+  //change color of favorite buttons
   socket.on('favoriteAdded',function(data){
-    $('#favorite-button');
+      $('#favorite-button .glyphicon').css({
+        "color":"red"
+      });
+      $('#favorite-button-selected .glyphicon').css({
+        "color":"red"
+      });
+  });
+  socket.on('favoriteDeleted',function(data){
+      $('#favorite-button .glyphicon').css(
+        "color","#f35656"
+      );
+      $('#favorite-button-selected .glyphicon').css(
+        "color","#f35656"
+      );
   });
 
 })(socket);

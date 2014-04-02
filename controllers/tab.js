@@ -215,7 +215,7 @@ exports.addFavorite = function(socket,data) {
   //check the session
   if(!data.session.user)
     return;
-
+  //add the tab to the favorite list
   db.User.find(data.session.user.id)
   .success(function(user){
     if(user) {
@@ -227,11 +227,39 @@ exports.addFavorite = function(socket,data) {
         });
       })
       .error(function(error){
+        rmFavorite(socket,data);
+      });
+    }
+  });
+}
+
+
+function rmFavorite(socket,data) {
+  //check the session
+  if(!data.session.user)
+    return;
+  //delete the tab from the favorite list
+  db.User.find(data.session.user.id)
+  .success(function(user){
+    if(user) {
+      var query = "DELETE FROM TabsUsers WHERE tab_id = '"+data.id+"' AND user_id = '"+user.id+"'";
+      db.sequelize.query(query)
+      .success(function() {
+        socket.emit('favoriteDeleted',{
+
+        });
+      })
+      .error(function(error){
         console.log(error);
       });
     }
   });
 }
+
+
+
+
+
 
 exports.addComment = function(sockets,data) {
   //check the session
