@@ -1,10 +1,10 @@
 var assert = require("assert");
 var should = require("chai").should();
 var db = require('../models');
+db.sequelize.sync({force:true});
 var User = db.User;
-sync = process.env.SYNC || false;
-if(sync)
-  db.sequelize.sync({force:true});
+var Tab = db.Tab;
+
 
 describe('User', function(){
 
