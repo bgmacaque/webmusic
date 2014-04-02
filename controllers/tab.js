@@ -144,7 +144,7 @@ exports.upload = function(socket,data) {
     //parse the file in JSON file
     var tabParsed;
     try {
-    var tabParsed = JSON.parse(data.json);
+     tabParsed = JSON.parse(data.json);
     } catch(e) {
       console.log(e);
       socket.emit('tabUploadError',e);  
@@ -164,6 +164,7 @@ exports.upload = function(socket,data) {
       socket.emit('tabAdded',tabAdded);
     })
     .error(function(err){
+      console.log(err);
       socket.emit('tabUploadError',err);
     });
   }  else {
