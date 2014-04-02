@@ -3,19 +3,15 @@ var should = require("chai").should();
 var db = require('../models');
 var User = db.User;
 sync = process.env.SYNC || false;
-if(sync)
-  db.sequelize.sync({force:true});
+
 
 describe('User', function(){
-    before(function(done){
-        User.sync({force:true})
-        .success(function(){
-            done();
-        })
-        .error(function(error){
-            done(error);
-        });
-    });
+  before(function(done){
+    if(sync)
+      db.sequelize.sync({force:true});
+    done();
+  });
+
   describe('#insert()', function(){
     it('should create a new user and insert it on the database', function(done){
     	var user = User.build({
@@ -94,3 +90,5 @@ describe('User', function(){
     });   
   });
 });
+
+
