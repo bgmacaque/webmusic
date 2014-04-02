@@ -51,6 +51,7 @@ h3 {
 }
 
 
+
 /****** tabs style ******/
 .editor {
 	display: none;
@@ -276,6 +277,16 @@ h3 {
 
 
 /****** Tab page *****/
+#favorite-button-selected {
+	.glyphicon {
+		color:red;
+	}
+	
+	.glyphicon:hover {
+		color:#f35656;
+	}
+	text-decoration: none;
+}
 
 #favorite-button {
 	.glyphicon {

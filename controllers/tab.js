@@ -47,13 +47,44 @@ exports.profil = function(req,res) {
         tab.note = average.toFixed(2);
         //generate the vextab language
         var translatedText = translateToVexTab(tab.file);
-        res.render('tab',{
-          layout:'main',
-          comments:comments,
-          tab:tab,
-          tabText : translatedText
-        });
-      });
+        
+        var queryAuthor = "SELECT * FROM Users WHERE id = '"+tab.user_id+"'";
+
+        db.sequelize.query(queryAuthor)
+        .success(function(author){
+          if(!author)
+            res.send('404');
+          //check if the current user has this tab in his favorite list
+          if(req.session.user) {
+            var queryFavorite = "SELECT * FROM TabsUsers WHERE user_id = '"+req.session.user.id+"'";
+            db.sequelize.query(queryFavorite)
+            .success(function(favRow) {
+              console.log(favRow);
+              var isFavorite = false;
+              if(favRow[0])
+                isFavorite = true;
+              //send the page
+              res.render('tab',{
+                layout:'main',
+                comments:comments,
+                tab:tab,
+                tabText : translatedText,
+                author:author,
+                isFavorite : isFavorite
+              });          
+            });
+          } else { //if the session user is not defined
+              res.render('tab',{
+                layout:'main',
+                comments:comments,
+                tab:tab,
+                tabText : translatedText,
+                isFavorite:false,
+                author:author
+              });                 
+          }
+        }); //end queryAuthor
+      }); //end find tab
     else
       res.send('404');
   })
@@ -66,6 +97,7 @@ exports.profil = function(req,res) {
 function translateToVexTab(json) {
   //here the json file is in well format
   var textGenerated = 'options player=true ';
+  //spaces in the properties name because of the json format
   var tabParsed = JSON.parse(json);
   var tempo = tabParsed[' tempo '];
   var positions = tabParsed[ ' emplacements '];
