@@ -67,6 +67,7 @@ function translateToVexTab(json) {
   //here the json file is in well format
   var textGenerated = 'options player=true ';
   var tabParsed = JSON.parse(json);
+  var positions = tabParsed.emplacements;
   textGenerated += ' tempo='+tabParsed.tempo.toString()+'\n';
   textGenerated += 'tabstave notation=true tablature=false \n';
   textGenerated += ' notes';
@@ -77,8 +78,8 @@ function translateToVexTab(json) {
     var notes = tabParsed.chords[i].notes;
     for(j in notes) {
       var note = notes[j];
-      var number = require('./calc').calcNumber(note);
-      var line = require('./calc').calcLine(note);
+      var number = require('./calc').calcNumber(note,j,positions);
+      var line = require('./calc').calcLine(note,j,positions);
 
       //write the notes
       textGenerated += number.toString()+'/'+line.toString()+'.';      
