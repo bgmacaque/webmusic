@@ -101,7 +101,7 @@ function translateToVexTab(json) {
   var tempo = tabParsed[' tempo '];
   var positions = tabParsed[ ' emplacements '];
   textGenerated += ' tempo='+tempo.toString()+'\n';
-  textGenerated += 'tabstave notation=true tablature=true \n';
+  textGenerated += 'tabstave notation=false tablature=true \n';
   textGenerated += ' notes';
   var lines = [6,5,4,3,2,1];
   //generate the notes
