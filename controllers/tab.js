@@ -44,7 +44,7 @@ exports.profil = function(req,res) {
           sum += comments[i].note;
         };
         var average = (comments.length!=0) ? sum/comments.length : 0;
-        tab.note = average;
+        tab.note = average.toFixed(2);
         //generate the vextab language
         var translatedText = translateToVexTab(tab.file);
         res.render('tab',{
@@ -116,8 +116,12 @@ exports.download = function(req,res) {
 
 
 exports.getAllFavorites = function(req,res) {
+  //check the session
+  if(!req.session.user)
+    res.redirect('/');
+  
   var idTab = req.params.id;
-  var query = 'SELECT * FROM TabsUsers, Tabs WHERE TabsUsers.user_id = \''+req.session.user.id + '\' AND TabsUsers.tab_id = Tabs.id';
+  var query = 'SELECT * FROM TabsUsers, Tabs WHERE TabsUsers.user_id = \''+req.session.user.id + '\' AND TabsUsers.tab_id = Tabs.id ORDER BY Tabs.name';
   db.sequelize.query(query)
   .success(function(TabRows){
     res.render('favorites',{
@@ -159,9 +163,10 @@ exports.upload = function(socket,data) {
 
 
 exports.addFavorite = function(socket,data) {
-  var ToDay = require('./today');
-  var today = new ToDay; 
-  var date = today.now();
+  //check the session
+  if(!data.session.user)
+    return;
+
   db.User.find(data.session.user.id)
   .success(function(user){
     if(user) {
@@ -180,6 +185,10 @@ exports.addFavorite = function(socket,data) {
 }
 
 exports.addComment = function(sockets,data) {
+  //check the session
+  if(!data.session.user)
+    return;
+
   //check the user
   db.User.find(data.session.user.id)
   .success(function(user){

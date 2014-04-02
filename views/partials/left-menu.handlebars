@@ -9,16 +9,19 @@
             <div class="top-menu">
             </div>
             <ul>
+            {{#if session.user}}
                 <li>
                     <a href="/user/favorites/{{{session.user.id}}}">
                         <span class="glyphicon glyphicon-heart"></span> Favorites
                     </a>
                 </li>
                 <li>
-                    <a href="/user/{{{session.user.id}}}/tabs">
+                    <a href="/user/tabs/{{{session.user.id}}}">
                         <span class="glyphicon glyphicon-music"></span> Tabs
                     </a>
-                </li>
+                </li>            
+            {{/if}}
+  
                 <li>
                     <a href="/listing">
                         <span class="glyphicon glyphicon-star"></span> Listing

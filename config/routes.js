@@ -15,7 +15,10 @@ module.exports = function(app) {
 	app.get('/user/create',user.create);
   app.post('/user/save',user.save);
   app.get('/user/profil/:id',user.profil);
+  app.get('/user/profile/:id',tab.profil);
+
   app.get('/user/favorites/:id',tab.getAllFavorites);
+  app.get('/user/tabs/:id',user.getTabs);
   //bands
   app.get('/band/create',band.create);
   app.post('/band/save',band.save);
@@ -23,6 +26,8 @@ module.exports = function(app) {
   app.post('/band/:id/user/add',band.addUser);
   //tabs
   app.get('/tab/profil/:id',tab.profil);
+  app.get('/tab/profile/:id',tab.profil);
+
   app.get('/tab/create',tab.create);
   app.get('/tab/download/:id',tab.download);
 

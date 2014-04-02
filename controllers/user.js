@@ -48,6 +48,9 @@ exports.profil = function(req,res){
             db.sequelize.query(queryStars)
             .success(function(starsRow){
               user.nbStars = (starsRow[0]) ? starsRow[0]['AVG'] : 0; 
+              //trunc the nbStars 
+              user.nbStars = user.nbStars.toFixed(1);
+              user.nbStars
                 res.render('user',{
                   layout:'main',
                   isFollower: isFollower,
@@ -87,14 +90,11 @@ exports.uploadImg = function(req,res) {
     var extension = req.files.image.type.split('/')[1];
     var name = req.files.image.name;
     var newFile = "./public/images/profiles/"+req.session.user.id+"."+extension;
-    console.log(req.session.user.id);
     fs.rename("./"+req.files.image.path,newFile,function(err){
       if(!err) {
         //save the image
         db.User.find(req.session.user.id)
         .success(function(user){
-            console.log('OK');
-
           user.image = '/images/profiles/'+req.session.user.id+"."+extension;
           user.save()
           .success(function(){
@@ -193,6 +193,7 @@ exports.save = function(req,res){
         .success(function(){
           req.session.user = user;
           res.render('signin',{
+            layout:'main',
             user: req.session.user
           });
         })
@@ -235,6 +236,26 @@ exports.login = function(req,res) {
   });
 }
 
+
+//get the tabs of the current user
+exports.getTabs = function(req,res) {
+  if(!req.session.user)
+    res.redirect('/');
+  db.User.find(req.session.user.id)
+  .success(function(user){
+    if(user) {
+      user.getTabs()
+      .success(function(tabs){
+        res.render('user-tabs',{
+          layout:'main',
+          tabs:tabs
+        });
+      }); 
+    }
+  });
+}
+
+
 exports.logout = function(req,res) {
   //delete the current user
   delete req.session.user;
@@ -274,6 +295,10 @@ exports.getFollowingTabs = function(user,callback) {
 
 //sockets 
 exports.unfollow = function(socket,data) {
+  //check the session
+  if(!data.session.user)
+    return;
+
   //get the user in the session
   var idFollower = data.session.user.id;
    //find the user who will be unfollowed
@@ -289,6 +314,9 @@ exports.unfollow = function(socket,data) {
 };
 
 exports.follow = function(socket,data) {
+  //check the session
+  if(!data.session.user)
+    return;
   //get the user in the session
   var idFollower = data.session.user.id;
   //find the user who will be followed
@@ -324,6 +352,9 @@ exports.follow = function(socket,data) {
     };
   });
 };
+
+
+
 
 
 exports.connect = function(socket,data) {

@@ -270,14 +270,14 @@ h1 {
 	.glyphicon:hover {
 		color:red;
 	}
-	text-underline: none;
+	text-decoration: none;
 }
 
 #upload-button {
 	.glyphicon {
 		color: #1abc9c;
 	}
-	text-underline: none;
+	text-decoration: none;
 	.glyphicon:hover {
 		color:green;
 	}
@@ -349,3 +349,13 @@ h1 {
 	}
 
 }
+
+/******* footer ******/
+footer {
+	p {
+		text-align: right;
+		margin-right: 1%;
+	}
+}
+
+

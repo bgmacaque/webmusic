@@ -11,15 +11,25 @@
 		{{else}}
 			{{#if users}}
 				<h1>Users</h1>
-				{{#each users }}
-					{{nickname}} {{id}}
-				{{/each}}			
+				<ul class="list-group">
+					{{#each users }}
+						<li class="list-group-item">
+							<a href="/user/profil/{{id}}">{{nickname}}</a>
+						</li>
+					{{/each}}						
+				</ul>
+		
 			{{/if}}
 			{{#if tabs}}
 				<h1>Tabs</h1>
-				{{#each tabs}}
-					{{name}} {{id}}
-				{{/each}}
+				<ul class="list-group">
+					{{#each tabs }}
+						<li class="list-group-item">
+							<a href="/tab/profil/{{id}}">{{name}}</a>
+						</li>
+					{{/each}}						
+				</ul>
+
 			{{/if}}
 
 		{{/unless}}
