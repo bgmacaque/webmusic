@@ -6,7 +6,6 @@ sync = process.env.SYNC || false;
 if(sync)
   db.sequelize.sync({force:true});
 
-
 describe('User', function(){
 
   describe('#insert()', function(){
