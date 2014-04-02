@@ -56,11 +56,12 @@
     //remove the li which contains the session user nickname
     $('.followers ul li a').each(function(index){
       if($(this).attr('href') === '/user/profil/'+data.id) {
+        alert('ok');
         $(this).parent().parent().fadeOut();
         return;
       }
     });
-    var $button = $('#button-unfollow').replaceWith('<a id="button-follow" href="#follow">Follow</a>');    
+    var $button = $('#button-unfollow').replaceWith('<a id="button-follow" href="#follow">Follow</a>');
     $button.css({
       "min-width":"50px",
       "text-decoration":"none",
@@ -74,7 +75,8 @@
     $followButton.on('click',follow);
   });
 
-  //comments, tab page
+  /****** comments ******/
+
   var postComment = $('#submit-comment');
   if(postComment)
     postComment.on('click',function(e){
@@ -124,6 +126,10 @@
     $('#upload-tab').append('<span class="glyphicon glyphicon-remove-circle"></span>');
     $('#upload-tab').fadeIn();
   });
+
+
+
+  /****** favorites ******/
 
   //manage favorites
   $('#favorite-button').on('click',addFavorite);
