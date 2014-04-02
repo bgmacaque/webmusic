@@ -29,11 +29,11 @@ var hbs = require('express3-handlebars').create({
     listing: function(hashmap) {
       var out = '';
       for(var key in hashmap) {
-        out += '<p>'+key+'</p>';
+        out += '<h3>'+key+'</h3>';
         //tabs
         for(var i in hashmap[key]) {
           var tab = hashmap[key][i];
-          out += '<li class="tab-list"><a href="/tab/profil/'+tab.id+'">'+tab.name+'</a></li>';
+          out += '<li class="list-group-item"><a href="/tab/profil/'+tab.id+'">'+tab.name+'</a></li>';
         }
       }
       return out; 

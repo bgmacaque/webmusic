@@ -36,6 +36,10 @@ h1 {
 	color: #f35656;
 }
 
+h3 {
+	margin-left:2%;
+}
+
 /****** tabs style ******/
 .editor {
 	display: none;
@@ -349,6 +353,23 @@ h1 {
 	}
 
 }
+
+/****** lists ******/
+.list-group {
+	.list-group-item {
+		text-align: center;
+		text-decoration: none;
+		.glyphicon-download {
+			color:#1abc9c;
+			font-size: 1.3em;
+		}
+		.glyphicon-download:hover {
+			color:green;
+		}
+
+	}
+}
+
 
 /******* footer ******/
 footer {
