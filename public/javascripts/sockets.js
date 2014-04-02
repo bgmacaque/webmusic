@@ -39,16 +39,17 @@
     //show the list with the new element
     $list.fadeIn();
 
-    var $button = $('#button-follow').replaceWith('<a id="button-unfollow" href="#unfollow">Unfollow</a> ');
-    $button.css({
+    var $button = $('#button-follow').replaceWith('<a id="button-unfollow" class="btn" href="#unfollow">Unfollow</a> ');
+
+    var $unfollowButton = $('#button-unfollow');
+    $unfollowButton.css({
       "min-width":"50px",
       "text-decoration":"none",
       "text-align":"center",
       "height": "35px",
       "display":"inline-block",
-      "color":"red"
+      "vertical-align":"top"
     });
-    $unfollowButton = $('#button-unfollow');
     $unfollowButton.on('click',unfollow);
   });
   
@@ -56,22 +57,23 @@
     //remove the li which contains the session user nickname
     $('.followers ul li a').each(function(index){
       if($(this).attr('href') === '/user/profil/'+data.id) {
-        alert('ok');
         $(this).parent().parent().fadeOut();
         return;
       }
     });
-    var $button = $('#button-unfollow').replaceWith('<a id="button-follow" href="#follow">Follow</a>');
-    $button.css({
+    var $button = $('#button-unfollow').replaceWith('<a id="button-follow" class="btn" href="#follow">Follow</a>');
+
+    var $followButton = $('#button-follow');
+    //change the css of the button
+    $followButton.css({
       "min-width":"50px",
       "text-decoration":"none",
       "text-align":"center",
       "height": "35px",
       "display":"inline-block",
-      "color":"red"
+      "vertical-align":"top"
     });
 
-    $followButton = $('#button-follow');
     $followButton.on('click',follow);
   });
 
