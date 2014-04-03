@@ -146,7 +146,7 @@ exports.download = function(req,res) {
     fs.writeFile('./public/tmp/tab/'+tab.name.trim()+'user_'+tab.user_id+'.tab',tab.file,function(err){
       if(!err) {
         //send the tab file
-        res.download('./public/tmp/tab/'+tab.name.trim()+'user_'+tab.user_id+'.tab',tab.name.trim());
+        res.download('./public/tmp/tab/'+tab.name.trim()+'user_'+tab.user_id+'.tab',tab.name.trim()+".tab");
       } else
         console.log(err);
     });

@@ -98,7 +98,6 @@ exports.uploadImg = function(req,res) {
           user.image = '/images/profiles/'+req.session.user.id+"."+extension;
           user.save()
           .success(function(){
-            console.log('OK');
             res.redirect('/');
           });
         });
@@ -138,7 +137,6 @@ function saveUpdate(req,res) {
             });
           } 
           else
-            console.log(userToUpdate);
             userToUpdate.save()
             .success(function(userUpdated){
               req.session.user = userUpdated;
