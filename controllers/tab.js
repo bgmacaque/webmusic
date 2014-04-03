@@ -178,7 +178,7 @@ exports.getAllFavorites = function(req,res) {
 
 exports.upload = function(socket,data) {
 
-  if( data.json && data.session.user.id ) {
+  if( data.json && data.session.user ) {
     //parse the file in JSON file
     var tabParsed;
     try {
@@ -206,7 +206,7 @@ exports.upload = function(socket,data) {
       socket.emit('tabUploadError',err);
     });
   }  else {
-      socket.emit('tabUploadError',e);
+      socket.emit('tabUploadError',{});
   }
 }
 

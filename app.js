@@ -62,7 +62,7 @@ app.set('models',require('./models'));
 
 //start the socket server
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server,{ log: false });
 
 //define the session socket
 var SessionSockets = require('session.socket.io');

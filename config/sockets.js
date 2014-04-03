@@ -5,9 +5,6 @@ var tab = require('../controllers/tab');
 module.exports = function(sessionSockets) {
   //io configuration
   sessionSockets.on('connection',function(err,socket,session){
-    console.log('session: '+session);
-    if(err)
-      console.log('ERROR'+err);
     //user
     socket.on('follow',function(data) {
       //call the function follow in user module
