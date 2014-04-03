@@ -187,7 +187,8 @@ exports.save = function(req,res){
   for(property in checkTab ) {
      if(!user[checkTab[property]])
         res.render('500',{
-          error:'FORM ERROR'
+          error:'FORM ERROR',
+          layout:"main"
         });
   }
 
@@ -205,13 +206,15 @@ exports.save = function(req,res){
           });
         })
         .error(function(error){res.render('500',{
-          error:'FORM ERROR'
+          error:'FORM ERROR',
+          layout:"main"
         });
       });
     }
      else
       res.render('500', {
-        error:"This user already exists!"
+        error:"This user already exists!",
+        layout:"main"
       });
    });
 };
@@ -232,7 +235,10 @@ exports.update = function(req,res){
 exports.login = function(req,res) {
   require('./authenticate').check(req.body.nickname,req.body.password,function(err,user) {
     if(err) {
-      res.send('ERROR');
+      res.render('500',{
+        layout:"main",
+        title:'Invalid username or password'
+      });
     }
     else {
       req.session.user = user;

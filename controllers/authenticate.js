@@ -29,7 +29,7 @@ var Authenticate = {
           callback(null,user);
         }
         else {
-          callback(new Error('NICKNAME OR PASSWORD :o'));
+          callback(new Error('NICKNAME OR PASSWORD ERROR'));
         }
       } else {
         callback(new Error('USER NOT FOUND'));

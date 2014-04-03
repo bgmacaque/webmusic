@@ -142,10 +142,11 @@ exports.download = function(req,res) {
   db.Tab.find(req.params.id)
   .success(function(tab) {
     var fs = require('fs');
-    fs.writeFile('./public/tmp/tab/'+tab.name+'user_'+tab.user_id+'.tab',tab.file,function(err){
+    //write the new file which contains information about the tab which will be downloaded
+    fs.writeFile('./public/tmp/tab/'+tab.name.trim()+'user_'+tab.user_id+'.tab',tab.file,function(err){
       if(!err) {
         //send the tab file
-        res.download('./public/tmp/tab/'+tab.name+'user_'+tab.user_id+'.tab',tab.name);
+        res.download('./public/tmp/tab/'+tab.name.trim()+'user_'+tab.user_id+'.tab',tab.name.trim());
       } else
         console.log(err);
     });
@@ -184,13 +185,11 @@ exports.upload = function(socket,data) {
      tabParsed = JSON.parse(data.json);
 
     } catch(e) {
-      console.log(e);
       socket.emit('tabUploadError',e);  
       return;    
     } 
 
     var nameParsed = tabParsed[' name '];
-    console.log('NAME:'+nameParsed);
     //save and check the tab uploaded
     var tab = {
       name: nameParsed,
@@ -308,13 +307,15 @@ exports.addComment = function(sockets,data) {
           });
         } else {
           res.send('500',{
-            error:'FORM ERROR'
+            error:'FORM ERROR',
+            layout:"main"
           });
         }
       });
     } else {
       res.send('500',{
-        error:'UNKNOWN AUTHOR'
+        error:'UNKNOWN AUTHOR',
+        layout:"main"
       });
     }
   });
